@@ -30,6 +30,10 @@ namespace GoogleMeetLogsNavigator
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
+            this.button_search = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button_logout = new System.Windows.Forms.Button();
@@ -37,19 +41,14 @@ namespace GoogleMeetLogsNavigator
             this.fILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dOWNLOADToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lastLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.firstLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aBOUTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button_search = new System.Windows.Forms.Button();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
-            this.hScrollBar1 = new System.Windows.Forms.HScrollBar();
+            this.hScrollBar2 = new System.Windows.Forms.HScrollBar();
+            this.vScrollBar2 = new System.Windows.Forms.VScrollBar();
+            this.text_search = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -59,6 +58,9 @@ namespace GoogleMeetLogsNavigator
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panel1.Controls.Add(this.text_search);
+            this.panel1.Controls.Add(this.vScrollBar2);
+            this.panel1.Controls.Add(this.hScrollBar2);
             this.panel1.Controls.Add(this.hScrollBar1);
             this.panel1.Controls.Add(this.vScrollBar1);
             this.panel1.Controls.Add(this.button_search);
@@ -71,6 +73,42 @@ namespace GoogleMeetLogsNavigator
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 452);
             this.panel1.TabIndex = 2;
+            // 
+            // hScrollBar1
+            // 
+            this.hScrollBar1.Location = new System.Drawing.Point(251, 416);
+            this.hScrollBar1.Name = "hScrollBar1";
+            this.hScrollBar1.Size = new System.Drawing.Size(537, 21);
+            this.hScrollBar1.TabIndex = 8;
+            // 
+            // vScrollBar1
+            // 
+            this.vScrollBar1.Location = new System.Drawing.Point(212, 71);
+            this.vScrollBar1.Name = "vScrollBar1";
+            this.vScrollBar1.Size = new System.Drawing.Size(19, 346);
+            this.vScrollBar1.TabIndex = 7;
+            // 
+            // button_search
+            // 
+            this.button_search.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.button_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_search.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button_search.Location = new System.Drawing.Point(769, 45);
+            this.button_search.Name = "button_search";
+            this.button_search.Size = new System.Drawing.Size(19, 20);
+            this.button_search.TabIndex = 6;
+            this.button_search.UseVisualStyleBackColor = false;
+            this.button_search.Click += new System.EventHandler(this.button_search_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(251, 71);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(538, 367);
+            this.dataGridView1.TabIndex = 5;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // label1
             // 
@@ -90,6 +128,7 @@ namespace GoogleMeetLogsNavigator
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(219, 368);
             this.listBox1.TabIndex = 3;
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // button_logout
             // 
@@ -120,98 +159,66 @@ namespace GoogleMeetLogsNavigator
             // 
             this.fILEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importToolStripMenuItem,
-            this.exportToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
-            this.saveAsToolStripMenuItem1});
+            this.exportToolStripMenuItem});
             this.fILEToolStripMenuItem.Name = "fILEToolStripMenuItem";
             this.fILEToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.fILEToolStripMenuItem.Text = "FILE";
+            this.fILEToolStripMenuItem.Click += new System.EventHandler(this.fILEToolStripMenuItem_Click);
             // 
             // importToolStripMenuItem
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importToolStripMenuItem.Text = "import...";
+            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportToolStripMenuItem.Text = "export...";
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveAsToolStripMenuItem.Text = "save";
-            // 
-            // saveAsToolStripMenuItem1
-            // 
-            this.saveAsToolStripMenuItem1.Name = "saveAsToolStripMenuItem1";
-            this.saveAsToolStripMenuItem1.Size = new System.Drawing.Size(120, 22);
-            this.saveAsToolStripMenuItem1.Text = "save as...";
             // 
             // dOWNLOADToolStripMenuItem
             // 
-            this.dOWNLOADToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lastLogToolStripMenuItem,
-            this.firstLogToolStripMenuItem});
             this.dOWNLOADToolStripMenuItem.Name = "dOWNLOADToolStripMenuItem";
             this.dOWNLOADToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.dOWNLOADToolStripMenuItem.Text = "DOWNLOAD";
-            // 
-            // lastLogToolStripMenuItem
-            // 
-            this.lastLogToolStripMenuItem.Name = "lastLogToolStripMenuItem";
-            this.lastLogToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.lastLogToolStripMenuItem.Text = "Last log";
-            // 
-            // firstLogToolStripMenuItem
-            // 
-            this.firstLogToolStripMenuItem.Name = "firstLogToolStripMenuItem";
-            this.firstLogToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
-            this.firstLogToolStripMenuItem.Text = "First log";
+            this.dOWNLOADToolStripMenuItem.Click += new System.EventHandler(this.dOWNLOADToolStripMenuItem_Click);
             // 
             // aBOUTToolStripMenuItem
             // 
             this.aBOUTToolStripMenuItem.Name = "aBOUTToolStripMenuItem";
             this.aBOUTToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.aBOUTToolStripMenuItem.Text = "ABOUT";
+            this.aBOUTToolStripMenuItem.Click += new System.EventHandler(this.aBOUTToolStripMenuItem_Click);
             // 
-            // dataGridView1
+            // hScrollBar2
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(251, 71);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(538, 367);
-            this.dataGridView1.TabIndex = 5;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.hScrollBar2.Location = new System.Drawing.Point(12, 417);
+            this.hScrollBar2.Name = "hScrollBar2";
+            this.hScrollBar2.Size = new System.Drawing.Size(219, 21);
+            this.hScrollBar2.TabIndex = 9;
+            this.hScrollBar2.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar2_Scroll);
             // 
-            // button_search
+            // vScrollBar2
             // 
-            this.button_search.BackColor = System.Drawing.Color.Gainsboro;
-            this.button_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_search.Location = new System.Drawing.Point(653, 37);
-            this.button_search.Name = "button_search";
-            this.button_search.Size = new System.Drawing.Size(135, 30);
-            this.button_search.TabIndex = 6;
-            this.button_search.Text = "Search";
-            this.button_search.UseVisualStyleBackColor = false;
+            this.vScrollBar2.Location = new System.Drawing.Point(769, 71);
+            this.vScrollBar2.Name = "vScrollBar2";
+            this.vScrollBar2.Size = new System.Drawing.Size(19, 346);
+            this.vScrollBar2.TabIndex = 10;
             // 
-            // vScrollBar1
+            // text_search
             // 
-            this.vScrollBar1.Location = new System.Drawing.Point(212, 71);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(19, 367);
-            this.vScrollBar1.TabIndex = 7;
-            // 
-            // hScrollBar1
-            // 
-            this.hScrollBar1.Location = new System.Drawing.Point(251, 416);
-            this.hScrollBar1.Name = "hScrollBar1";
-            this.hScrollBar1.Size = new System.Drawing.Size(537, 21);
-            this.hScrollBar1.TabIndex = 8;
+            this.text_search.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.text_search.BackColor = System.Drawing.Color.Gainsboro;
+            this.text_search.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.text_search.Location = new System.Drawing.Point(605, 45);
+            this.text_search.Name = "text_search";
+            this.text_search.Size = new System.Drawing.Size(158, 20);
+            this.text_search.TabIndex = 11;
+            this.text_search.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Form3
             // 
@@ -223,9 +230,9 @@ namespace GoogleMeetLogsNavigator
             this.Text = "Google Meet Logs Navigator";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -240,15 +247,14 @@ namespace GoogleMeetLogsNavigator
         private System.Windows.Forms.ToolStripMenuItem fILEToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem dOWNLOADToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lastLogToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem firstLogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aBOUTToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.HScrollBar hScrollBar1;
         private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.Button button_search;
+        private System.Windows.Forms.HScrollBar hScrollBar2;
+        private System.Windows.Forms.VScrollBar vScrollBar2;
+        private System.Windows.Forms.TextBox text_search;
     }
 }
