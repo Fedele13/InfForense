@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace GMCSVReaderPrototype.TO
+namespace GoogleMeetLogsNavigator.TO
 {
     /// <summary>
     /// Google Meeting rappresentation

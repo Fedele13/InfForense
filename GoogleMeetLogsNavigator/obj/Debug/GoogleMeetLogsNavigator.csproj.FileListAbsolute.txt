@@ -16,3 +16,7 @@ C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNaviga
 C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.csproj.CopyComplete
 C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.exe
 C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.pdb
+C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.About_form.resources
+C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.Download_Form.resources
+C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.Form_login.resources
+C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.Form3.resources

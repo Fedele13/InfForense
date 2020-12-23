@@ -1,11 +1,12 @@
 ﻿using CsvHelper;
-using GMCSVReaderPrototype.TO;
+using GoogleMeetLogsNavigator.Interface;
+using GoogleMeetLogsNavigator.TO;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace GMCSVReaderPrototype.GoogleReader
+namespace GoogleMeetLogsNavigator.GoogleReader
 {
     /// <summary>
     /// 
@@ -37,7 +38,7 @@ namespace GMCSVReaderPrototype.GoogleReader
             this._csvReader = new CsvReader(csvStream, System.Globalization.CultureInfo.InvariantCulture);
 
             IList<GoogleMeetLogTO> recordsList = this._csvReader.GetRecords<GoogleMeetLogTO>().ToList();
-            IList<string> meetingCodesList = recordsList.Select(item => item.MeetingCode).ToList();
+            IList<string> meetingCodesList = recordsList.Select(item => item.MeetingCode).Distinct().ToList();
 
             foreach (string meetingCode in meetingCodesList)
             {

@@ -1,6 +1,6 @@
 ﻿using CsvHelper.Configuration.Attributes;
 
-namespace GMCSVReaderPrototype.TO
+namespace GoogleMeetLogsNavigator.TO
 {
     /// <summary>
     /// Google Meet Log Transfer Object

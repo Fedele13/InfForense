@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GMCSVReaderPrototype.BO
+namespace GoogleMeetLogsNavigator.BO
 {
     class GoogleMeetingBO
     {

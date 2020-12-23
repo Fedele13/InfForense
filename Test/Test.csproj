@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GoogleMeetLogsNavigator\GoogleMeetLogsNavigator.csproj">
+      <Project>{c1b3af4b-a8fb-427e-aef3-bf1ca6ac4d64}</Project>
+      <Name>GoogleMeetLogsNavigator</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
