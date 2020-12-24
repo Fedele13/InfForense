@@ -11,7 +11,7 @@ namespace GoogleMeetLogsNavigator.GoogleReader
     /// <summary>
     /// 
     /// </summary>
-    public class GoogleCSVReader : ICSVReader<GoogleMeetingTO>
+    public class GoogleMeetCSVReader : ICSVReader<GoogleMeetingTO>
     {
         /// <summary>
         /// 
@@ -27,7 +27,7 @@ namespace GoogleMeetLogsNavigator.GoogleReader
         /// 
         /// </summary>
         /// <param name="csvStream"></param>
-        public GoogleCSVReader(StreamReader csvStream)
+        public GoogleMeetCSVReader(StreamReader csvStream)
         {
             if (csvStream == null)
             {
