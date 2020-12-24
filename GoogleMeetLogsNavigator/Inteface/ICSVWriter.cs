@@ -1,21 +1,21 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GoogleMeetLogsNavigator.Interface
+namespace GoogleMeetLogsNavigator.Inteface
 {
     /// <summary>
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface ICSVReader<T>
+    interface ICSVWriter<T>
     {
         /// <summary>
         /// 
         /// </summary>
-        IDictionary<string, T> MeetingDictionary { get; }
+        /// <param name="logs"></param>
+        void ToGoogleMeetCsv(IList<T> logs);
     }
 }

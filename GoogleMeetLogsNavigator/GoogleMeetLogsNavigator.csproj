@@ -92,14 +92,16 @@
     <Compile Include="Form3.Designer.cs">
       <DependentUpon>Form3.cs</DependentUpon>
     </Compile>
-    <Compile Include="GoogleReader\GoogleMeetCSVReader.cs" />
+    <Compile Include="GoogleParser\GoogleMeetCSVReader.cs" />
+    <Compile Include="GoogleParser\GoogleMeetCSVWriter.cs" />
     <Compile Include="Inteface\ICSVReader.cs" />
+    <Compile Include="Inteface\ICSVWriter.cs" />
     <Compile Include="Model\GoogleMeetLogModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransferObject\GoogleMeetingTO.cs" />
     <Compile Include="TransferObject\GoogleMeetLogTO.cs" />
-    <Compile Include="Utility\DataTimeExtension.cs" />
+    <Compile Include="Utility\GoogleMeetLogTOExtension.cs" />
     <EmbeddedResource Include="About_form.resx">
       <DependentUpon>About_form.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,11 +141,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Resources\search.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

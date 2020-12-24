@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace GoogleMeetLogsNavigator.Model
 {
    
-    class GoogleMeetLogModel
+    public class GoogleMeetLogModel
     {
         #region Mandatory Data
 
@@ -18,13 +18,13 @@ namespace GoogleMeetLogsNavigator.Model
         public string EventDescription { get; set; }
         public string MeetingCode { get; set; }
         public string PartecipantIdentifier { get; set; }
-        public string ExternalPartecipantIdentifier { get; set; }
+        public bool ExternalPartecipantIdentifier { get; set; }
         public string ClientType { get; set; }
         public string MeetingOwnerEmail { get; set; }
     
         public string ProductType { get; set; }
     
-        public int Duration { get; set; }
+        public TimeSpan Duration { get; set; }
     
         public string CallEvaluationOn5 { get; set; }
     
@@ -97,18 +97,9 @@ namespace GoogleMeetLogsNavigator.Model
         public int VideoSenfingDuration { get; set; }
         public int ShortSideMedianVideoSending { get; set; }
         public string NetworkCongestion { get; set; }
-
-        //TO ADD IN specular of this object model
-        //Meeting Start Data (La data più piccola - la durata del log di riferimento)
-        //MeetingEnteringData (la data del log di abbandono - la durata)
-        //Total meeting partecipation duration (somma delle durate di quel pèartecipante)
-        /*
-         Se l'id del partecipante non è presente riferirsi a nome del partecipante che ce l'ho sempre a 
-         disposizione mentre  l'indirizzo IP in anonimo non l'avrò mai
-         */
-        public DateTime MeetingStartData { get; set; }
-        public DateTime MeetingEndData { get; set; }
-        public DateTime MeetingEnteringData { get; set; }
+        public DateTime MeetingStartDate { get; set; }
+        public DateTime MeetingEndDate { get; set; }
+        public DateTime MeetingEnteringDate { get; set; }
         public int TotalMeetingUserPartecipation { get; set; }
 
         #endregion
