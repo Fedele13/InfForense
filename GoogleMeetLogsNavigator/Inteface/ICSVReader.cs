@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GoogleMeetLogsNavigator.Interface
 {
-    interface ICSVReader<T>
+    public interface ICSVReader<T>
     {
         IDictionary<string, T> MeetingDictionary { get; }
     }

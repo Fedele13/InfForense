@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BO\GoogleMeetingBO.cs" />
+    <Compile Include="BusinessObject\GoogleMeetingDataCalculator.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -94,10 +94,12 @@
     </Compile>
     <Compile Include="GoogleReader\GoogleMeetCSVReader.cs" />
     <Compile Include="Inteface\ICSVReader.cs" />
+    <Compile Include="Model\GoogleMeetLogModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TO\GoogleMeetingTO.cs" />
-    <Compile Include="TO\GoogleMeetLogTO.cs" />
+    <Compile Include="TransferObject\GoogleMeetingTO.cs" />
+    <Compile Include="TransferObject\GoogleMeetLogTO.cs" />
+    <Compile Include="Utility\DataTimeExtension.cs" />
     <EmbeddedResource Include="About_form.resx">
       <DependentUpon>About_form.cs</DependentUpon>
     </EmbeddedResource>
@@ -139,7 +141,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\search.png" />
+    <EmbeddedResource Include="Resources\search.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
