@@ -33,7 +33,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser
             {
                 throw new ArgumentNullException("csvStream is null");
             }
-
+            this._csvReader.Configuration.TrimOptions = CsvHelper.Configuration.TrimOptions.Trim;
             this._meetingDictionary = new Dictionary<string, GoogleMeetingTO>();
             this._csvReader = new CsvReader(csvStream, System.Globalization.CultureInfo.InvariantCulture);
 
