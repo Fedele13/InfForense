@@ -1,8 +1,5 @@
-﻿using System;
+﻿using GoogleMeetLogsNavigator.GoogleParser;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoogleMeetLogsNavigator.Inteface
 {
@@ -15,7 +12,13 @@ namespace GoogleMeetLogsNavigator.Inteface
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="configurationDictioanry"></param>
+        void SetConfiguration(IDictionary<CSVHeaderEnum, bool> configurationDictionary);
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="logs"></param>
-        void ToGoogleMeetCsv(IList<T> logs);
+        string ToGoogleMeetCsv(IList<T> logs);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CsvHelper.Configuration.Attributes;
+using GoogleMeetLogsNavigator.Utility;
 
 namespace GoogleMeetLogsNavigator.TO
 {
@@ -9,149 +10,152 @@ namespace GoogleMeetLogsNavigator.TO
     {
         #region Mandatory Data
 
-        [Index(0)]
+        [Name(Constants.CSVHeader.Date)]
         public string Date { get; set; }
-        [Index(1)]
+        [Name(Constants.CSVHeader.EventName)]
         public string EventName { get; set; }
-        [Index(2)]
+        [Name(Constants.CSVHeader.EventDescription)]
         public string EventDescription { get; set; }
-        [Index(3)]
+        [Name(Constants.CSVHeader.MeetingCode)]
         public string MeetingCode { get; set; }
-        [Index(4),NullValues("-")]
+        [Name(Constants.CSVHeader.PartecipantIdentifier), NullValues(Constants.ConstantsValue.EmptyString)]
         public string PartecipantIdentifier { get; set; }
-        [Index(5), NullValues("-")]
+        [Name(Constants.CSVHeader.ExternalPartecipantIdentifier), NullValues(Constants.ConstantsValue.EmptyString)]
         public string ExternalPartecipantIdentifier { get; set; }
-        [Index(6)]
-        public string ClientType { get; set; }
-        [Index(7), NullValues("-")]
-        public string MeetingOwnerEmail { get; set; }
-        [Index(8), NullValues("-")]
-        public string ProductType { get; set; }
-        [Index(9)]
-        public string Duration { get; set; }
-        [Index(10), NullValues("-")]
-        public string CallEvaluationOn5 { get; set; }
-        [Index(11)]
+        [Name(Constants.CSVHeader.PartecipantName)]
         public string PartecipantName { get; set; }
-        [Index(12), NullValues("-")]
-        public string IPAddress { get; set; }
-        [Index(13), NullValues("-")]
-        public string City { get; set; }
-        [Index(14), NullValues("-")]
-        public string Nation { get; set; }
-        [Index(59), NullValues("-")]
-        public string ActionCause { get; set; }
-        [Index(60), NullValues("-")]
-        public string ActionDescription { get; set; }
-        [Index(61), NullValues("-")]
-        public string VisualizedDestinationName { get; set; }
-        [Index(62), NullValues("-")]
-        public string DetinationEmailsAddresses { get; set; }
-        [Index(63), NullValues("-")]
-        public string DestinationPhoneNumber { get; set; }
-        [Index(26), NullValues("-")]
-        public string CalendarEventIdentifier { get; set; }
-        [Index(27), NullValues("-")]
-        public string ConferenceID { get; set; }
 
         #endregion Mandatory Data
 
         #region Optional Data
 
-        [Index(15), NullValues("0")]
+        [Name(Constants.CSVHeader.ClientType)]
+        public string ClientType { get; set; }
+        [Name(Constants.CSVHeader.MeetingOwnerEmail), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string MeetingOwnerEmail { get; set; }
+        [Name(Constants.CSVHeader.ProductType), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string ProductType { get; set; }
+        [Name(Constants.CSVHeader.Duration)]
+        public string Duration { get; set; }
+        [Name(Constants.CSVHeader.CallEvaluationOn5), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string CallEvaluationOn5 { get; set; }
+        [Name(Constants.CSVHeader.IPAddress), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string IPAddress { get; set; }
+        [Name(Constants.CSVHeader.City), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string City { get; set; }
+        [Name(Constants.CSVHeader.Nation), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string Nation { get; set; }
+        [Name(Constants.CSVHeader.ActionCause), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string ActionCause { get; set; }
+        [Name(Constants.CSVHeader.ActionDescription), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string ActionDescription { get; set; }
+        [Name(Constants.CSVHeader.VisualizedDestinationName), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string VisualizedDestinationName { get; set; }
+        [Name(Constants.CSVHeader.DestinationEmailsAddresses), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string DestinationEmailsAddresses { get; set; }
+        [Name(Constants.CSVHeader.DestinationPhoneNumber), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string DestinationPhoneNumber { get; set; }
+        [Name(Constants.CSVHeader.CalendarEventIdentifier), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string CalendarEventIdentifier { get; set; }
+        [Name(Constants.CSVHeader.ConferenceID), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string ConferenceID { get; set; }
+       
+
+        [Name(Constants.CSVHeader.NETRoundTrip), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string NETRoundTrip { get; set; }
-        [Index(16), NullValues("-")]
+        [Name(Constants.CSVHeader.TransportProtocol), NullValues(Constants.ConstantsValue.EmptyString)]
         public string TransportProtocol { get; set; }
-        [Index(17), NullValues("0")]
+        [Name(Constants.CSVHeader.PredictedBandWidthLoading), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string PredictedBandWidthLoading { get; set; }
-        [Index(18), NullValues("0")]
+        [Name(Constants.CSVHeader.PredictedBandWidthUploading), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string PredictedBandWidthUploading { get; set; }
 
-        [Index(19), NullValues("0")]
+        [Name(Constants.CSVHeader.MaxReceptionAudioPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string MaxReceptionAudioPacketsLost { get; set; }
-        [Index(20), NullValues("0")]
+        [Name(Constants.CSVHeader.AverageReceptionAudioPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageReceptionAudioPacketsLost { get; set; }
-        [Index(21), NullValues("0")]
+        [Name(Constants.CSVHeader.AudioReceptionDuration), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AudioReceptionDuration { get; set; }
-        [Index(22), NullValues("0")]
+        [Name(Constants.CSVHeader.BitRationAudioSending), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string BitRationAudioSending { get; set; }
-        [Index(23), NullValues("0")]
+        [Name(Constants.CSVHeader.MaxSendingAudioPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string MaxSendingAudioPacketsLost { get; set; }
-        [Index(24), NullValues("0")]
+        [Name(Constants.CSVHeader.AverageSendingAudioPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageSendingAudioPacketsLost { get; set; }
-        [Index(25), NullValues("0")]
+        [Name(Constants.CSVHeader.AudioSendingDuration), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AudioSendingDuration { get; set; }
-        [Index(28), NullValues("0")]
+        [Name(Constants.CSVHeader.AverageReceptionFlickering), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageReceptionFlickering { get; set; }
-        [Index(29), NullValues("0")]
+        [Name(Constants.CSVHeader.MaxReceptionFilckering), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string MaxReceptionFilckering { get; set; }
-        [Index(30), NullValues("0")]
+        [Name(Constants.CSVHeader.AverageSendingFlickering), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageSendingFlickering { get; set; }
-        [Index(31), NullValues("0")]
+        [Name(Constants.CSVHeader.BitRationScreencastReception), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string BitRationScreencastReception { get; set; }
-        [Index(32), NullValues("0")]
+        [Name(Constants.CSVHeader.AverageScreecastReception), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageScreecastReception { get; set; }
-        [Index(33), NullValues("0")]
+        [Name(Constants.CSVHeader.LongSideMedianScreencastReception), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string LongSideMedianScreencastReception { get; set; }
-        [Index(34), NullValues("0")]
+        [Name(Constants.CSVHeader.MaxReceptionScreencastPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string MaxReceptionScreencastPacketsLost { get; set; }
-        [Index(35), NullValues("0")]
+        [Name(Constants.CSVHeader.AverageReceptionScreencastPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageReceptionScreencastPacketsLost { get; set; }
-        [Index(36), NullValues("0")]
+        [Name(Constants.CSVHeader.ScreencastReceptionDuration), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string ScreencastReceptionDuration { get; set; }
-        [Index(37), NullValues("0")]
+        [Name(Constants.CSVHeader.ShortSideMedianScreencastReception), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string ShortSideMedianScreencastReception { get; set; }
-        [Index(38), NullValues("0")]
+        [Name(Constants.CSVHeader.BitRationScreencastSending), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string BitRationScreencastSending { get; set; }
-        [Index(39), NullValues("0")]
+        [Name(Constants.CSVHeader.AverageScreecastSending), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageScreecastSending { get; set; }
-        [Index(40), NullValues("0")]
+        [Name(Constants.CSVHeader.LongSideMedianScreencastSending), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string LongSideMedianScreencastSending { get; set; }
-        [Index(41), NullValues("0")]
+        [Name(Constants.CSVHeader.MaxSendingScreencastPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string MaxSendingScreencastPacketsLost { get; set; }
-        [Index(42), NullValues("0")]
+        [Name(Constants.CSVHeader.AverageSendingScreencastPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageSendingScreencastPacketsLost { get; set; }
-        [Index(43), NullValues("0")]
+        [Name(Constants.CSVHeader.ScreencastSendingDuration), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string ScreencastSendingDuration { get; set; }
-        [Index(44), NullValues("0")]
+        [Name(Constants.CSVHeader.ShortSideMedianScreencastSending), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string ShortSideMedianScreencastSending { get; set; }
-        [Index(45), NullValues("0")]
+        [Name(Constants.CSVHeader.AverageVideoReception), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageVideoReception { get; set; }
-        [Index(46), NullValues("0")]
+        [Name(Constants.CSVHeader.LongSideMedianVideoReception), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string LongSideMedianVideoReception { get; set; }
-        [Index(47), NullValues("0")]
+        [Name(Constants.CSVHeader.MaxVideoReceptionPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string MaxVideoReceptionPacketsLost { get; set; }
-        [Index(48), NullValues("0")]
+        [Name(Constants.CSVHeader.AverageVideoReceptionPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageVideoReceptionPacketsLost { get; set; }
-        [Index(49), NullValues("0")]
+        [Name(Constants.CSVHeader.ReceptionVideoDuration), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string ReceptionVideoDuration { get; set; }
-        [Index(50), NullValues("0")]
+        [Name(Constants.CSVHeader.ShortSideMedianVideoReception), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string ShortSideMedianVideoReception { get; set; }
-        [Index(52), NullValues("0")]
+        [Name(Constants.CSVHeader.BitRationVideoSending), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string BitRationVideoSending { get; set; }
-        [Index(53), NullValues("0")]
+        [Name(Constants.CSVHeader.AverageVideoSending), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageVideoSending { get; set; }
-        [Index(54), NullValues("0")]
+        [Name(Constants.CSVHeader.LongSideMedianVideoSending), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string LongSideMedianVideoSending { get; set; }
-        [Index(55), NullValues("0")]
+        [Name(Constants.CSVHeader.MaxSendingVideoPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string MaxSendingVideoPacketsLost { get; set; }
-        [Index(56), NullValues("0")]
+        [Name(Constants.CSVHeader.AverageSendingVideoPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageSendingVideoPacketsLost { get; set; }
-        [Index(57), NullValues("0")]
+        [Name(Constants.CSVHeader.VideoSenfingDuration), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string VideoSenfingDuration { get; set; }
-        [Index(58), NullValues("0")]
+        [Name(Constants.CSVHeader.ShortSideMedianVideoSending), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string ShortSideMedianVideoSending { get; set; }
-        [Index(51), NullValues("0")]
+        [Name(Constants.CSVHeader.NetworkCongestion), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string NetworkCongestion { get; set; }
-
-        //TO ADD IN specular of this object model
-        //Meeting Start Data (La data più piccola - la durata del log di riferimento)
-        //MeetingEnteringData (la data del log di abbandono - la durata)
-        //Total meeting partecipation duration (somma delle durate di quel pèartecipante)
-        /*
-         Se l'id del partecipante non è presente riferirsi a nome del partecipante che ce l'ho sempre a 
-         disposizione mentre  l'indirizzo IP in anonimo non l'avrò mai
-         */
+        [Name(Constants.CSVHeader.MeetingStartDate), NullValues(Constants.ConstantsValue.MinValue)]
+        public string MeetingStartDate { get; set; }
+        [Name(Constants.CSVHeader.MeetingEndDate), NullValues(Constants.ConstantsValue.MinValue)]
+        public string MeetingEndDate { get; set; }
+        [Name(Constants.CSVHeader.MeetingEnteringDate), NullValues(Constants.ConstantsValue.MinValue)]
+        public string MeetingEnteringDate { get; set; }
+        [Name(Constants.CSVHeader.TotalMeetingUserPartecipation), NullValues(Constants.ConstantsValue.ZeroValue)]
+        public string TotalMeetingUserPartecipation { get; set; }
+        [Name(Constants.CSVHeader.CommonEuropeanTimeType), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string CommonEuropeanTimeType { get; set; }
 
         #endregion
     }

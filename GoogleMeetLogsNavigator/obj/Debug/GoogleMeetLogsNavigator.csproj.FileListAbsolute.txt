@@ -9,7 +9,6 @@ C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNaviga
 C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.csprojAssemblyReference.cache
 C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.Form1.resources
 C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.Properties.Resources.resources
 C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.csproj.GenerateResource.cache

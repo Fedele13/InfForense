@@ -1,9 +1,10 @@
 ﻿using CsvHelper;
 using GoogleMeetLogsNavigator.Inteface;
 using GoogleMeetLogsNavigator.Model;
-using System;
+using GoogleMeetLogsNavigator.Utility;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace GoogleMeetLogsNavigator.GoogleParser
 {
@@ -12,23 +13,66 @@ namespace GoogleMeetLogsNavigator.GoogleParser
     /// </summary>
     public class GoogleMeetCSVWriter : ICSVWriter<GoogleMeetLogModel>
     {
-        private string _destinationPath = string.Empty;
+      
+        /// <summary>
+        /// 
+        /// </summary>
+        private IDictionary<CSVHeaderEnum, bool> _configurationDictionary = null;
 
-        public GoogleMeetCSVWriter(string destinationPath)
+        public GoogleMeetCSVWriter(IDictionary<CSVHeaderEnum, bool> configurationDictionary)
         {
-            this._destinationPath = destinationPath;
+            this._configurationDictionary = configurationDictionary;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configurationDictionary"></param>
+        public void SetConfiguration(IDictionary<CSVHeaderEnum, bool> configurationDictionary)
+        {
+            this._configurationDictionary = configurationDictionary;
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="logs"></param>
-        public void ToGoogleMeetCsv(IList<GoogleMeetLogModel> logs)
+        public string ToGoogleMeetCsv(IList<GoogleMeetLogModel> logs)
         {
-            using (StreamWriter writer = File.CreateText(_destinationPath))
+            using (var mem = new MemoryStream())
+            using (var writer = new StreamWriter(mem))
+            using (var csvWriter = new CsvWriter(writer, System.Globalization.CultureInfo.InvariantCulture))
             {
-                CsvWriter csv = new CsvWriter(writer, System.Globalization.CultureInfo.InvariantCulture);
-                csv.Configuration.SanitizeForInjection = true;
-                csv.WriteRecords(logs);
+                csvWriter.Configuration.SanitizeForInjection = true;
+                csvWriter.Configuration.Delimiter = ",";
+                
+                if (this._configurationDictionary[CSVHeaderEnum.ExternalPartecipantIdentifier])
+                    csvWriter.WriteField(Constants.CSVHeader.ExternalPartecipantIdentifier);
+
+                if (this._configurationDictionary[CSVHeaderEnum.ExternalPartecipantIdentifier])
+                    csvWriter.WriteField(Constants.CSVHeader.ExternalPartecipantIdentifier);
+
+
+
+
+
+                //qua posso scegliere i field da considerare
+                /*
+                 * csvWriter.WriteField("Customer");
+				
+				csvWriter.WriteField("Deadline");
+				csvWriter.NextRecord();
+
+				foreach (var project in data)
+				{
+					csvWriter.WriteField(project.CustomerName);
+					csvWriter.WriteField(project.Title);
+					csvWriter.WriteField(project.Deadline);
+					csvWriter.NextRecord();
+				}
+                 */
+
+                return Encoding.UTF8.GetString(mem.ToArray());
             }
         }
     }

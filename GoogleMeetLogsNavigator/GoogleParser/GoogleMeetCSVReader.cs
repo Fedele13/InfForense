@@ -33,9 +33,13 @@ namespace GoogleMeetLogsNavigator.GoogleParser
             {
                 throw new ArgumentNullException("csvStream is null");
             }
-            this._csvReader.Configuration.TrimOptions = CsvHelper.Configuration.TrimOptions.Trim;
+            
             this._meetingDictionary = new Dictionary<string, GoogleMeetingTO>();
             this._csvReader = new CsvReader(csvStream, System.Globalization.CultureInfo.InvariantCulture);
+            this._csvReader.Configuration.TrimOptions = CsvHelper.Configuration.TrimOptions.InsideQuotes;
+            this._csvReader.Configuration.HeaderValidated = null;
+            this._csvReader.Configuration.MissingFieldFound = null;
+
 
             IList<GoogleMeetLogTO> recordsList = this._csvReader.GetRecords<GoogleMeetLogTO>().ToList();
             IList<string> meetingCodesList = recordsList.Select(item => item.MeetingCode).Distinct().ToList();
@@ -46,10 +50,10 @@ namespace GoogleMeetLogsNavigator.GoogleParser
             }
         }
 
-       
+
         /// <summary>
         /// 
         /// </summary>
-        IDictionary<string, GoogleMeetingTO> ICSVReader<GoogleMeetingTO>.MeetingDictionary => this._meetingDictionary;
+        IDictionary<string, GoogleMeetingTO> ICSVReader<GoogleMeetingTO>.MeetingDictionary { get => this._meetingDictionary; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 namespace GoogleMeetLogsNavigator.TO
 {
@@ -47,7 +48,7 @@ namespace GoogleMeetLogsNavigator.TO
             {
                 foreach (GoogleMeetLogTO log in logs)
                 {
-                    if (log.MeetingCode != meetingCode)
+                    if (log.MeetingCode != this._meetingCode)
                     {
                         continue;
                     }
@@ -59,6 +60,11 @@ namespace GoogleMeetLogsNavigator.TO
         #endregion
 
         #region prop
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string MeetingCode { get => this.MeetingCode; }
 
         /// <summary>
         /// 
@@ -188,6 +194,17 @@ namespace GoogleMeetLogsNavigator.TO
         {
             return this._googleMeetingLogs.GetEnumerator();
         }
+
+        //public override string ToString()
+        //{
+        //    StringBuilder stringBuilder = new StringBuilder();
+        //    foreach (var record in this._googleMeetingLogs)
+        //    {
+        //        stringBuilder.AppendLine($"{record.Date},{record.EventName},{record.EventDescription},{record.MeetingCode}");
+        //    }
+
+        //    return stringBuilder.ToString();
+        //}
 
         #endregion
     }
