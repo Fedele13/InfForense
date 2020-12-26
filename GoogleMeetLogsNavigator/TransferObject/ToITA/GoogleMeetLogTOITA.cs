@@ -1,12 +1,13 @@
 ﻿using CsvHelper.Configuration.Attributes;
+using GoogleMeetLogsNavigator.TransferObject.Interface;
 using GoogleMeetLogsNavigator.Utility;
 
-namespace GoogleMeetLogsNavigator.TO
+namespace GoogleMeetLogsNavigator.TransferObject.ToITA
 {
     /// <summary>
     /// Google Meet Log Transfer Object
     /// </summary>
-    public class GoogleMeetLogTO
+    public class GoogleMeetLogTOITA : IGoogleMeetLogTO
     {
         #region Mandatory Data
 

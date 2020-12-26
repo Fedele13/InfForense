@@ -1,14 +1,15 @@
-﻿using System;
+﻿using GoogleMeetLogsNavigator.TransferObject.Interface;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GoogleMeetLogsNavigator.TO
+namespace GoogleMeetLogsNavigator.TransferObject
 {
     /// <summary>
     /// Google Meeting rappresentation
     /// </summary>
-    public class GoogleMeetingTO : IList<GoogleMeetLogTO>
+    public class GoogleMeetingTO : IList<IGoogleMeetLogTO>
     {
         #region private
 
@@ -20,7 +21,7 @@ namespace GoogleMeetLogsNavigator.TO
         /// <summary>
         /// 
         /// </summary>
-        private IList<GoogleMeetLogTO> _googleMeetingLogs = new List<GoogleMeetLogTO>();
+        private IList<IGoogleMeetLogTO> _googleMeetingLogs = new List<IGoogleMeetLogTO>();
 
         #endregion
 
@@ -40,13 +41,13 @@ namespace GoogleMeetLogsNavigator.TO
         /// </summary>
         /// <param name="meetingCode"></param>
         /// <param name="logs"></param>
-        public GoogleMeetingTO(string meetingCode, IList<GoogleMeetLogTO> logs)
+        public GoogleMeetingTO(string meetingCode, IList<IGoogleMeetLogTO> logs)
         {
             this._meetingCode = meetingCode;
 
             if (logs != null && logs.Count > 0)
             {
-                foreach (GoogleMeetLogTO log in logs)
+                foreach (IGoogleMeetLogTO log in logs)
                 {
                     if (log.MeetingCode != this._meetingCode)
                     {
@@ -64,14 +65,14 @@ namespace GoogleMeetLogsNavigator.TO
         /// <summary>
         /// 
         /// </summary>
-        public string MeetingCode { get => this.MeetingCode; }
+        public string MeetingCode { get => this._meetingCode; }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public GoogleMeetLogTO this[int index] 
+        public IGoogleMeetLogTO this[int index] 
         {
             get => this._googleMeetingLogs[index]; 
             set => this._googleMeetingLogs[index] = value; 
@@ -95,7 +96,7 @@ namespace GoogleMeetLogsNavigator.TO
         /// 
         /// </summary>
         /// <param name="item"></param>
-        public void Add(GoogleMeetLogTO item)
+        public void Add(IGoogleMeetLogTO item)
         {
             if (item.MeetingCode != item.MeetingCode)
             {
@@ -118,7 +119,7 @@ namespace GoogleMeetLogsNavigator.TO
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public bool Contains(GoogleMeetLogTO item)
+        public bool Contains(IGoogleMeetLogTO item)
         {
             return this._googleMeetingLogs.Contains(item);
         }
@@ -128,7 +129,7 @@ namespace GoogleMeetLogsNavigator.TO
         /// </summary>
         /// <param name="array"></param>
         /// <param name="arrayIndex"></param>
-        public void CopyTo(GoogleMeetLogTO[] array, int arrayIndex)
+        public void CopyTo(IGoogleMeetLogTO[] array, int arrayIndex)
         {
             this._googleMeetingLogs.CopyTo(array, arrayIndex);
         }
@@ -137,7 +138,7 @@ namespace GoogleMeetLogsNavigator.TO
         /// 
         /// </summary>
         /// <returns></returns>
-        public IEnumerator<GoogleMeetLogTO> GetEnumerator()
+        public IEnumerator<IGoogleMeetLogTO> GetEnumerator()
         {
             return this._googleMeetingLogs.GetEnumerator();
         }
@@ -147,7 +148,7 @@ namespace GoogleMeetLogsNavigator.TO
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public int IndexOf(GoogleMeetLogTO item)
+        public int IndexOf(IGoogleMeetLogTO item)
         {
             return this._googleMeetingLogs.IndexOf(item);
         }
@@ -157,7 +158,7 @@ namespace GoogleMeetLogsNavigator.TO
         /// </summary>
         /// <param name="index"></param>
         /// <param name="item"></param>
-        public void Insert(int index, GoogleMeetLogTO item)
+        public void Insert(int index, IGoogleMeetLogTO item)
         {
             if (item.MeetingCode != item.MeetingCode)
             {
@@ -172,7 +173,7 @@ namespace GoogleMeetLogsNavigator.TO
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public bool Remove(GoogleMeetLogTO item)
+        public bool Remove(IGoogleMeetLogTO item)
         {
             return this._googleMeetingLogs.Remove(item);
         }
@@ -194,17 +195,6 @@ namespace GoogleMeetLogsNavigator.TO
         {
             return this._googleMeetingLogs.GetEnumerator();
         }
-
-        //public override string ToString()
-        //{
-        //    StringBuilder stringBuilder = new StringBuilder();
-        //    foreach (var record in this._googleMeetingLogs)
-        //    {
-        //        stringBuilder.AppendLine($"{record.Date},{record.EventName},{record.EventDescription},{record.MeetingCode}");
-        //    }
-
-        //    return stringBuilder.ToString();
-        //}
 
         #endregion
     }

@@ -1,7 +1,7 @@
-﻿using GoogleMeetLogsNavigator.GoogleParser;
+﻿using GoogleMeetLogsNavigator.GoogleParser.Enum;
 using System.Collections.Generic;
 
-namespace GoogleMeetLogsNavigator.Inteface
+namespace GoogleMeetLogsNavigator.GoogleParser.nteface
 {
     /// <summary>
     /// 

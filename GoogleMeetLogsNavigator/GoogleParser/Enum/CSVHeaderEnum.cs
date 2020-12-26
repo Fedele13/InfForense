@@ -1,4 +1,4 @@
-﻿namespace GoogleMeetLogsNavigator.GoogleParser
+﻿namespace GoogleMeetLogsNavigator.GoogleParser.Enum
 {
     public enum CSVHeaderEnum : int
     {

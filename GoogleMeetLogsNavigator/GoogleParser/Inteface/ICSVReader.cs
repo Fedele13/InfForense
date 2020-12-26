@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GoogleMeetLogsNavigator.Interface
+namespace GoogleMeetLogsNavigator.GoogleParser.Interface
 {
     /// <summary>
     /// 

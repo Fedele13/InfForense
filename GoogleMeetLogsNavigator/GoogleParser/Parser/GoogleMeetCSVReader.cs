@@ -1,12 +1,14 @@
 ﻿using CsvHelper;
-using GoogleMeetLogsNavigator.Interface;
-using GoogleMeetLogsNavigator.TO;
+using GoogleMeetLogsNavigator.GoogleParser.Interface;
+using GoogleMeetLogsNavigator.TransferObject;
+using GoogleMeetLogsNavigator.TransferObject.Interface;
+using GoogleMeetLogsNavigator.TransferObject.ToITA;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace GoogleMeetLogsNavigator.GoogleParser
+namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 {
     /// <summary>
     /// 
@@ -21,13 +23,18 @@ namespace GoogleMeetLogsNavigator.GoogleParser
         /// <summary>
         /// 
         /// </summary>
+        private string _langauge = "it";
+
+        /// <summary>
+        /// 
+        /// </summary>
         private IDictionary<string, GoogleMeetingTO> _meetingDictionary = null;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="csvStream"></param>
-        public GoogleMeetCSVReader(StreamReader csvStream)
+        public GoogleMeetCSVReader(StreamReader csvStream, string langauge = "it")
         {
             if (csvStream == null)
             {
@@ -39,9 +46,17 @@ namespace GoogleMeetLogsNavigator.GoogleParser
             this._csvReader.Configuration.TrimOptions = CsvHelper.Configuration.TrimOptions.InsideQuotes;
             this._csvReader.Configuration.HeaderValidated = null;
             this._csvReader.Configuration.MissingFieldFound = null;
-
-
-            IList<GoogleMeetLogTO> recordsList = this._csvReader.GetRecords<GoogleMeetLogTO>().ToList();
+            this._langauge = langauge;
+            IList<IGoogleMeetLogTO> recordsList = null;
+            if (this._langauge == "it" || string.IsNullOrEmpty(this._langauge))
+            {
+                recordsList = this._csvReader.GetRecords<GoogleMeetLogTOITA>().ToList().ConvertAll(item => (IGoogleMeetLogTO)item);
+            }
+            else
+            {
+                throw new InvalidOperationException("No other langauge supported for the moment");
+            }
+            
             IList<string> meetingCodesList = recordsList.Select(item => item.MeetingCode).Distinct().ToList();
 
             foreach (string meetingCode in meetingCodesList)

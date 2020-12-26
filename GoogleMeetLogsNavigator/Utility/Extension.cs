@@ -1,5 +1,7 @@
 ﻿using GoogleMeetLogsNavigator.Model;
-using GoogleMeetLogsNavigator.TO;
+using GoogleMeetLogsNavigator.TransferObject;
+using GoogleMeetLogsNavigator.TransferObject.Interface;
+using GoogleMeetLogsNavigator.TransferObject.ToITA;
 using System;
 
 namespace GoogleMeetLogsNavigator.Utility
@@ -176,7 +178,7 @@ namespace GoogleMeetLogsNavigator.Utility
         /// <param name="googleMeetLogTO"></param>
         /// <param name="dataToUpdate"></param>
         /// <returns></returns>
-        public static GoogleMeetLogModel MapTransferObjectInModel(this GoogleMeetLogTO googleMeetLogTO)
+        public static GoogleMeetLogModel MapTransferObjectITAInModel(this IGoogleMeetLogTO googleMeetLogTO)
         {
             return new GoogleMeetLogModel
             {
@@ -260,9 +262,9 @@ namespace GoogleMeetLogsNavigator.Utility
         /// </summary>
         /// <param name="googleMeetLogModel"></param>
         /// <returns></returns>
-        public static GoogleMeetLogTO MapObjectModelInTransferObject(this GoogleMeetLogModel googleMeetLogModel)
+        public static IGoogleMeetLogTO MapObjectModelInTransferObjectITA(this GoogleMeetLogModel googleMeetLogModel)
         {
-            return new GoogleMeetLogTO
+            return new GoogleMeetLogTOITA
             {
                 Date = googleMeetLogModel.Date.ConvertGoogleDateTimeInString(googleMeetLogModel.CommonEuropeanTimeType),
                 EventName = googleMeetLogModel.EventName,
@@ -348,7 +350,7 @@ namespace GoogleMeetLogsNavigator.Utility
         public static string ConvertGoogleDateTimeInString(this DateTime googleDateTime, string cet)
         {
             return string.Format("{0} {1} {2}, {3}:{4}:{5} {6}", 
-                googleDateTime.Day, googleDateTime.Month, googleDateTime.Year,
+                googleDateTime.Day, GetGoogleMonthString(googleDateTime.Month), googleDateTime.Year,
                 googleDateTime.Hour, googleDateTime.Minute, googleDateTime.Second,
                 string.IsNullOrEmpty(cet) ? string.Empty : cet);
 

@@ -1,12 +1,13 @@
 ﻿using CsvHelper;
-using GoogleMeetLogsNavigator.Inteface;
+using GoogleMeetLogsNavigator.GoogleParser.Enum;
+using GoogleMeetLogsNavigator.GoogleParser.nteface;
 using GoogleMeetLogsNavigator.Model;
 using GoogleMeetLogsNavigator.Utility;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace GoogleMeetLogsNavigator.GoogleParser
+namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 {
     /// <summary>
     /// 
@@ -74,6 +75,11 @@ namespace GoogleMeetLogsNavigator.GoogleParser
 
                 return Encoding.UTF8.GetString(mem.ToArray());
             }
+        }
+
+        private IDictionary<CSVHeaderEnum, bool> getDefaultConfiguration()
+        {
+            return new Dictionary<CSVHeaderEnum, bool>();
         }
     }
 }

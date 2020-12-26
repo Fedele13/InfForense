@@ -1,6 +1,7 @@
-﻿using GoogleMeetLogsNavigator.Interface;
+﻿using GoogleMeetLogsNavigator.GoogleParser.Interface;
 using GoogleMeetLogsNavigator.Model;
-using GoogleMeetLogsNavigator.TO;
+using GoogleMeetLogsNavigator.TransferObject;
+using GoogleMeetLogsNavigator.TransferObject.Interface;
 using GoogleMeetLogsNavigator.Utility;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace GoogleMeetLogsNavigator.BO
     /// <summary>
     /// 
     /// </summary>
-    public class GoogleMeetingDataCalculator
+    public class GoogleMeetingMissingDataCalculator
     {
         #region private
 
@@ -28,7 +29,7 @@ namespace GoogleMeetLogsNavigator.BO
         /// 
         /// </summary>
         /// <param name="reader"></param>
-        public GoogleMeetingDataCalculator(ICSVReader<GoogleMeetingTO> reader)
+        public GoogleMeetingMissingDataCalculator(ICSVReader<GoogleMeetingTO> reader)
         {
             this._reader = reader;
 
@@ -37,14 +38,14 @@ namespace GoogleMeetLogsNavigator.BO
             {
                 IList<GoogleMeetLogModel> logsModel = new List<GoogleMeetLogModel>();
                 
-                IDictionary<string, GoogleMeetLogTO> resultAdditionalDataDictionary = calculateAdditionalData(reader.MeetingDictionary[meetingKey]);
+                IDictionary<string, IGoogleMeetLogTO> resultAdditionalDataDictionary = calculateAdditionalData(reader.MeetingDictionary[meetingKey]);
 
                 foreach (string dateLog in resultAdditionalDataDictionary.Keys)
                 {
-                    GoogleMeetLogTO log = reader.MeetingDictionary[meetingKey].
+                    IGoogleMeetLogTO log = reader.MeetingDictionary[meetingKey].
                         Where(item => item.Date == dateLog && getPartecipantLogIdentifier(item) == getPartecipantLogIdentifier(resultAdditionalDataDictionary[dateLog])).FirstOrDefault();
 
-                    logsModel.Add(log.MapTransferObjectInModel());
+                    logsModel.Add(log.MapTransferObjectITAInModel());
                 }
 
                 this.MeetingLogsDictionary.Add(meetingKey, logsModel);
@@ -60,28 +61,28 @@ namespace GoogleMeetLogsNavigator.BO
         /// </summary>
         /// <param name="logs">Logs of the same meeting</param>
         /// <returns></returns>
-        private IDictionary<string, GoogleMeetLogTO> calculateAdditionalData(IList<GoogleMeetLogTO> logs)
+        private IDictionary<string, IGoogleMeetLogTO> calculateAdditionalData(IList<IGoogleMeetLogTO> logs)
         {
             if (logs.Select(item => item.MeetingCode).Distinct().Count() > 1) 
                 throw new InvalidOperationException("The input logs are not of the same google meeting");
 
-            IDictionary<string, GoogleMeetLogTO> resultDictionary = new Dictionary<string, GoogleMeetLogTO>();
+            IDictionary<string, IGoogleMeetLogTO> resultDictionary = new Dictionary<string, IGoogleMeetLogTO>();
 
-            IList<GoogleMeetLogTO> filteredLogs = logs.Where(item => item.EventName == Constants.EventsToConsider.CallExit).ToList();
+            IList<IGoogleMeetLogTO> filteredLogs = logs.Where(item => item.EventName == Constants.EventsToConsider.CallExit).ToList();
             string cet = string.Empty;
             DateTime minDateTime = filteredLogs.Select(item =>item.Date.ConvertGooogleMeetDataInDateTime(out cet)).Min();
             int meetingDurationInSeconds = int.Parse(filteredLogs.Where(item => item.Date.ConvertGooogleMeetDataInDateTime() == minDateTime).Select(item => item.Duration).FirstOrDefault());
             string meetingStartDate = minDateTime.AddSeconds(-meetingDurationInSeconds).ConvertGoogleDateTimeInString(cet);
             string meetingEndDate = filteredLogs.Select(item => item.Date.ConvertGooogleMeetDataInDateTime()).Max().ToString();
 
-            foreach (GoogleMeetLogTO log in filteredLogs)
+            foreach (IGoogleMeetLogTO log in filteredLogs)
             {
                 string partecipantIdentifier = getPartecipantLogIdentifier(log);
-                IList<GoogleMeetLogTO> partecipantsLogs = filteredLogs.Where(item => partecipantIdentifier == getPartecipantLogIdentifier(item)).ToList();
+                IList<IGoogleMeetLogTO> partecipantsLogs = filteredLogs.Where(item => partecipantIdentifier == getPartecipantLogIdentifier(item)).ToList();
 
                 DateTime meetingEnteringData = DateTime.MinValue;
 
-                foreach (GoogleMeetLogTO partecipantLog in partecipantsLogs)
+                foreach (IGoogleMeetLogTO partecipantLog in partecipantsLogs)
                 {
                     if (isDateTimeToUpdate(partecipantLog.MeetingStartDate))
                         partecipantLog.MeetingStartDate = meetingStartDate;
@@ -110,7 +111,7 @@ namespace GoogleMeetLogsNavigator.BO
         /// </summary>
         /// <param name="log"></param>
         /// <returns></returns>
-        private string getPartecipantLogIdentifier(GoogleMeetLogTO log)
+        private string getPartecipantLogIdentifier(IGoogleMeetLogTO log)
         {
             return string.IsNullOrEmpty(log.PartecipantIdentifier) ? log.PartecipantName : log.PartecipantIdentifier;
         }
