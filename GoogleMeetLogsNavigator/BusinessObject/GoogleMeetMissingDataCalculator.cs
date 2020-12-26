@@ -12,7 +12,7 @@ namespace GoogleMeetLogsNavigator.BO
     /// <summary>
     /// 
     /// </summary>
-    public class GoogleMeetingMissingDataCalculator
+    public class GoogleMeetMissingDataCalculator
     {
         #region private
 
@@ -29,7 +29,7 @@ namespace GoogleMeetLogsNavigator.BO
         /// 
         /// </summary>
         /// <param name="reader"></param>
-        public GoogleMeetingMissingDataCalculator(ICSVReader<GoogleMeetingTO> reader)
+        public GoogleMeetMissingDataCalculator(ICSVReader<GoogleMeetingTO> reader)
         {
             this._reader = reader;
 
@@ -77,10 +77,9 @@ namespace GoogleMeetLogsNavigator.BO
             if (meetingDurationInSeconds > 0)
             {
                 meetingStartDate  = minDateTime.AddSeconds(-meetingDurationInSeconds).ConvertGoogleDateTimeInString(cet);
-                meetingEndDate= filteredLogs.Select(item => item.Date.ConvertGooogleMeetDataInDateTime()).Max().ToString();
+                meetingEndDate = filteredLogs.Select(item => item.Date.ConvertGooogleMeetDataInDateTime()).Max().ToString();
             }
            
-
             foreach (IGoogleMeetLogTO log in filteredLogs)
             {
                 string partecipantIdentifier = getPartecipantLogIdentifier(log);

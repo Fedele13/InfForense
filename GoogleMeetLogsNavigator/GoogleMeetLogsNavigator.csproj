@@ -60,7 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessObject\GoogleMeetingMissingDataCalculator.cs" />
+    <Compile Include="BusinessObject\GoogleMeetMissingDataCalculator.cs" />
     <Compile Include="TransferObject\Interface\IGoogleMeetLogTO.cs" />
     <Compile Include="Utility\Constants.cs" />
     <Compile Include="Form1.cs">

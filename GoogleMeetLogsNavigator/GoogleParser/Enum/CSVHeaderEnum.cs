@@ -24,8 +24,8 @@
         Nation,
         ActionCause,
         ActionDescription,
-        VisualizedDestinationName,
-        DetinationEmailsAddresses,
+        VisualizedDestinationNames,
+        DestinationEmailsAddresses,
         DestinationPhoneNumber,
         CalendarEventIdentifier,
         ConferenceID,
@@ -38,7 +38,7 @@
         MaxReceptionAudioPacketsLost,
         AverageReceptionAudioPacketsLost,
         AudioReceptionDuration,
-        BitRationAudioSending,
+        BitRatioAudioSending,
         MaxSendingAudioPacketsLost,
         AverageSendingAudioPacketsLost,
         AudioSendingDuration,
@@ -47,14 +47,14 @@
         MaxReceptionFilckering,
         AverageSendingFlickering,
         
-        BitRationScreencastReception,
+        BitRatioScreencastReception,
         AverageScreecastReception,
         LongSideMedianScreencastReception,
         MaxReceptionScreencastPacketsLost,
         AverageReceptionScreencastPacketsLost,
         ScreencastReceptionDuration,
         ShortSideMedianScreencastReception,
-        BitRationScreencastSending,
+        BitRatioScreencastSending,
         AverageScreecastSending,
         LongSideMedianScreencastSending,
         MaxSendingScreencastPacketsLost,
@@ -68,14 +68,21 @@
         AverageVideoReceptionPacketsLost,
         ReceptionVideoDuration,
         ShortSideMedianVideoReception,
-        BitRationVideoSending,
+        BitRatioVideoSending,
         AverageVideoSending,
         LongSideMedianVideoSending,
         MaxSendingVideoPacketsLost,
         AverageSendingVideoPacketsLost,
-        VideoSenfingDuration,
+        VideoSendingDuration,
         ShortSideMedianVideoSending,
         
-        NetworkCongestion
+        NetworkCongestion,
+
+        MeetingStartDate,
+        MeetingEndDate,
+        MeetingEnteringDate,
+        TotalMeetingUserPartecipation,
+        CommonEuropeanTimeType
+
     }
 }

@@ -18,7 +18,7 @@ namespace Test
         static void Main(string[] args)
         {
             ICSVReader<GoogleMeetingTO> reader = new GoogleMeetCSVReader(new System.IO.StreamReader(@"C:\Users\Fedele Simone De Feo\Desktop\meet_logs_1608390927280.csv"));
-            GoogleMeetingMissingDataCalculator dataCalculator = new GoogleMeetingMissingDataCalculator(reader);
+            GoogleMeetMissingDataCalculator dataCalculator = new GoogleMeetMissingDataCalculator(reader);
 
 
             foreach (var pair in reader.MeetingDictionary)

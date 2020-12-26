@@ -50,8 +50,8 @@ namespace GoogleMeetLogsNavigator.TransferObject.ToITA
         public string ActionCause { get; set; }
         [Name(Constants.CSVHeader.ActionDescription), NullValues(Constants.ConstantsValue.EmptyString)]
         public string ActionDescription { get; set; }
-        [Name(Constants.CSVHeader.VisualizedDestinationName), NullValues(Constants.ConstantsValue.EmptyString)]
-        public string VisualizedDestinationName { get; set; }
+        [Name(Constants.CSVHeader.VisualizedDestinationNames), NullValues(Constants.ConstantsValue.EmptyString)]
+        public string VisualizedDestinationNames { get; set; }
         [Name(Constants.CSVHeader.DestinationEmailsAddresses), NullValues(Constants.ConstantsValue.EmptyString)]
         public string DestinationEmailsAddresses { get; set; }
         [Name(Constants.CSVHeader.DestinationPhoneNumber), NullValues(Constants.ConstantsValue.EmptyString)]
@@ -77,8 +77,8 @@ namespace GoogleMeetLogsNavigator.TransferObject.ToITA
         public string AverageReceptionAudioPacketsLost { get; set; }
         [Name(Constants.CSVHeader.AudioReceptionDuration), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AudioReceptionDuration { get; set; }
-        [Name(Constants.CSVHeader.BitRationAudioSending), NullValues(Constants.ConstantsValue.ZeroValue)]
-        public string BitRationAudioSending { get; set; }
+        [Name(Constants.CSVHeader.BitRatioAudioSending), NullValues(Constants.ConstantsValue.ZeroValue)]
+        public string BitRatioAudioSending { get; set; }
         [Name(Constants.CSVHeader.MaxSendingAudioPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string MaxSendingAudioPacketsLost { get; set; }
         [Name(Constants.CSVHeader.AverageSendingAudioPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
@@ -91,8 +91,8 @@ namespace GoogleMeetLogsNavigator.TransferObject.ToITA
         public string MaxReceptionFilckering { get; set; }
         [Name(Constants.CSVHeader.AverageSendingFlickering), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageSendingFlickering { get; set; }
-        [Name(Constants.CSVHeader.BitRationScreencastReception), NullValues(Constants.ConstantsValue.ZeroValue)]
-        public string BitRationScreencastReception { get; set; }
+        [Name(Constants.CSVHeader.BitRatioScreencastReception), NullValues(Constants.ConstantsValue.ZeroValue)]
+        public string BitRatioScreencastReception { get; set; }
         [Name(Constants.CSVHeader.AverageScreecastReception), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageScreecastReception { get; set; }
         [Name(Constants.CSVHeader.LongSideMedianScreencastReception), NullValues(Constants.ConstantsValue.ZeroValue)]
@@ -105,8 +105,8 @@ namespace GoogleMeetLogsNavigator.TransferObject.ToITA
         public string ScreencastReceptionDuration { get; set; }
         [Name(Constants.CSVHeader.ShortSideMedianScreencastReception), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string ShortSideMedianScreencastReception { get; set; }
-        [Name(Constants.CSVHeader.BitRationScreencastSending), NullValues(Constants.ConstantsValue.ZeroValue)]
-        public string BitRationScreencastSending { get; set; }
+        [Name(Constants.CSVHeader.BitRatioScreencastSending), NullValues(Constants.ConstantsValue.ZeroValue)]
+        public string BitRatioScreencastSending { get; set; }
         [Name(Constants.CSVHeader.AverageScreecastSending), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageScreecastSending { get; set; }
         [Name(Constants.CSVHeader.LongSideMedianScreencastSending), NullValues(Constants.ConstantsValue.ZeroValue)]
@@ -131,8 +131,8 @@ namespace GoogleMeetLogsNavigator.TransferObject.ToITA
         public string ReceptionVideoDuration { get; set; }
         [Name(Constants.CSVHeader.ShortSideMedianVideoReception), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string ShortSideMedianVideoReception { get; set; }
-        [Name(Constants.CSVHeader.BitRationVideoSending), NullValues(Constants.ConstantsValue.ZeroValue)]
-        public string BitRationVideoSending { get; set; }
+        [Name(Constants.CSVHeader.BitRatioVideoSending), NullValues(Constants.ConstantsValue.ZeroValue)]
+        public string BitRatioVideoSending { get; set; }
         [Name(Constants.CSVHeader.AverageVideoSending), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageVideoSending { get; set; }
         [Name(Constants.CSVHeader.LongSideMedianVideoSending), NullValues(Constants.ConstantsValue.ZeroValue)]
@@ -141,8 +141,8 @@ namespace GoogleMeetLogsNavigator.TransferObject.ToITA
         public string MaxSendingVideoPacketsLost { get; set; }
         [Name(Constants.CSVHeader.AverageSendingVideoPacketsLost), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string AverageSendingVideoPacketsLost { get; set; }
-        [Name(Constants.CSVHeader.VideoSenfingDuration), NullValues(Constants.ConstantsValue.ZeroValue)]
-        public string VideoSenfingDuration { get; set; }
+        [Name(Constants.CSVHeader.VideoSendingDuration), NullValues(Constants.ConstantsValue.ZeroValue)]
+        public string VideoSendingDuration { get; set; }
         [Name(Constants.CSVHeader.ShortSideMedianVideoSending), NullValues(Constants.ConstantsValue.ZeroValue)]
         public string ShortSideMedianVideoSending { get; set; }
         [Name(Constants.CSVHeader.NetworkCongestion), NullValues(Constants.ConstantsValue.ZeroValue)]
