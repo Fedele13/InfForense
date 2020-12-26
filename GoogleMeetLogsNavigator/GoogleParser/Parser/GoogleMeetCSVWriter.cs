@@ -1,8 +1,10 @@
 ﻿using CsvHelper;
-using GoogleMeetLogsNavigator.GoogleParser.Enum;
+using GoogleMeetLogsNavigator.GoogleParser.GoogleEnum;
 using GoogleMeetLogsNavigator.GoogleParser.nteface;
 using GoogleMeetLogsNavigator.Model;
+using GoogleMeetLogsNavigator.TransferObject.Interface;
 using GoogleMeetLogsNavigator.Utility;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -12,7 +14,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
     /// <summary>
     /// 
     /// </summary>
-    public class GoogleMeetCSVWriter : ICSVWriter<GoogleMeetLogModel>
+    public class GoogleMeetCSVWriter : ICSVWriter<IGoogleMeetLogTO>
     {
       
         /// <summary>
@@ -38,7 +40,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// 
         /// </summary>
         /// <param name="logs"></param>
-        public string ToGoogleMeetCsv(IList<GoogleMeetLogModel> logs)
+        public string ToGoogleMeetCsv(IList<IGoogleMeetLogTO> logs)
         {
             using (var mem = new MemoryStream())
             using (var writer = new StreamWriter(mem))
@@ -47,8 +49,15 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 csvWriter.Configuration.SanitizeForInjection = true;
                 csvWriter.Configuration.Delimiter = ",";
                 
-                if (this._configurationDictionary[CSVHeaderEnum.ExternalPartecipantIdentifier])
-                    csvWriter.WriteField(Constants.CSVHeader.ExternalPartecipantIdentifier);
+
+                csvWriter.WriteField(Constants.CSVHeader.Date);
+                csvWriter.WriteField(Constants.CSVHeader.EventName);
+                csvWriter.WriteField(Constants.CSVHeader.EventDescription);
+                csvWriter.WriteField(Constants.CSVHeader.MeetingCode);
+                csvWriter.WriteField(Constants.CSVHeader.PartecipantIdentifier);
+                csvWriter.WriteField(Constants.CSVHeader.ExternalPartecipantIdentifier);
+                //csvWriter.WriteField(Constants.CSVHeader.)
+
 
                 if (this._configurationDictionary[CSVHeaderEnum.ExternalPartecipantIdentifier])
                     csvWriter.WriteField(Constants.CSVHeader.ExternalPartecipantIdentifier);
@@ -77,9 +86,19 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private IDictionary<CSVHeaderEnum, bool> getDefaultConfiguration()
         {
-            return new Dictionary<CSVHeaderEnum, bool>();
+            IDictionary<CSVHeaderEnum, bool> defaultConfigurationDictionary = new Dictionary<CSVHeaderEnum, bool>();
+
+            for (int headerEnum = 7; headerEnum < Enum.GetValues(typeof(CSVHeaderEnum)).Length; ++headerEnum)
+            {
+                defaultConfigurationDictionary.Add((CSVHeaderEnum)headerEnum, true);
+            }
+            return defaultConfigurationDictionary;
         }
     }
 }

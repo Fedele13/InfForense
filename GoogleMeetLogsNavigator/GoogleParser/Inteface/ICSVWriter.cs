@@ -1,4 +1,4 @@
-﻿using GoogleMeetLogsNavigator.GoogleParser.Enum;
+﻿using GoogleMeetLogsNavigator.GoogleParser.GoogleEnum;
 using System.Collections.Generic;
 
 namespace GoogleMeetLogsNavigator.GoogleParser.nteface
@@ -7,7 +7,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.nteface
     /// 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    interface ICSVWriter<T>
+    public interface ICSVWriter<T>
     {
         /// <summary>
         /// 

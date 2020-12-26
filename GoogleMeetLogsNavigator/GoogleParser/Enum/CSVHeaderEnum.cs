@@ -1,4 +1,4 @@
-﻿namespace GoogleMeetLogsNavigator.GoogleParser.Enum
+﻿namespace GoogleMeetLogsNavigator.GoogleParser.GoogleEnum
 {
     public enum CSVHeaderEnum : int
     {
@@ -11,13 +11,13 @@
         PartecipantIdentifier,
         ExternalPartecipantIdentifier,
         PartecipantName,
+        Duration,
 
         #endregion
 
         ClientType,
         MeetingOwnerEmail,
         ProductType,
-        Duration,
         CallEvaluationOn5,
         IPAddress,
         City,
