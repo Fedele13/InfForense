@@ -34,7 +34,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// 
         /// </summary>
         /// <param name="csvStream"></param>
-        public GoogleMeetCSVReader(StreamReader csvStream, string langauge = "it")
+        public GoogleMeetCSVReader(StreamReader csvStream, string csvDelimiter = ",", string langauge = "it")
         {
             if (csvStream == null)
             {
@@ -46,6 +46,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
             this._csvReader.Configuration.TrimOptions = CsvHelper.Configuration.TrimOptions.InsideQuotes;
             this._csvReader.Configuration.HeaderValidated = null;
             this._csvReader.Configuration.MissingFieldFound = null;
+            this._csvReader.Configuration.Delimiter = csvDelimiter;
             this._langauge = langauge;
             IList<IGoogleMeetLogTO> recordsList = null;
             if (this._langauge == "it" || string.IsNullOrEmpty(this._langauge))

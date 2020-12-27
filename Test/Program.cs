@@ -17,7 +17,13 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            ICSVReader<GoogleMeetingTO> reader = new GoogleMeetCSVReader(new System.IO.StreamReader(@"C:\Users\Fedele Simone De Feo\Desktop\meet_logs_1608390927280.csv"));
+            bool fileExcel = true;
+            string delimiter = ",";
+            if (fileExcel)
+            {
+                delimiter = ";":
+            }
+            ICSVReader<GoogleMeetingTO> reader = new GoogleMeetCSVReader(new System.IO.StreamReader(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimo.csv"), delimiter);
             GoogleMeetMissingDataCalculator dataCalculator = new GoogleMeetMissingDataCalculator(reader);
 
 
