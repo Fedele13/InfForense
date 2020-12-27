@@ -21,7 +21,7 @@ namespace Test
             string delimiter = ",";
             if (fileExcel)
             {
-                delimiter = ";":
+                delimiter = ";";
             }
             ICSVReader<GoogleMeetingTO> reader = new GoogleMeetCSVReader(new System.IO.StreamReader(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimo.csv"), delimiter);
             GoogleMeetMissingDataCalculator dataCalculator = new GoogleMeetMissingDataCalculator(reader);

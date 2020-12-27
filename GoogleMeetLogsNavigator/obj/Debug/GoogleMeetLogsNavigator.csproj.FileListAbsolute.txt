@@ -19,4 +19,3 @@ C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNaviga
 C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.Download_Form.resources
 C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.Form_login.resources
 C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.Form3.resources
-C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.csprojAssemblyReference.cache

@@ -12,6 +12,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.nteface
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="delimiter"></param>
+        void SetCSVDelimiter(string delimiter);
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="configurationDictioanry"></param>
         void SetConfiguration(IDictionary<CSVHeaderEnum, bool> configurationDictionary);
 

@@ -24,10 +24,43 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// <summary>
         /// 
         /// </summary>
+        private string _csvDelimiter = ",";
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="configurationDictionary"></param>
         public GoogleMeetCSVWriter(IDictionary<CSVHeaderEnum, bool> configurationDictionary)
         {
             this._configurationDictionary = configurationDictionary;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="delimiter"></param>
+        public GoogleMeetCSVWriter(string delimiter = ",")
+        {
+            this._csvDelimiter = delimiter;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="configurationDictionary"></param>
+        public GoogleMeetCSVWriter(IDictionary<CSVHeaderEnum, bool> configurationDictionary, string delimiter = ",")
+        {
+            this._configurationDictionary = configurationDictionary;
+            this._csvDelimiter = delimiter;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="delimiter"></param>
+        public void SetCSVDelimiter(string delimiter)
+        {
+            this._csvDelimiter = delimiter;
         }
 
         /// <summary>
@@ -50,8 +83,13 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
             using (var csvWriter = new CsvWriter(writer, System.Globalization.CultureInfo.InvariantCulture))
             {
                 csvWriter.Configuration.SanitizeForInjection = true;
-                csvWriter.Configuration.Delimiter = ",";
-                
+                csvWriter.Configuration.Delimiter = this._csvDelimiter;
+
+                if (this._configurationDictionary == null)
+                {
+                    this._configurationDictionary = getDefaultConfiguration();
+                }
+
                 /*Mandatory*/
                 csvWriter.WriteField(Constants.CSVHeader.Date);
                 csvWriter.WriteField(Constants.CSVHeader.EventName);

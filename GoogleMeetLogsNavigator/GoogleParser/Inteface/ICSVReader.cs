@@ -8,6 +8,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Interface
     /// <typeparam name="T"></typeparam>
     public interface ICSVReader<T>
     {
+        
         /// <summary>
         /// 
         /// </summary>

@@ -71,5 +71,6 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// 
         /// </summary>
         IDictionary<string, GoogleMeetingTO> ICSVReader<GoogleMeetingTO>.MeetingDictionary { get => this._meetingDictionary; }
+
     }
 }
