@@ -77,7 +77,7 @@ namespace GoogleMeetLogsNavigator.BO
             if (meetingDurationInSeconds > 0)
             {
                 meetingStartDate  = minDateTime.AddSeconds(-meetingDurationInSeconds).ConvertGoogleDateTimeInString(cet);
-                meetingEndDate = filteredLogs.Select(item => item.Date.ConvertGooogleMeetDataInDateTime()).Max().ToString();
+                meetingEndDate = filteredLogs.Select(item => item.Date.ConvertGooogleMeetDataInDateTime()).Max().ConvertGoogleDateTimeInString(cet);
             }
            
             foreach (IGoogleMeetLogTO log in filteredLogs)
@@ -94,7 +94,7 @@ namespace GoogleMeetLogsNavigator.BO
                         partecipantLog.MeetingEndDate = meetingEndDate;
 
                     if (isDateTimeToUpdate(partecipantLog.MeetingEnteringDate) && int.Parse(partecipantLog.Duration) > 0)
-                        partecipantLog.MeetingEnteringDate = partecipantLog.Date.ConvertGooogleMeetDataInDateTime().AddSeconds(-int.Parse(partecipantLog.Duration)).ToString();
+                        partecipantLog.MeetingEnteringDate = partecipantLog.Date.ConvertGooogleMeetDataInDateTime(out string cet2).AddSeconds(-int.Parse(partecipantLog.Duration)).ConvertGoogleDateTimeInString(cet2);
 
                     if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipation))
                         partecipantLog.TotalMeetingUserPartecipation = partecipantsLogs.Sum(item => int.Parse(item.Duration)).ToString();
