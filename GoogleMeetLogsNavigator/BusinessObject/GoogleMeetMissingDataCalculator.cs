@@ -85,8 +85,6 @@ namespace GoogleMeetLogsNavigator.BO
                 string partecipantIdentifier = getPartecipantLogIdentifier(log);
                 IList<IGoogleMeetLogTO> partecipantsLogs = filteredLogs.Where(item => partecipantIdentifier == getPartecipantLogIdentifier(item)).ToList();
 
-                DateTime meetingEnteringData = DateTime.MinValue;
-
                 foreach (IGoogleMeetLogTO partecipantLog in partecipantsLogs)
                 {
                     if (isDateTimeToUpdate(partecipantLog.MeetingStartDate))
@@ -96,7 +94,7 @@ namespace GoogleMeetLogsNavigator.BO
                         partecipantLog.MeetingEndDate = meetingEndDate;
 
                     if (isDateTimeToUpdate(partecipantLog.MeetingEnteringDate) && int.Parse(partecipantLog.Duration) > 0)
-                        partecipantLog.MeetingEnteringDate = DateTime.Parse(partecipantLog.Date).AddSeconds(-int.Parse(partecipantLog.Duration)).ToString();
+                        partecipantLog.MeetingEnteringDate = partecipantLog.Date.ConvertGooogleMeetDataInDateTime().AddSeconds(-int.Parse(partecipantLog.Duration)).ToString();
 
                     if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipation))
                         partecipantLog.TotalMeetingUserPartecipation = partecipantsLogs.Sum(item => int.Parse(item.Duration)).ToString();
