@@ -1,6 +1,6 @@
 *.suo
 *.user
 _ReSharper.*
-Test/bin/*
-Test/obj/*
-Test/packages/*
+/Test/bin/*
+/Test/obj/*
+/Test/packages/*
