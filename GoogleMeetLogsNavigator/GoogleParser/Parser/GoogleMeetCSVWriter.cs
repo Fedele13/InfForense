@@ -111,8 +111,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 
                 if (this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
                     csvWriter.WriteField(Constants.CSVHeader.CallEvaluationOn5);
-                if (this._configurationDictionary[CSVHeaderEnum.PartecipantName])
-                    csvWriter.WriteField(Constants.CSVHeader.PartecipantName);
+                
+                csvWriter.WriteField(Constants.CSVHeader.PartecipantName);
+                
                 if (this._configurationDictionary[CSVHeaderEnum.IPAddress])
                     csvWriter.WriteField(Constants.CSVHeader.IPAddress);
                 if (this._configurationDictionary[CSVHeaderEnum.City])
@@ -256,8 +257,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                     if (this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
                         csvWriter.WriteField(log.CallEvaluationOn5);
-                    if (this._configurationDictionary[CSVHeaderEnum.PartecipantName])
-                        csvWriter.WriteField(log.PartecipantName);
+                    
+                    csvWriter.WriteField(log.PartecipantName);
+                    
                     if (this._configurationDictionary[CSVHeaderEnum.IPAddress])
                         csvWriter.WriteField(log.IPAddress);
                     if (this._configurationDictionary[CSVHeaderEnum.City])

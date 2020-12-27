@@ -1,8 +1,12 @@
 ﻿using CsvHelper;
 using GoogleMeetLogsNavigator.BO;
 using GoogleMeetLogsNavigator.GoogleParser.Interface;
+using GoogleMeetLogsNavigator.GoogleParser.nteface;
 using GoogleMeetLogsNavigator.GoogleParser.Parser;
+using GoogleMeetLogsNavigator.Model;
 using GoogleMeetLogsNavigator.TransferObject;
+using GoogleMeetLogsNavigator.TransferObject.Interface;
+using GoogleMeetLogsNavigator.Utility;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -26,11 +30,19 @@ namespace Test
             ICSVReader<GoogleMeetingTO> reader = new GoogleMeetCSVReader(new System.IO.StreamReader(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimo.csv"), delimiter);
             GoogleMeetMissingDataCalculator dataCalculator = new GoogleMeetMissingDataCalculator(reader);
 
-
-            foreach (var pair in reader.MeetingDictionary)
+            IList<IGoogleMeetLogTO> logs = new List<IGoogleMeetLogTO>();
+            foreach(var pair in dataCalculator.MeetingLogsDictionary)
             {
-                Console.WriteLine(pair.Value);
+                foreach (GoogleMeetLogModel log in pair.Value)
+                {
+                    logs.Add(log.MapObjectModelInTransferObjectITA());
+                }
+
             }
+
+            ICSVWriter<IGoogleMeetLogTO> writer = new GoogleMeetCSVWriter();
+            Console.WriteLine(writer.ToGoogleMeetCsv(logs));
+
 
            
             Console.ReadKey();

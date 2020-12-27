@@ -47,21 +47,21 @@ namespace GoogleMeetLogsNavigator.Model
         public int MaxReceptionAudioPacketsLost { get; set; }
         public double AverageReceptionAudioPacketsLost { get; set; }
         public int AudioReceptionDuration { get; set; }
-        public double BitRationAudioSending { get; set; }
+        public double BitRatioAudioSending { get; set; }
         public int MaxSendingAudioPacketsLost { get; set; }
         public double AverageSendingAudioPacketsLost { get; set; }
         public int AudioSendingDuration { get; set; }
         public double AverageReceptionFlickering { get; set; }
         public int MaxReceptionFilckering { get; set; }
         public double AverageSendingFlickering { get; set; }
-        public double BitRationScreencastReception { get; set; }
+        public double BitRatioScreencastReception { get; set; }
         public double AverageScreecastReception { get; set; }
         public int LongSideMedianScreencastReception { get; set; }
         public int MaxReceptionScreencastPacketsLost { get; set; }
         public double AverageReceptionScreencastPacketsLost { get; set; }
         public int ScreencastReceptionDuration { get; set; }
         public int ShortSideMedianScreencastReception { get; set; }
-        public double BitRationScreencastSending { get; set; }
+        public double BitRatioScreencastSending { get; set; }
         public double AverageScreecastSending { get; set; }
         public int LongSideMedianScreencastSending { get; set; }
         public int MaxSendingScreencastPacketsLost { get; set; }
@@ -74,12 +74,12 @@ namespace GoogleMeetLogsNavigator.Model
         public double AverageVideoReceptionPacketsLost { get; set; }
         public int ReceptionVideoDuration { get; set; }
         public int ShortSideMedianVideoReception { get; set; }
-        public double BitRationVideoSending { get; set; }
+        public double BitRatioVideoSending { get; set; }
         public double AverageVideoSending { get; set; }
         public int LongSideMedianVideoSending { get; set; }
         public int MaxSendingVideoPacketsLost { get; set; }
         public double AverageSendingVideoPacketsLost { get; set; }
-        public int VideoSenfingDuration { get; set; }
+        public int VideoSendingDuration { get; set; }
         public int ShortSideMedianVideoSending { get; set; }
         public string NetworkCongestion { get; set; }
         public DateTime MeetingStartDate { get; set; }

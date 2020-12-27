@@ -36,19 +36,28 @@ namespace GoogleMeetLogsNavigator.BO
             this.MeetingLogsDictionary = new Dictionary<string, IList<GoogleMeetLogModel>>();
             foreach (string meetingKey in reader.MeetingDictionary.Keys)
             {
-                IList<GoogleMeetLogModel> logsModel = new List<GoogleMeetLogModel>();
-                
-                IDictionary<string, IGoogleMeetLogTO> resultAdditionalDataDictionary = calculateAdditionalData(reader.MeetingDictionary[meetingKey]);
+               
+                    IList<GoogleMeetLogModel> logsModel = new List<GoogleMeetLogModel>();
 
-                foreach (string dateLog in resultAdditionalDataDictionary.Keys)
-                {
-                    IGoogleMeetLogTO log = reader.MeetingDictionary[meetingKey].
-                        Where(item => item.Date == dateLog && getPartecipantLogIdentifier(item) == getPartecipantLogIdentifier(resultAdditionalDataDictionary[dateLog])).FirstOrDefault();
+                    IDictionary<string, IGoogleMeetLogTO> resultAdditionalDataDictionary = calculateAdditionalData(reader.MeetingDictionary[meetingKey]);
 
-                    logsModel.Add(log.MapTransferObjectITAInModel());
-                }
+                    foreach (string keyLog in resultAdditionalDataDictionary.Keys)
+                    {
+                        try
+                        {
+                            string[] keysLog = splitKeyLog(keyLog);
 
-                this.MeetingLogsDictionary.Add(meetingKey, logsModel);
+                            IGoogleMeetLogTO log = reader.MeetingDictionary[meetingKey].
+                                Where(item => item.Date == keysLog[0] && getPartecipantLogIdentifier(item) == keysLog[1]).FirstOrDefault();
+
+                            logsModel.Add(log.MapTransferObjectITAInModel());
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                    }
+                    this.MeetingLogsDictionary.Add(meetingKey, logsModel);
             }
         }
 
@@ -71,29 +80,36 @@ namespace GoogleMeetLogsNavigator.BO
             IList<IGoogleMeetLogTO> filteredLogs = logs.Where(item => item.EventName == Constants.EventsToConsider.CallExit).ToList();
             string cet = string.Empty;
             DateTime minDateTime = filteredLogs.Select(item =>item.Date.ConvertGooogleMeetDataInDateTime(out cet)).Min();
-            int meetingDurationInSeconds = int.Parse(filteredLogs.Where(item => item.Date.ConvertGooogleMeetDataInDateTime() == minDateTime).Select(item => item.Duration).FirstOrDefault());
-            string meetingStartDate = string.Empty;
+            int meetingDurationInSeconds = int.Parse(filteredLogs.Where(item => item.Date == minDateTime.ConvertGoogleDateTimeInString(cet)).Select(item => item.Duration).FirstOrDefault());
+            string meetingStartDate = minDateTime.ConvertGoogleDateTimeInString(cet); ;
             string meetingEndDate = string.Empty;
             if (meetingDurationInSeconds > 0)
             {
-                meetingStartDate  = minDateTime.AddSeconds(-meetingDurationInSeconds).ConvertGoogleDateTimeInString(cet);
-                meetingEndDate = filteredLogs.Select(item => item.Date.ConvertGooogleMeetDataInDateTime()).Max().ConvertGoogleDateTimeInString(cet);
+                meetingStartDate = minDateTime.AddSeconds(-meetingDurationInSeconds).ConvertGoogleDateTimeInString(cet);
             }
-           
+
+            meetingEndDate = filteredLogs.Select(item => item.Date.ConvertGooogleMeetDataInDateTime()).Max().ConvertGoogleDateTimeInString(cet);
+
             foreach (IGoogleMeetLogTO log in filteredLogs)
             {
+               
                 string partecipantIdentifier = getPartecipantLogIdentifier(log);
                 IList<IGoogleMeetLogTO> partecipantsLogs = filteredLogs.Where(item => partecipantIdentifier == getPartecipantLogIdentifier(item)).ToList();
 
                 foreach (IGoogleMeetLogTO partecipantLog in partecipantsLogs)
                 {
+                    if (resultDictionary.ContainsKey(createLogkey(partecipantLog)))
+                    {
+                        continue;
+                    }
+
                     if (isDateTimeToUpdate(partecipantLog.MeetingStartDate))
                         partecipantLog.MeetingStartDate = meetingStartDate;
 
                     if (isDateTimeToUpdate(partecipantLog.MeetingEndDate))
                         partecipantLog.MeetingEndDate = meetingEndDate;
 
-                    if (isDateTimeToUpdate(partecipantLog.MeetingEnteringDate) && int.Parse(partecipantLog.Duration) > 0)
+                    if (isDateTimeToUpdate(partecipantLog.MeetingEnteringDate))
                         partecipantLog.MeetingEnteringDate = partecipantLog.Date.ConvertGooogleMeetDataInDateTime(out string cet2).AddSeconds(-int.Parse(partecipantLog.Duration)).ConvertGoogleDateTimeInString(cet2);
 
                     if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipation))
@@ -102,11 +118,31 @@ namespace GoogleMeetLogsNavigator.BO
                     if (string.IsNullOrEmpty(partecipantLog.CommonEuropeanTimeType))
                         partecipantLog.CommonEuropeanTimeType = cet;
 
-                    resultDictionary.Add(partecipantLog.Date, partecipantLog);
+                    resultDictionary.Add(createLogkey(partecipantLog), partecipantLog);
                 }
             }
 
             return resultDictionary;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="log"></param>
+        /// <returns></returns>
+        private string createLogkey(IGoogleMeetLogTO log)
+        {
+            return log.Date + "_" + getPartecipantLogIdentifier(log);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        private string[] splitKeyLog(string key)
+        {
+            return key.Split('_');
         }
 
         /// <summary>
@@ -137,7 +173,7 @@ namespace GoogleMeetLogsNavigator.BO
         /// <summary>
         /// 
         /// </summary>
-        IDictionary<string, IList<GoogleMeetLogModel>> MeetingLogsDictionary { get; } = null;
+        public IDictionary<string, IList<GoogleMeetLogModel>> MeetingLogsDictionary { get; } = null;
 
         #endregion
     }
