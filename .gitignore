@@ -1,9 +1,9 @@
 *.suo
 *.user
 _ReSharper.*
-\Test\bin
-\Test\obj
-\Test\packages
-\GoogleMeetLogsNavigator\bin
-\GoogleMeetLogsNavigator\obj
-\GoogleMeetLogsNavigator\packages
+\Test\bin/
+\Test\obj/
+\Test\packages/
+\GoogleMeetLogsNavigator\bin/
+\GoogleMeetLogsNavigator\obj/
+\GoogleMeetLogsNavigator\packages/
