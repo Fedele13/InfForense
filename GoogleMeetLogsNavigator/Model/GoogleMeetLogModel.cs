@@ -11,8 +11,6 @@ namespace GoogleMeetLogsNavigator.Model
    
     public class GoogleMeetLogModel
     {
-        #region Mandatory Data
-
         public DateTime Date { get; set; }
         public string EventName { get; set; }
         public string EventDescription { get; set; }
@@ -35,11 +33,6 @@ namespace GoogleMeetLogsNavigator.Model
         public string DestinationPhoneNumber { get; set; }
         public string CalendarEventIdentifier { get; set; }
         public string ConferenceID { get; set; }
-
-        #endregion Mandatory Data
-
-        #region Optional Data
-
         public string NETRoundTrip { get; set; }
         public string TransportProtocol { get; set; }
         public int PredictedBandWidthLoading { get; set; }
@@ -88,6 +81,5 @@ namespace GoogleMeetLogsNavigator.Model
         public int TotalMeetingUserPartecipation { get; set; }
         public string CommonEuropeanTimeType { get; set; }
 
-        #endregion
     }
 }

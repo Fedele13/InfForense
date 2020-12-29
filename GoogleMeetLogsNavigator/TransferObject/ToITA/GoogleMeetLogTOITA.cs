@@ -9,8 +9,6 @@ namespace GoogleMeetLogsNavigator.TransferObject.ToITA
     /// </summary>
     public class GoogleMeetLogTOITA : IGoogleMeetLogTO
     {
-        #region Mandatory Data
-
         [Name(Constants.CSVHeader.Date)]
         public string Date { get; set; }
         [Name(Constants.CSVHeader.EventName)]
@@ -25,10 +23,6 @@ namespace GoogleMeetLogsNavigator.TransferObject.ToITA
         public string ExternalPartecipantIdentifier { get; set; }
         [Name(Constants.CSVHeader.PartecipantName)]
         public string PartecipantName { get; set; }
-
-        #endregion Mandatory Data
-
-        #region Optional Data
 
         [Name(Constants.CSVHeader.ClientType)]
         public string ClientType { get; set; }
@@ -157,7 +151,5 @@ namespace GoogleMeetLogsNavigator.TransferObject.ToITA
         public string TotalMeetingUserPartecipation { get; set; }
         [Name(Constants.CSVHeader.CommonEuropeanTimeType), NullValues(Constants.ConstantsValue.EmptyString)]
         public string CommonEuropeanTimeType { get; set; }
-
-        #endregion
     }
 }

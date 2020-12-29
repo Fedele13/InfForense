@@ -11,8 +11,6 @@ namespace GoogleMeetLogsNavigator.TransferObject.Interface
     /// </summary>
     public interface IGoogleMeetLogTO
     {
-        #region Mandatory Data
-
         string Date { get; set; }
         string EventName { get; set; }
         string EventDescription { get; set; }
@@ -35,10 +33,6 @@ namespace GoogleMeetLogsNavigator.TransferObject.Interface
         string DestinationPhoneNumber { get; set; }
         string CalendarEventIdentifier { get; set; }
         string ConferenceID { get; set; }
-
-        #endregion Mandatory Data
-
-        #region Optional Data
 
         string NETRoundTrip { get; set; }
         string TransportProtocol { get; set; }
@@ -87,7 +81,5 @@ namespace GoogleMeetLogsNavigator.TransferObject.Interface
         string MeetingEnteringDate { get; set; }
         string TotalMeetingUserPartecipation { get; set; }
         string CommonEuropeanTimeType { get; set; }
-
-        #endregion
     }
 }
