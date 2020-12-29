@@ -77,7 +77,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
             }
             catch (System.Exception ex)
             {
-                throw new Exception.ReaderException(ex.Message ex);
+                throw new Exception.ReaderException(ex.Message, ex);
             }
         }
 
