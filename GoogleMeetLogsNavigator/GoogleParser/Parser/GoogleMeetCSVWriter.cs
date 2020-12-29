@@ -97,10 +97,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 csvWriter.WriteField(Constants.CSVHeader.MeetingCode);
                 csvWriter.WriteField(Constants.CSVHeader.PartecipantIdentifier);
                 csvWriter.WriteField(Constants.CSVHeader.ExternalPartecipantIdentifier);
+                csvWriter.WriteField(Constants.CSVHeader.ClientType);
                 /*Mandatory*/
 
-                if (this._configurationDictionary[CSVHeaderEnum.ClientType])
-                    csvWriter.WriteField(Constants.CSVHeader.ClientType);
                 if (this._configurationDictionary[CSVHeaderEnum.MeetingOwnerEmail])
                     csvWriter.WriteField(Constants.CSVHeader.MeetingOwnerEmail);
                 if (this._configurationDictionary[CSVHeaderEnum.ProductType])
@@ -234,8 +233,10 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 
                 csvWriter.NextRecord();
 
-                foreach (IGoogleMeetLogTO log in logs)
+                for(int i = 0; i < logs.Count; ++i)
                 {
+                    IGoogleMeetLogTO log = logs[i];
+
                     /*Mandatory*/
                     csvWriter.WriteField(log.Date);
                     csvWriter.WriteField(log.EventName);
@@ -243,10 +244,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                     csvWriter.WriteField(log.MeetingCode);
                     csvWriter.WriteField(log.PartecipantIdentifier);
                     csvWriter.WriteField(log.ExternalPartecipantIdentifier);
+                    csvWriter.WriteField(log.ClientType);
                     /*Mandatory*/
 
-                    if (this._configurationDictionary[CSVHeaderEnum.ClientType])
-                        csvWriter.WriteField(log.ClientType);
                     if (this._configurationDictionary[CSVHeaderEnum.MeetingOwnerEmail])
                         csvWriter.WriteField(log.MeetingOwnerEmail);
                     if (this._configurationDictionary[CSVHeaderEnum.ProductType])
@@ -257,9 +257,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                     if (this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
                         csvWriter.WriteField(log.CallEvaluationOn5);
-                    
+
                     csvWriter.WriteField(log.PartecipantName);
-                    
+
                     if (this._configurationDictionary[CSVHeaderEnum.IPAddress])
                         csvWriter.WriteField(log.IPAddress);
                     if (this._configurationDictionary[CSVHeaderEnum.City])
@@ -381,7 +381,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                     csvWriter.NextRecord();
                 }
 
-                return Encoding.UTF8.GetString(mem.ToArray());
+               writer.Flush();
+               return Encoding.UTF8.GetString(mem.ToArray());
+
             }
         }
 
@@ -393,7 +395,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         {
             IDictionary<CSVHeaderEnum, bool> defaultConfigurationDictionary = new Dictionary<CSVHeaderEnum, bool>();
 
-            for (int headerEnum = 8; headerEnum < Enum.GetValues(typeof(CSVHeaderEnum)).Length; ++headerEnum)
+            for (int headerEnum = 9; headerEnum < Enum.GetValues(typeof(CSVHeaderEnum)).Length; ++headerEnum)
             {
                 defaultConfigurationDictionary.Add((CSVHeaderEnum)headerEnum, true);
             }

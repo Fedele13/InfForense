@@ -48,16 +48,16 @@ namespace GoogleMeetLogsNavigator.BO
                             string[] keysLog = splitKeyLog(keyLog);
 
                             IGoogleMeetLogTO log = reader.MeetingDictionary[meetingKey].
-                                Where(item => item.Date == keysLog[0] && getPartecipantLogIdentifier(item) == keysLog[1]).FirstOrDefault();
+                                Where(item => item.Date == keysLog[0] && getPartecipantLogIdentifier(item) == keysLog[1] && item.ClientType == keysLog[2]).FirstOrDefault();
 
                             logsModel.Add(log.MapTransferObjectITAInModel());
                         }
                         catch (Exception ex)
                         {
-
+                            
                         }
                     }
-                    this.MeetingLogsDictionary.Add(meetingKey, logsModel);
+                    this.MeetingLogsDictionary.Add(meetingKey, logsModel.OrderByDescending(item => item.Date).ToList());
             }
         }
 
@@ -98,7 +98,9 @@ namespace GoogleMeetLogsNavigator.BO
 
                 foreach (IGoogleMeetLogTO partecipantLog in partecipantsLogs)
                 {
-                    if (resultDictionary.ContainsKey(createLogkey(partecipantLog)))
+                   
+                    string key = createLogkey(partecipantLog);
+                    if (resultDictionary.ContainsKey(key))
                     {
                         continue;
                     }
@@ -118,7 +120,7 @@ namespace GoogleMeetLogsNavigator.BO
                     if (string.IsNullOrEmpty(partecipantLog.CommonEuropeanTimeType))
                         partecipantLog.CommonEuropeanTimeType = cet;
 
-                    resultDictionary.Add(createLogkey(partecipantLog), partecipantLog);
+                    resultDictionary.Add(key, partecipantLog);
                 }
             }
 
@@ -132,7 +134,7 @@ namespace GoogleMeetLogsNavigator.BO
         /// <returns></returns>
         private string createLogkey(IGoogleMeetLogTO log)
         {
-            return log.Date + "_" + getPartecipantLogIdentifier(log);
+            return log.Date + "_" + getPartecipantLogIdentifier(log) + "_" + log.ClientType;
         }
 
         /// <summary>

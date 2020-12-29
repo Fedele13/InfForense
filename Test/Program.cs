@@ -37,15 +37,24 @@ namespace Test
                 {
                     logs.Add(log.MapObjectModelInTransferObjectITA());
                 }
+                Console.WriteLine(pair.Key + ": " + pair.Value.Count);
 
             }
 
+
+
             ICSVWriter<IGoogleMeetLogTO> writer = new GoogleMeetCSVWriter();
-            Console.WriteLine(writer.ToGoogleMeetCsv(logs));
+            string s = writer.ToGoogleMeetCsv(logs.ToList());
+            Console.WriteLine();
+            using (FileStream fs = File.Create(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimo2.csv"))
+            {
+                byte[] info = new UTF8Encoding(true).GetBytes(s);
+                fs.Write(info, 0, info.Length);
+            }
 
 
-           
             Console.ReadKey();
+
         }
     }
 }

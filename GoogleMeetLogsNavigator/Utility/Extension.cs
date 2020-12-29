@@ -286,7 +286,7 @@ namespace GoogleMeetLogsNavigator.Utility
                 VisualizedDestinationNames = googleMeetLogModel.VisualizedDestinationName,
                 DestinationEmailsAddresses = googleMeetLogModel.DestinationEmailsAddresses,
                 DestinationPhoneNumber = googleMeetLogModel.DestinationPhoneNumber,
-                CalendarEventIdentifier = googleMeetLogModel.CalendarEventIdentifier,
+                CalendarEventIdentifier = string.IsNullOrEmpty(googleMeetLogModel.CalendarEventIdentifier) ? string.Empty : googleMeetLogModel.CalendarEventIdentifier,
                 ConferenceID = googleMeetLogModel.ConferenceID,
                 NETRoundTrip = googleMeetLogModel.NETRoundTrip,
                 TransportProtocol = googleMeetLogModel.TransportProtocol,

@@ -12,10 +12,10 @@
         ExternalPartecipantIdentifier,
         PartecipantName,
         Duration,
+        ClientType,
 
         #endregion
 
-        ClientType,
         MeetingOwnerEmail,
         ProductType,
         CallEvaluationOn5,
