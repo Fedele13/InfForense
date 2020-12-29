@@ -48,21 +48,36 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
             this._csvReader.Configuration.MissingFieldFound = null;
             this._csvReader.Configuration.Delimiter = csvDelimiter;
             this._langauge = langauge;
-            IList<IGoogleMeetLogTO> recordsList = null;
-            if (this._langauge == "it" || string.IsNullOrEmpty(this._langauge))
-            {
-                recordsList = this._csvReader.GetRecords<GoogleMeetLogTOITA>().ToList().ConvertAll(item => (IGoogleMeetLogTO)item);
-            }
-            else
-            {
-                throw new InvalidOperationException("No other langauge supported for the moment");
-            }
-            
-            IList<string> meetingCodesList = recordsList.Select(item => item.MeetingCode).Distinct().ToList();
 
-            foreach (string meetingCode in meetingCodesList)
+            try
             {
-                this._meetingDictionary.Add(meetingCode, new GoogleMeetingTO(meetingCode, recordsList.Where(item => item.MeetingCode == meetingCode).ToList()));
+                IList<IGoogleMeetLogTO> recordsList = null;
+                if (this._langauge == "it" || string.IsNullOrEmpty(this._langauge))
+                {
+                    recordsList = this._csvReader.GetRecords<GoogleMeetLogTOITA>().ToList().ConvertAll(item => (IGoogleMeetLogTO)item);
+                }
+                else
+                {
+                    throw new InvalidOperationException("No other langauge supported for the moment");
+                }
+
+                IList<string> meetingCodesList = recordsList.Select(item => item.MeetingCode).Distinct().ToList();
+
+                foreach (string meetingCode in meetingCodesList)
+                {
+                    try
+                    {
+                        this._meetingDictionary.Add(meetingCode, new GoogleMeetingTO(meetingCode, recordsList.Where(item => item.MeetingCode == meetingCode).ToList()));
+                    }
+                    catch (System.Exception ex)
+                    {
+                        throw new Exception.ReaderException($"Errore durante la lettura del meeting {meetingCode}", ex);   
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception.ReaderException(ex.Message ex);
             }
         }
 

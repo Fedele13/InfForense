@@ -36,9 +36,9 @@ namespace GoogleMeetLogsNavigator.BO
             this.MeetingLogsDictionary = new Dictionary<string, IList<GoogleMeetLogModel>>();
             foreach (string meetingKey in reader.MeetingDictionary.Keys)
             {
-               
-                    IList<GoogleMeetLogModel> logsModel = new List<GoogleMeetLogModel>();
-
+                IList<GoogleMeetLogModel> logsModel = new List<GoogleMeetLogModel>();
+                try
+                {
                     IDictionary<string, IGoogleMeetLogTO> resultAdditionalDataDictionary = calculateAdditionalData(reader.MeetingDictionary[meetingKey]);
 
                     foreach (string keyLog in resultAdditionalDataDictionary.Keys)
@@ -54,10 +54,15 @@ namespace GoogleMeetLogsNavigator.BO
                         }
                         catch (Exception ex)
                         {
-                            
+                            throw new BusinessObject.Exception.CalculationException($"Errore durante il calcolo dei dati mancanti del log con chiave: {keyLog}", ex);
                         }
                     }
                     this.MeetingLogsDictionary.Add(meetingKey, logsModel.OrderByDescending(item => item.Date).ToList());
+                }
+                catch (Exception ex)
+                {
+                    throw new BusinessObject.Exception.CalculationException(ex.Message, ex);
+                }
             }
         }
 
@@ -92,35 +97,47 @@ namespace GoogleMeetLogsNavigator.BO
 
             foreach (IGoogleMeetLogTO log in filteredLogs)
             {
-               
-                string partecipantIdentifier = getPartecipantLogIdentifier(log);
-                IList<IGoogleMeetLogTO> partecipantsLogs = filteredLogs.Where(item => partecipantIdentifier == getPartecipantLogIdentifier(item)).ToList();
-
-                foreach (IGoogleMeetLogTO partecipantLog in partecipantsLogs)
+                try
                 {
-                   
-                    string key = createLogkey(partecipantLog);
-                    if (resultDictionary.ContainsKey(key))
+                    string partecipantIdentifier = getPartecipantLogIdentifier(log);
+                    IList<IGoogleMeetLogTO> partecipantsLogs = filteredLogs.Where(item => partecipantIdentifier == getPartecipantLogIdentifier(item)).ToList();
+
+                    foreach (IGoogleMeetLogTO partecipantLog in partecipantsLogs)
                     {
-                        continue;
+                        try
+                        {
+                            string key = createLogkey(partecipantLog);
+                            if (resultDictionary.ContainsKey(key))
+                            {
+                                continue;
+                            }
+
+                            if (isDateTimeToUpdate(partecipantLog.MeetingStartDate))
+                                partecipantLog.MeetingStartDate = meetingStartDate;
+
+                            if (isDateTimeToUpdate(partecipantLog.MeetingEndDate))
+                                partecipantLog.MeetingEndDate = meetingEndDate;
+
+                            if (isDateTimeToUpdate(partecipantLog.MeetingEnteringDate))
+                                partecipantLog.MeetingEnteringDate = partecipantLog.Date.ConvertGooogleMeetDataInDateTime(out string cet2).AddSeconds(-int.Parse(partecipantLog.Duration)).ConvertGoogleDateTimeInString(cet2);
+
+                            if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipation))
+                                partecipantLog.TotalMeetingUserPartecipation = partecipantsLogs.Sum(item => int.Parse(item.Duration)).ToString();
+
+                            if (string.IsNullOrEmpty(partecipantLog.CommonEuropeanTimeType))
+                                partecipantLog.CommonEuropeanTimeType = cet;
+
+                            resultDictionary.Add(key, partecipantLog);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new BusinessObject.Exception.CalculationException(ex.Message, ex);
+                        }
                     }
-
-                    if (isDateTimeToUpdate(partecipantLog.MeetingStartDate))
-                        partecipantLog.MeetingStartDate = meetingStartDate;
-
-                    if (isDateTimeToUpdate(partecipantLog.MeetingEndDate))
-                        partecipantLog.MeetingEndDate = meetingEndDate;
-
-                    if (isDateTimeToUpdate(partecipantLog.MeetingEnteringDate))
-                        partecipantLog.MeetingEnteringDate = partecipantLog.Date.ConvertGooogleMeetDataInDateTime(out string cet2).AddSeconds(-int.Parse(partecipantLog.Duration)).ConvertGoogleDateTimeInString(cet2);
-
-                    if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipation))
-                        partecipantLog.TotalMeetingUserPartecipation = partecipantsLogs.Sum(item => int.Parse(item.Duration)).ToString();
-
-                    if (string.IsNullOrEmpty(partecipantLog.CommonEuropeanTimeType))
-                        partecipantLog.CommonEuropeanTimeType = cet;
-
-                    resultDictionary.Add(key, partecipantLog);
+                }
+                catch (Exception ex)
+                {
+                    throw new BusinessObject.Exception.CalculationException(ex.Message, ex);
                 }
             }
 
