@@ -4,6 +4,7 @@ using GoogleMeetLogsNavigator.GoogleParser.Interface;
 using GoogleMeetLogsNavigator.GoogleParser.nteface;
 using GoogleMeetLogsNavigator.GoogleParser.Parser;
 using GoogleMeetLogsNavigator.Model;
+using GoogleMeetLogsNavigator.Utility;
 using GoogleMeetLogsNavigator.TransferObject;
 using GoogleMeetLogsNavigator.TransferObject.Interface;
 using GoogleMeetLogsNavigator.Utility;
@@ -30,13 +31,12 @@ namespace Test
             ICSVReader<GoogleMeetingTO> reader = new GoogleMeetCSVReader(new System.IO.StreamReader(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimo.csv"), delimiter);
             GoogleMeetMissingDataCalculator dataCalculator = new GoogleMeetMissingDataCalculator(reader);
 
-            IList<IGoogleMeetLogTO> logs = new List<IGoogleMeetLogTO>();
+            List<IGoogleMeetLogTO> logs = new List<IGoogleMeetLogTO>();
             foreach(var pair in dataCalculator.MeetingLogsDictionary)
             {
-                foreach (GoogleMeetLogModel log in pair.Value)
-                {
-                    logs.Add(log.MapObjectModelInTransferObjectITA());
-                }
+                
+                logs.AddRange(pair.Value.Select(i => i.MapObjectModelInTransferObjectITA()).ToList().Cast<IGoogleMeetLogTO>());
+                
                 Console.WriteLine(pair.Key + ": " + pair.Value.Count);
 
             }
@@ -44,7 +44,7 @@ namespace Test
 
 
             ICSVWriter<IGoogleMeetLogTO> writer = new GoogleMeetCSVWriter();
-            string s = writer.ToGoogleMeetCsv(logs.ToList());
+            string s = writer.ToGoogleMeetCsv(logs);
             Console.WriteLine();
             using (FileStream fs = File.Create(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimo2.csv"))
             {
