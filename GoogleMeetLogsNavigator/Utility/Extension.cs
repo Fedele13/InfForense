@@ -22,13 +22,11 @@ namespace GoogleMeetLogsNavigator.Utility
         /// <returns></returns>
         public static DateTime ConvertGooogleMeetDataInDateTime(this string googleDate, out string commonEuropeanTime)
         {
-            string[] dateSplitted = googleDate.Split(',');
-            string[] date = dateSplitted[0].Split(' ');
-            string[] hours = dateSplitted[1].Split(':');
-            string[] seconds = hours[2].Split(' ');
+            string[] date = googleDate.Split(' ');
+            string[] hours = date[3].Split(':');
             int monthInt = GetGoogleMonthInt(date[1]);
-            commonEuropeanTime = seconds[1];
-            return new DateTime(int.Parse(date[2]), monthInt, int.Parse(date[0]), int.Parse(hours[0]), int.Parse(hours[1]), int.Parse(seconds[0]));
+            commonEuropeanTime = date[4];
+            return new DateTime(int.Parse(date[2]), monthInt, int.Parse(date[0]), int.Parse(hours[0]), int.Parse(hours[1]), int.Parse(hours[2]));
         }
 
         /// <summary>
@@ -375,7 +373,7 @@ namespace GoogleMeetLogsNavigator.Utility
         /// <returns></returns>
         public static string ConvertGoogleDateTimeInString(this DateTime googleDateTime, string cet)
         {
-            return string.Format("{0} {1} {2}, {3}:{4}:{5} {6}", 
+            return string.Format("{0} {1} {2} {3}:{4}:{5} {6}", 
                 googleDateTime.Day, 
                 GetGoogleMonthString(googleDateTime.Month), 
                 googleDateTime.Year,

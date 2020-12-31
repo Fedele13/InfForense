@@ -17,13 +17,13 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            bool prodottoDaExcel = false;
+            bool prodottoDaExcel = true;
             string delimiter = ",";
             if (prodottoDaExcel)
             {
                 delimiter = ";";
             }
-            ICSVReader<GoogleMeetingTO> reader = new GoogleMeetCSVReader(new StreamReader(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimo2.csv"), delimiter);
+            ICSVReader<GoogleMeetingTO> reader = new GoogleMeetCSVReader(new StreamReader(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimoMenoColonne.csv"), delimiter);
             GoogleMeetMissingDataCalculator dataCalculator = new GoogleMeetMissingDataCalculator(reader);
 
             List<IGoogleMeetLogTO> logs = new List<IGoogleMeetLogTO>();
@@ -42,7 +42,7 @@ namespace Test
 
             
             Console.WriteLine();
-            using (FileStream fs = File.Create(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimo2.csv"))
+            using (FileStream fs = File.Create(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimo3.csv"))
             {
                 byte[] info = reader.CSVTextEncoding.GetBytes(s);
                 fs.Write(info, 0, info.Length);

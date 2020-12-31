@@ -305,7 +305,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                     try
                     {
                         /*Mandatory*/
-                        csvWriter.WriteField(log.Date.GetSafeString().Contains(this._csvDelimiter) ? "\"" + log.Date.GetSafeString() + "\"" : log.Date.GetSafeString());
+                        csvWriter.WriteField(log.Date.GetSafeString());
                         csvWriter.WriteField(log.EventName.GetSafeString());
                         csvWriter.WriteField(log.EventDescription.GetSafeString());
                         csvWriter.WriteField(log.MeetingCode.GetSafeString());
