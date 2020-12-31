@@ -126,6 +126,7 @@ namespace GoogleMeetLogsNavigator
             }
             catch (Exception ex)
             {
+                label1.Text = "Files";
                 MessageBox.Show(ex.Message);
             }
         }
@@ -191,10 +192,17 @@ namespace GoogleMeetLogsNavigator
                 logItem = (LogItem)listBox2.SelectedItem;
                 listLog = (IList<GoogleMeetLogModel>)logItem.logListModel;
                 dt.Rows.Clear();
-
+                DataRow dr;
                 foreach (GoogleMeetLogModel model in listLog)
                 {
+                    dr = dt.NewRow();
+                    foreach (var value in columns)
+                    {
+                        dr[value] = model.GetType().GetProperty(value).GetValue(model);
+                    }
+                    dt.Rows.Add(dr);
 
+                    /*
                     dt.Rows.Add(model.Date.ConvertGoogleDateTimeInString(model.CommonEuropeanTimeType), model.EventName, model.EventDescription, model.MeetingCode, model.PartecipantIdentifier, model.ExternalPartecipantIdentifier, model.ClientType
                         , model.MeetingOwnerEmail, model.ProductType, model.Duration, model.CallEvaluationOn5, model.PartecipantName, model.IPAddress,
                         model.City, model.Nation, model.ActionCause, model.ActionDescription, model.VisualizedDestinationName, model.DestinationEmailsAddresses,
@@ -209,6 +217,7 @@ namespace GoogleMeetLogsNavigator
                         model.BitRatioVideoSending, model.AverageVideoSending, model.LongSideMedianVideoSending, model.MaxSendingVideoPacketsLost, model.AverageSendingVideoPacketsLost,
                         model.VideoSendingDuration, model.ShortSideMedianVideoSending, model.NetworkCongestion, model.MeetingStartDate, model.MeetingEndDate, model.MeetingEnteringDate,
                         model.TotalMeetingUserPartecipation, model.CommonEuropeanTimeType);
+                    */
 
                 }
                 dataGridView1.DataSource = dt;
