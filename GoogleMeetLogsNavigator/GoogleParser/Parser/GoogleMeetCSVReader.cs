@@ -73,8 +73,8 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 IList<IGoogleMeetLogTO> recordsList = null;
                 if (string.IsNullOrEmpty(this._langauge) || this._langauge == "it")
                 {
-                    //recordsList = getTransferObjectITA(this._csvReader).ToList().ConvertAll(item => (IGoogleMeetLogTO)item);
-                    recordsList = this._csvReader.GetRecords<GoogleMeetLogTOITA>().ToList().ConvertAll(item => (IGoogleMeetLogTO)item);
+                    recordsList = getTransferObjectListITA(this._csvReader).ToList().ConvertAll(item => (IGoogleMeetLogTO)item);
+                    //recordsList = this._csvReader.GetRecords<GoogleMeetLogTOITA>().ToList().ConvertAll(item => (IGoogleMeetLogTO)item);
                 }
                 else
                 {
@@ -123,7 +123,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// </summary>
         /// <param name="_csvReader">The CSV reader</param>
         /// <returns>List of GoogleMeetLogTOITA</returns>
-        private IList<GoogleMeetLogTOITA> getTransferObjectITA(CsvReader csvReader)
+        private IList<GoogleMeetLogTOITA> getTransferObjectListITA(CsvReader csvReader)
         {
             IList<GoogleMeetLogTOITA> toList = new List<GoogleMeetLogTOITA>();
 
