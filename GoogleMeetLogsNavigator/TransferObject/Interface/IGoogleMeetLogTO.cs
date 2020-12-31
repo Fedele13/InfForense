@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GoogleMeetLogsNavigator.TransferObject.Interface
 {
     /// <summary>
-    /// 
+    /// The Google Meet Logel interface
     /// </summary>
     public interface IGoogleMeetLogTO
     {

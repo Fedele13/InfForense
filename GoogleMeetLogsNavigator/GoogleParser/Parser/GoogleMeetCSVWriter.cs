@@ -1,7 +1,6 @@
 ﻿using CsvHelper;
 using GoogleMeetLogsNavigator.GoogleParser.GoogleEnum;
 using GoogleMeetLogsNavigator.GoogleParser.nteface;
-using GoogleMeetLogsNavigator.Model;
 using GoogleMeetLogsNavigator.TransferObject.Interface;
 using GoogleMeetLogsNavigator.Utility;
 using System;
@@ -12,42 +11,44 @@ using System.Text;
 namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 {
     /// <summary>
-    /// 
+    /// The GoogleMeetCSVWriter
+    /// Implements <see cref="ICSVWriter">
     /// </summary>
     public class GoogleMeetCSVWriter : ICSVWriter<IGoogleMeetLogTO>
     {
         /// <summary>
-        /// 
+        /// The configuration Dictionary
         /// </summary>
         private IDictionary<CSVHeaderEnum, bool> _configurationDictionary = null;
 
         /// <summary>
-        /// 
+        /// The delimter to use to build the csv
         /// </summary>
         private string _csvDelimiter = ",";
 
         /// <summary>
-        /// 
+        /// The Constructor
         /// </summary>
-        /// <param name="configurationDictionary"></param>
+        /// <param name="configurationDictionary">The Configuration Dictionary</param>
         public GoogleMeetCSVWriter(IDictionary<CSVHeaderEnum, bool> configurationDictionary)
         {
             this._configurationDictionary = configurationDictionary;
         }
 
         /// <summary>
-        /// 
+        /// The Constructor
         /// </summary>
-        /// <param name="delimiter"></param>
+        /// <param name="delimiter">The delimiter to use to build csv file</param>
         public GoogleMeetCSVWriter(string delimiter = ",")
         {
             this._csvDelimiter = delimiter;
         }
 
         /// <summary>
-        /// 
+        /// The Constructor
         /// </summary>
-        /// <param name="configurationDictionary"></param>
+        /// <param name="configurationDictionary">The Configuration Dictionary</param>
+        /// <param name="delimiter">The delimiter to use to build csv file</param>
         public GoogleMeetCSVWriter(IDictionary<CSVHeaderEnum, bool> configurationDictionary, string delimiter = ",")
         {
             this._configurationDictionary = configurationDictionary;
@@ -55,27 +56,29 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         }
 
         /// <summary>
-        /// 
+        /// Set the delimter used to build the csv file
         /// </summary>
-        /// <param name="delimiter"></param>
+        /// <param name="delimiter">The delimiter</param>
         public void SetCSVDelimiter(string delimiter)
         {
             this._csvDelimiter = delimiter;
         }
 
         /// <summary>
-        /// 
+        /// Set the configuration dictionary to build the csv file with selected columns
         /// </summary>
-        /// <param name="configurationDictionary"></param>
+        /// <param name="configurationDictioanry">The Configuration Dictionary <columnName, true/false></param>
         public void SetConfiguration(IDictionary<CSVHeaderEnum, bool> configurationDictionary)
         {
             this._configurationDictionary = configurationDictionary;
         }
 
         /// <summary>
-        /// 
+        /// Create csv contetn
         /// </summary>
-        /// <param name="logs"></param>
+        /// <param name="logs">Logs to write in csv file</param>
+        /// <return>The string content in csv format</return>
+        /// <exception cref="Exception.WriterException">
         public string ToGoogleMeetCsv(IList<IGoogleMeetLogTO> logs)
         {
             using (var mem = new MemoryStream())

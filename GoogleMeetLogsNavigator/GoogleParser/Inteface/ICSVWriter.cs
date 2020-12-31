@@ -4,27 +4,28 @@ using System.Collections.Generic;
 namespace GoogleMeetLogsNavigator.GoogleParser.nteface
 {
     /// <summary>
-    /// 
+    /// The ICSV Writer interface
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Treated type</typeparam>
     public interface ICSVWriter<T>
     {
         /// <summary>
-        /// 
+        /// Set the delimter used to build the csv file
         /// </summary>
-        /// <param name="delimiter"></param>
+        /// <param name="delimiter">The delimiter</param>
         void SetCSVDelimiter(string delimiter);
 
         /// <summary>
-        /// 
+        /// Set the configuration dictionary to build the csv file with selected columns
         /// </summary>
-        /// <param name="configurationDictioanry"></param>
+        /// <param name="configurationDictioanry">The Configuration Dictionary <columnName, true/false></param>
         void SetConfiguration(IDictionary<CSVHeaderEnum, bool> configurationDictionary);
 
         /// <summary>
-        /// 
+        /// Create csv contetn
         /// </summary>
-        /// <param name="logs"></param>
+        /// <param name="logs">Logs to write in csv file</param>
+        /// <return>The string content in csv format</return>
         string ToGoogleMeetCsv(IList<T> logs);
     }
 }

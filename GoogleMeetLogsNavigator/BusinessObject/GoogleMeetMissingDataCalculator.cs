@@ -10,14 +10,14 @@ using System.Linq;
 namespace GoogleMeetLogsNavigator.BO
 {
     /// <summary>
-    /// 
+    /// This class calculates the missing data in csv file
     /// </summary>
     public class GoogleMeetMissingDataCalculator
     {
         #region private
 
         /// <summary>
-        /// 
+        /// The reader
         /// </summary>
         private ICSVReader<GoogleMeetingTO> _reader = null;
 
@@ -26,9 +26,10 @@ namespace GoogleMeetLogsNavigator.BO
         #region .ctor
 
         /// <summary>
-        /// 
+        /// The Constructor
         /// </summary>
-        /// <param name="reader"></param>
+        /// <param name="reader">The ICSVReader instance</param>
+        /// <exception cref="BusinessObject.Exception.CalculationException"></exception>
         public GoogleMeetMissingDataCalculator(ICSVReader<GoogleMeetingTO> reader)
         {
             this._reader = reader;
@@ -71,10 +72,11 @@ namespace GoogleMeetLogsNavigator.BO
         #region private
 
         /// <summary>
-        /// 
+        /// Private method used to calculate the missing data
         /// </summary>
         /// <param name="logs">Logs of the same meeting</param>
-        /// <returns></returns>
+        /// <returns>IDictionary<string, IGoogleMeetLogTO></returns>
+        /// <exception cref="BusinessObject.Exception.CalculationException"></exception>
         private IDictionary<string, IGoogleMeetLogTO> calculateAdditionalData(IList<IGoogleMeetLogTO> logs)
         {
             if (logs.Select(item => item.MeetingCode).Distinct().Count() > 1) 
@@ -145,40 +147,40 @@ namespace GoogleMeetLogsNavigator.BO
         }
 
         /// <summary>
-        /// 
+        /// Private method to create key of treated log
         /// </summary>
-        /// <param name="log"></param>
-        /// <returns></returns>
+        /// <param name="log">The Log</param>
+        /// <returns>Log's key</returns>
         private string createLogkey(IGoogleMeetLogTO log)
         {
             return log.Date + "_" + getPartecipantLogIdentifier(log) + "_" + log.ClientType;
         }
 
         /// <summary>
-        /// 
+        /// Private method to split the log's key
         /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
+        /// <param name="key">The log's key</param>
+        /// <returns>Splitted key</returns>
         private string[] splitKeyLog(string key)
         {
             return key.Split('_');
         }
 
         /// <summary>
-        /// 
+        /// Private method to get partecipant identifier
         /// </summary>
-        /// <param name="log"></param>
-        /// <returns></returns>
+        /// <param name="log">The Log</param>
+        /// <returns>The partecipant identifier</returns>
         private string getPartecipantLogIdentifier(IGoogleMeetLogTO log)
         {
             return string.IsNullOrEmpty(log.PartecipantIdentifier) ? log.PartecipantName : log.PartecipantIdentifier;
         }
 
         /// <summary>
-        /// 
+        /// Private method to understand if the date must be updated
         /// </summary>
-        /// <param name="dateTime"></param>
-        /// <returns></returns>
+        /// <param name="dateTime">The datetim in string format</param>
+        /// <returns>Trye if the input must be updated, false otherwise</returns>
         private bool isDateTimeToUpdate(string dateTime)
         {
             return string.IsNullOrEmpty(dateTime) || dateTime == Constants.ConstantsValue.MinValue;
@@ -190,7 +192,7 @@ namespace GoogleMeetLogsNavigator.BO
         #region prop
 
         /// <summary>
-        /// 
+        /// The Meeting Dictionary with complete data <meetingKey, Logs>
         /// </summary>
         public IDictionary<string, IList<GoogleMeetLogModel>> MeetingLogsDictionary { get; } = null;
 

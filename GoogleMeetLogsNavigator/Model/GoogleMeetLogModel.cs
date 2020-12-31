@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
 
 namespace GoogleMeetLogsNavigator.Model
 {
-   
+    /// <summary>
+    /// The Log Model Representation
+    /// </summary>
     public class GoogleMeetLogModel
     {
         public DateTime Date { get; set; }

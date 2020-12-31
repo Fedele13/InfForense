@@ -1,5 +1,8 @@
 ﻿namespace GoogleMeetLogsNavigator.GoogleParser.GoogleEnum
 {
+    /// <summary>
+    /// Treated CSV Hedaer
+    /// </summary>
     public enum CSVHeaderEnum : int
     {
         #region MANDATORY DATA

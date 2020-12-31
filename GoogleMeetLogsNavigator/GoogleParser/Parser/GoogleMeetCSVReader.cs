@@ -11,29 +11,35 @@ using System.Linq;
 namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 {
     /// <summary>
-    /// 
+    /// The GoogleMeetCSVReader
+    /// Implements <see cref="ICSVReader">
     /// </summary>
     public class GoogleMeetCSVReader : ICSVReader<GoogleMeetingTO>
     {
         /// <summary>
-        /// 
+        /// The CSV Reader instance
         /// </summary>
         private CsvReader _csvReader = null;
 
         /// <summary>
-        /// 
+        /// Used Laguage
         /// </summary>
         private string _langauge = "it";
 
         /// <summary>
-        /// 
+        /// The meeting dictionary
         /// </summary>
         private IDictionary<string, GoogleMeetingTO> _meetingDictionary = null;
 
         /// <summary>
-        /// 
+        /// The constructor
         /// </summary>
-        /// <param name="csvStream"></param>
+        /// <param name="csvStream">The considered stream</param>
+        /// <param name="csvDelimiter">The delimiter to use to build the csv</param>
+        /// <param name="langauge">Language to use</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
+        /// <exception cref="Exception.ReaderException"></exception>
         public GoogleMeetCSVReader(StreamReader csvStream, string csvDelimiter = ",", string langauge = "it")
         {
             if (csvStream == null)
@@ -77,13 +83,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
             }
             catch (System.Exception ex)
             {
-                throw new Exception.ReaderException(ex.Message ex);
+                throw new Exception.ReaderException(ex.Message, ex);
             }
         }
 
-
         /// <summary>
-        /// 
+        /// The Meeting Dictionaty with complete data
         /// </summary>
         IDictionary<string, GoogleMeetingTO> ICSVReader<GoogleMeetingTO>.MeetingDictionary { get => this._meetingDictionary; }
 

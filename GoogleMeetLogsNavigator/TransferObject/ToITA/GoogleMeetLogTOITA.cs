@@ -5,7 +5,7 @@ using GoogleMeetLogsNavigator.Utility;
 namespace GoogleMeetLogsNavigator.TransferObject.ToITA
 {
     /// <summary>
-    /// Google Meet Log Transfer Object
+    /// Google Meet Log Transfer Object for ITA Language
     /// </summary>
     public class GoogleMeetLogTOITA : IGoogleMeetLogTO
     {
