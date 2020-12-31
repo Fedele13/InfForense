@@ -53,7 +53,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
         /// <exception cref="Exception.ReaderException"></exception>
-        public GoogleMeetCSVReader(StreamReader csvStream, string csvDelimiter = ";", string langauge = "it")
+        public GoogleMeetCSVReader(StreamReader csvStream, string csvDelimiter = ",", string langauge = "it")
         {
             if (csvStream == null)
             {
@@ -104,6 +104,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         #endregion
 
         #region prop
+
         /// <summary>
         /// The Meeting Dictionary with complete data
         /// </summary>
@@ -140,7 +141,11 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 GoogleMeetLogTOITA to = new GoogleMeetLogTOITA();
 
                 /*Mandatory*/
-                to.Date = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeader.Date)) ? string.Empty : csvReader.GetField(Constants.CSVHeader.Date).Replace(",", "");
+                to.Date = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeader.Date)) ? throw new ArgumentException("Il campo Data non può essere vuoto") : csvReader.GetField(Constants.CSVHeader.Date).Replace(",", "");
+                if (to.Date.StartsWith("\"") && to.Date.EndsWith("\""))
+                {
+                    to.Date = to.Date.Replace("\"", "");
+                }
                 to.EventName = csvReader.GetField(Constants.CSVHeader.EventName);
                 to.EventDescription = csvReader.GetField(Constants.CSVHeader.EventDescription);
                 to.MeetingCode = csvReader.GetField(Constants.CSVHeader.MeetingCode);

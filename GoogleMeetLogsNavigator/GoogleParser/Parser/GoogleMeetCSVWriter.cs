@@ -136,11 +136,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
             {
                 csvWriter.Configuration.SanitizeForInjection = true;
                 csvWriter.Configuration.Delimiter = this._csvDelimiter;
-                csvWriter.Configuration.ShouldQuote = (field, context) => 
-                { 
-                    Debug.WriteLine(field); 
-                    Debug.WriteLine(field.Contains(_csvDelimiter)); 
-                    return field.Contains(_csvDelimiter); 
+                csvWriter.Configuration.ShouldQuote = (field, context) =>
+                {
+                    return field.Contains(_csvDelimiter);
                 };
 
                 if (this._configurationDictionary == null)
