@@ -30,7 +30,8 @@
             public const string Duration = "Durata";
             public const string CallEvaluationOn5 = "Valutazione chiamata su 5";
             public const string IPAddress = "Indirizzo IP";
-            public const string City = "Città";
+            public const string City = "CittÃ ";
+            public const string City2 = "Città";
             public const string Nation = "Paese";
             public const string ActionCause = "Motivo azione";
             public const string ActionDescription = "Descrizione azione";
@@ -48,7 +49,8 @@
             public const string MaxReceptionAudioPacketsLost = "Perdita max pacchetti ricezione audio";
             public const string AverageReceptionAudioPacketsLost = "Perdita media pacchetti ricezione audio";
             public const string AudioReceptionDuration = "Durata ricezione audio";
-            public const string BitRatioAudioSending = "Media velocità in bit invio audio in kbps";
+            public const string BitRatioAudioSending = "Media velocitÃ  in bit invio audio in kbps";
+            public const string BitRatioAudioSending2 = "Media velocità in bit invio audio in kbps";
             public const string MaxSendingAudioPacketsLost = "Perdita max pacchetti invio audio";
             public const string AverageSendingAudioPacketsLost = "Perdita media pacchetti invio audio";
             public const string AudioSendingDuration = "Durata invio audio";
@@ -57,14 +59,16 @@
             public const string MaxReceptionFilckering = "Massimo tremolio ricezione rete in ms";
             public const string AverageSendingFlickering = "Media tremolio invio rete in ms";
 
-            public const string BitRatioScreencastReception = "Media velocità in bit ricezione screencast in kbps";
+            public const string BitRatioScreencastReception = "Media velocitÃ  in bit ricezione screencast in kbps";
+            public const string BitRatioScreencastReception2 = "Media velocità in bit ricezione screencast in kbps";
             public const string AverageScreecastReception = "Media f/s ricezione screencast";
             public const string LongSideMedianScreencastReception = "Mediana lato lungo ricezione screencast";
             public const string MaxReceptionScreencastPacketsLost = "Perdita max pacchetti ricezione screencast";
             public const string AverageReceptionScreencastPacketsLost = "Perdita media pacchetti ricezione screencast";
             public const string ScreencastReceptionDuration = "Durata ricezione screencast";
             public const string ShortSideMedianScreencastReception = "Mediana lato corto ricezione screencast";
-            public const string BitRatioScreencastSending = "Media velocità in bit invio screencast in kbps";
+            public const string BitRatioScreencastSending = "Media velocitÃ  in bit invio screencast in kbps";
+            public const string BitRatioScreencastSending2 = "Media velocità in bit invio screencast in kbps";
             public const string AverageScreecastSending = "Media f/s invio screencast";
             public const string LongSideMedianScreencastSending = "Mediana lato lungo invio screencast";
             public const string MaxSendingScreencastPacketsLost = "Perdita max pacchetti invio screencast";
@@ -78,7 +82,8 @@
             public const string AverageVideoReceptionPacketsLost = "Perdita media pacchetti ricezione video";
             public const string ReceptionVideoDuration = "Durata ricezione video";
             public const string ShortSideMedianVideoReception = "Mediana lato corto ricezione video";
-            public const string BitRatioVideoSending = "Media velocità in bit invio video in kbps";
+            public const string BitRatioVideoSending = "Media velocitÃ  in bit invio video in kbps";
+            public const string BitRatioVideoSending2 = "Media velocità in bit invio video in kbps";
             public const string AverageVideoSending = "Media f/s invio video";
             public const string LongSideMedianVideoSending = "Mediana lato lungo invio video";
             public const string MaxSendingVideoPacketsLost = "Perdita max pacchetti invio video";

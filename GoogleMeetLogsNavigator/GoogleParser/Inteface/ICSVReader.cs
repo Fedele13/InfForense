@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace GoogleMeetLogsNavigator.GoogleParser.Interface
 {
@@ -11,6 +12,11 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Interface
         /// <summary>
         /// The Complete Data Dictinary prop
         /// </summary>
-        IDictionary<string, T> MeetingDictionary { get; }
+        public IDictionary<string, T> MeetingDictionary { get; }
+
+        /// <summary>
+        /// The Encoding
+        /// </summary>
+        public Encoding CSVTextEncoding { get; }
     }
 }

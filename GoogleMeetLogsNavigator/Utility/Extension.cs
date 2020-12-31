@@ -41,6 +41,16 @@ namespace GoogleMeetLogsNavigator.Utility
             return googleDate.ConvertGooogleMeetDataInDateTime(out string notUsed);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <returns></returns>
+        public static string GetSafeString(this string instance)
+        {
+            return string.IsNullOrEmpty(instance) ? string.Empty : instance;
+        }
+
         #endregion
 
         #region private

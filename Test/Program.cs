@@ -1,20 +1,15 @@
-﻿using CsvHelper;
-using GoogleMeetLogsNavigator.BO;
+﻿using GoogleMeetLogsNavigator.BO;
 using GoogleMeetLogsNavigator.GoogleParser.Interface;
 using GoogleMeetLogsNavigator.GoogleParser.nteface;
 using GoogleMeetLogsNavigator.GoogleParser.Parser;
-using GoogleMeetLogsNavigator.Model;
 using GoogleMeetLogsNavigator.Utility;
 using GoogleMeetLogsNavigator.TransferObject;
 using GoogleMeetLogsNavigator.TransferObject.Interface;
-using GoogleMeetLogsNavigator.Utility;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Test
 {
@@ -22,13 +17,13 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            bool fileExcel = true;
+            bool prodottoDaExcel = false;
             string delimiter = ",";
-            if (fileExcel)
+            if (prodottoDaExcel)
             {
                 delimiter = ";";
             }
-            ICSVReader<GoogleMeetingTO> reader = new GoogleMeetCSVReader(new System.IO.StreamReader(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimo.csv"), delimiter);
+            ICSVReader<GoogleMeetingTO> reader = new GoogleMeetCSVReader(new StreamReader(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimo2.csv"), delimiter);
             GoogleMeetMissingDataCalculator dataCalculator = new GoogleMeetMissingDataCalculator(reader);
 
             List<IGoogleMeetLogTO> logs = new List<IGoogleMeetLogTO>();
@@ -41,15 +36,15 @@ namespace Test
 
             }
 
-          
 
-
-            ICSVWriter<IGoogleMeetLogTO> writer = new GoogleMeetCSVWriter();
+            ICSVWriter<IGoogleMeetLogTO> writer = new GoogleMeetCSVWriter(reader.CSVTextEncoding);
             string s = writer.ToGoogleMeetCsv(logs);
+
+            
             Console.WriteLine();
             using (FileStream fs = File.Create(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimo2.csv"))
             {
-                byte[] info = new UTF8Encoding(true).GetBytes(s);
+                byte[] info = reader.CSVTextEncoding.GetBytes(s);
                 fs.Write(info, 0, info.Length);
             }
 
