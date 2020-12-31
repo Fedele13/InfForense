@@ -90,7 +90,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                 if (this._configurationDictionary == null)
                 {
-                    this._configurationDictionary = getDefaultConfiguration();
+                    this._configurationDictionary = GetDefaultConfiguration();
                 }
 
                 try
@@ -409,7 +409,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// 
         /// </summary>
         /// <returns></returns>
-        private IDictionary<CSVHeaderEnum, bool> getDefaultConfiguration()
+        public static IDictionary<CSVHeaderEnum, bool> GetDefaultConfiguration()
         {
             IDictionary<CSVHeaderEnum, bool> defaultConfigurationDictionary = new Dictionary<CSVHeaderEnum, bool>();
 
