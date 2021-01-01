@@ -23,7 +23,7 @@ namespace Test
             {
                 delimiter = ";";
             }
-            ICSVReader<GoogleMeetingTO> reader = new GoogleMeetCSVReader(new StreamReader(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimoMenoColonne.csv"), delimiter);
+            ICSVReader<GoogleMeetingTO> reader = new GoogleMeetCSVReader(new StreamReader(@"C:\Users\Fedele Simone De Feo\Desktop\GMAnonimo.csv"), delimiter);
             GoogleMeetMissingDataCalculator dataCalculator = new GoogleMeetMissingDataCalculator(reader);
 
             List<IGoogleMeetLogTO> logs = new List<IGoogleMeetLogTO>();

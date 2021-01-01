@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleMeetLogsNavigator", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "..\Test\Test.csproj", "{D9C8E606-685B-4B22-9F4B-F00C61550727}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupGMLN", "..\SetupGMLN\SetupGMLN.vdproj", "{6BDAC822-6F89-4F57-8AD1-7C571224FBB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,8 @@ Global
 		{D9C8E606-685B-4B22-9F4B-F00C61550727}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9C8E606-685B-4B22-9F4B-F00C61550727}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9C8E606-685B-4B22-9F4B-F00C61550727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BDAC822-6F89-4F57-8AD1-7C571224FBB9}.Debug|Any CPU.ActiveCfg = Debug
+		{6BDAC822-6F89-4F57-8AD1-7C571224FBB9}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
