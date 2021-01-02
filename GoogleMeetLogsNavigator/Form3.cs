@@ -14,6 +14,7 @@ using GoogleMeetLogsNavigator.GoogleParser.nteface;
 using System.Text;
 using static System.Windows.Forms.CheckedListBox;
 using System.Drawing;
+using System.Configuration;
 
 namespace GoogleMeetLogsNavigator
 {
@@ -31,6 +32,7 @@ namespace GoogleMeetLogsNavigator
             ,CSVHeaderEnum.ClientType.ToString()
         };
         private IList<GoogleMeetLogModel> listLog;
+        private string _supportedLanguage = "it";
         private Encoding csvEncoding = Encoding.UTF8;
         public Form3()
         {
@@ -61,7 +63,11 @@ namespace GoogleMeetLogsNavigator
                     checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf(value), true);
                 }
             }
-
+            var appSettings = ConfigurationManager.AppSettings;
+            if (appSettings.Count > 0)
+            {
+                _supportedLanguage = string.IsNullOrEmpty(appSettings["Langauge"]) ? _supportedLanguage : appSettings["Langauge"];
+            }
 
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -132,7 +138,7 @@ namespace GoogleMeetLogsNavigator
                     csvDelimiter = form1.Delimitator;
                 }
                 StreamReader streamCsv = new StreamReader(all);
-                GoogleMeetCSVReader gcsvr = new GoogleMeetCSVReader(streamCsv, csvDelimiter);
+                GoogleMeetCSVReader gcsvr = new GoogleMeetCSVReader(streamCsv, csvDelimiter, _supportedLanguage);
                 csvEncoding = gcsvr.CSVTextEncoding;
                 var gmdc = new GoogleMeetMissingDataCalculator(gcsvr);
                 IDictionary<string, IList<GoogleMeetLogModel>> dicLog = gmdc.MeetingLogsDictionary;
