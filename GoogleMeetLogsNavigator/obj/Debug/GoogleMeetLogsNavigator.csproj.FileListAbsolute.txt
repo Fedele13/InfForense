@@ -42,3 +42,12 @@ C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\obj\Debu
 C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.exe
 C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.pdb
 C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.Form3.resources
+C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.csprojAssemblyReference.cache
+C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\bin\Debug\System.Security.AccessControl.dll
+C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\bin\Debug\System.Security.Permissions.dll
+C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\bin\Debug\System.Security.AccessControl.xml
+C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\bin\Debug\System.Security.Permissions.xml
+C:\Users\Fedele Simone De Feo\Repository\InformaticaForense\GoogleMeetLogsNavigator\bin\Debug\System.Security.Principal.Windows.xml

@@ -11,6 +11,7 @@ using GoogleMeetLogsNavigator.Utility;
 using GoogleMeetLogsNavigator.TransferObject.Interface;
 using GoogleMeetLogsNavigator.GoogleParser.GoogleEnum;
 using GoogleMeetLogsNavigator.GoogleParser.nteface;
+using System.Configuration;
 
 namespace GoogleMeetLogsNavigator
 {
@@ -22,6 +23,7 @@ namespace GoogleMeetLogsNavigator
         String selectComboItem;
         private IList<string> columns;
         private IList<GoogleMeetLogModel> listLog;
+        private string _supportedLanguage = "it";
         public Form3()
         {
             InitializeComponent();
@@ -46,7 +48,14 @@ namespace GoogleMeetLogsNavigator
                 comboBox1.Items.Add(value);
                 dt.Columns.Add(value, typeof(string));
             }
-            
+
+            var appSettings = ConfigurationManager.AppSettings;
+            if (appSettings.Count > 0)
+            {
+                _supportedLanguage = string.IsNullOrEmpty(appSettings["Langauge"]) ? _supportedLanguage : appSettings["Langauge"];
+            }
+           
+
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -108,7 +117,7 @@ namespace GoogleMeetLogsNavigator
                 var all = string.Join(Environment.NewLine, selectedItems.Select(x => x.Path));
                 string csvDelimiter = ";";
                 StreamReader streamCsv = new StreamReader(all);
-                GoogleMeetCSVReader gcsvr = new GoogleMeetCSVReader(streamCsv, csvDelimiter);
+                GoogleMeetCSVReader gcsvr = new GoogleMeetCSVReader(streamCsv, csvDelimiter, _supportedLanguage);
                 var gmdc = new GoogleMeetMissingDataCalculator(gcsvr);
                 IDictionary<string, IList<GoogleMeetLogModel>> dicLog = gmdc.MeetingLogsDictionary;
                 IList<GoogleMeetLogModel> listAllMeeting = new List<GoogleMeetLogModel>();

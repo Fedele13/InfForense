@@ -78,7 +78,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 }
                 else
                 {
-                    throw new InvalidOperationException("Non sono supportate altre lingue oltre all'italiano");
+                    throw new InvalidOperationException("La lingua selezionata non è supportata");
                 }
 
                 IList<string> meetingCodesList = recordsList.Select(item => item.MeetingCode).Distinct().ToList();
