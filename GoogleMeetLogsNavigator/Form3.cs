@@ -11,7 +11,9 @@ using GoogleMeetLogsNavigator.Utility;
 using GoogleMeetLogsNavigator.TransferObject.Interface;
 using GoogleMeetLogsNavigator.GoogleParser.GoogleEnum;
 using GoogleMeetLogsNavigator.GoogleParser.nteface;
-using System.Configuration;
+using System.Text;
+using static System.Windows.Forms.CheckedListBox;
+using System.Drawing;
 
 namespace GoogleMeetLogsNavigator
 {
@@ -21,9 +23,15 @@ namespace GoogleMeetLogsNavigator
         DataTable dt = new DataTable();
         LogItem logItem;
         String selectComboItem;
+        string csvDelimiter = ",";
         private IList<string> columns;
+        private IList<string> mandatoryColumns = new List<string> { CSVHeaderEnum.Date.ToString(), CSVHeaderEnum.EventName.ToString(),
+            CSVHeaderEnum.EventDescription.ToString(), CSVHeaderEnum.MeetingCode.ToString(),CSVHeaderEnum.PartecipantIdentifier.ToString(),
+            CSVHeaderEnum.ExternalPartecipantIdentifier.ToString(), CSVHeaderEnum.Duration.ToString(),CSVHeaderEnum.PartecipantName.ToString()
+            ,CSVHeaderEnum.ClientType.ToString()
+        };
         private IList<GoogleMeetLogModel> listLog;
-        private string _supportedLanguage = "it";
+        private Encoding csvEncoding = Encoding.UTF8;
         public Form3()
         {
             InitializeComponent();
@@ -47,14 +55,13 @@ namespace GoogleMeetLogsNavigator
             {
                 comboBox1.Items.Add(value);
                 dt.Columns.Add(value, typeof(string));
+                checkedListBox1.Items.Add(value);
+                if (mandatoryColumns.Contains(value))
+                {
+                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf(value), true);
+                }
             }
 
-            var appSettings = ConfigurationManager.AppSettings;
-            if (appSettings.Count > 0)
-            {
-                _supportedLanguage = string.IsNullOrEmpty(appSettings["Langauge"]) ? _supportedLanguage : appSettings["Langauge"];
-            }
-           
 
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -78,6 +85,7 @@ namespace GoogleMeetLogsNavigator
                 checkedListBox1.Visible = false;
                 button_filter.Visible = false;
                 label2.Visible = false;
+                exportToolStripMenuItem.Enabled = false;
                 label1.Text = "Files";
                 listBox2.Items.Clear();
                 listBox1.Items.Clear();
@@ -91,33 +99,41 @@ namespace GoogleMeetLogsNavigator
                         {
                             var fileItem = new FileItem { Title = Path.GetFileName(file), Path = Path.GetFullPath(file) };
                             listBox1.Items.Add(fileItem);
+
                         }
                     }
                 }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         private void fILEToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                label1.Text = "Meeting code";
+                label1.Text = "Meeting codes";
                 listBox2.Visible = true;
+
                 var selectedItems = listBox1.SelectedItems.Cast<FileItem>();
                 var all = string.Join(Environment.NewLine, selectedItems.Select(x => x.Path));
-                string csvDelimiter = ";";
+                using (Form1 form1 = new Form1())
+                {
+                    form1.ShowDialog();
+                    csvDelimiter = form1.Delimitator;
+                }
                 StreamReader streamCsv = new StreamReader(all);
-                GoogleMeetCSVReader gcsvr = new GoogleMeetCSVReader(streamCsv, csvDelimiter, _supportedLanguage);
+                GoogleMeetCSVReader gcsvr = new GoogleMeetCSVReader(streamCsv, csvDelimiter);
+                csvEncoding = gcsvr.CSVTextEncoding;
                 var gmdc = new GoogleMeetMissingDataCalculator(gcsvr);
                 IDictionary<string, IList<GoogleMeetLogModel>> dicLog = gmdc.MeetingLogsDictionary;
                 IList<GoogleMeetLogModel> listAllMeeting = new List<GoogleMeetLogModel>();
@@ -132,6 +148,7 @@ namespace GoogleMeetLogsNavigator
                 }
                 var logAllItem = new LogItem { codiceRiunione = "AllMeeting", logListModel = listAllMeeting };
                 listBox2.Items.Add(logAllItem);
+               
             }
             catch (Exception ex)
             {
@@ -179,11 +196,11 @@ namespace GoogleMeetLogsNavigator
 
                 dataGridView1.DataSource = dv;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -244,7 +261,7 @@ namespace GoogleMeetLogsNavigator
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button_filter_Click(object sender, EventArgs e)
@@ -274,7 +291,7 @@ namespace GoogleMeetLogsNavigator
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -304,9 +321,13 @@ namespace GoogleMeetLogsNavigator
                 {
                     exportConfiguration = GoogleMeetCSVWriter.GetDefaultConfiguration();
                 }
-
+                using (Form1 form1 = new Form1())
+                {
+                    form1.ShowDialog();
+                    csvDelimiter = form1.Delimitator;
+                }
                 IList<IGoogleMeetLogTO> logs = listLog.Select(i => i.MapObjectModelInTransferObjectITA()).Cast<IGoogleMeetLogTO>().ToList();
-                ICSVWriter<IGoogleMeetLogTO> writer = new GoogleMeetCSVWriter(exportConfiguration);
+                ICSVWriter<IGoogleMeetLogTO> writer = new GoogleMeetCSVWriter(exportConfiguration, csvEncoding, csvDelimiter);
                 string s = writer.ToGoogleMeetCsv(logs);
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.Filter = "CSV files (*.csv)|*.csv";
@@ -324,16 +345,29 @@ namespace GoogleMeetLogsNavigator
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            
+
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+        void listBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            ListBox list = (ListBox)sender;
+            if (e.Index > -1)
+            {
+                object item = list.Items[e.Index];
+                e.DrawBackground();
+                e.DrawFocusRectangle();
+                Brush brush = new SolidBrush(e.ForeColor);
+                SizeF size = e.Graphics.MeasureString(item.ToString(), e.Font);
+                e.Graphics.DrawString(item.ToString(), e.Font, brush, e.Bounds.Left + (e.Bounds.Width / 2 - size.Width / 2), e.Bounds.Top + (e.Bounds.Height / 2 - size.Height / 2));
+            }
         }
     }
     public class FileItem

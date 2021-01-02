@@ -117,4 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>Il tool è stato realizzato ai fini di controllo e analisi dei file di Log delle riunioni effettuate attraverso la piattaforma Google Meet.
+
+I dati vengono trattati nel pieno rispetto delle normative sancite dal GDPR e le informazioni non vengono salvate.
+
+La possibilità di esportazione di eventuali informazioni è lasciata alla discrezione dell'utente</value>
+  </data>
 </root>

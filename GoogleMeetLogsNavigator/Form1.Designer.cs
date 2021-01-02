@@ -28,15 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button_login = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aBOUTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button_select_delimitator = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -46,81 +43,58 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.panel1.Controls.Add(this.button_login);
-            this.panel1.Controls.Add(this.menuStrip1);
+            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.button_select_delimitator);
             this.panel1.Location = new System.Drawing.Point(1, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 452);
+            this.panel1.Size = new System.Drawing.Size(174, 125);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // button_login
+            // comboBox1
             // 
-            this.button_login.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.button_login.Location = new System.Drawing.Point(687, 0);
-            this.button_login.Name = "button_login";
-            this.button_login.Size = new System.Drawing.Size(112, 24);
-            this.button_login.TabIndex = 1;
-            this.button_login.Text = "LOGIN";
-            this.button_login.UseVisualStyleBackColor = false;
-            this.button_login.Click += new System.EventHandler(this.button1_Click);
+            this.comboBox1.BackColor = System.Drawing.Color.Gainsboro;
+            this.comboBox1.DisplayMember = ",";
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            ",",
+            ";"});
+            this.comboBox1.Location = new System.Drawing.Point(99, 39);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(65, 21);
+            this.comboBox1.TabIndex = 3;
             // 
-            // menuStrip1
+            // label1
             // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fILEToolStripMenuItem,
-            this.aBOUTToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(11, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Delimitator:";
             // 
-            // fILEToolStripMenuItem
+            // button_select_delimitator
             // 
-            this.fILEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importToolStripMenuItem,
-            this.exportToolStripMenuItem});
-            this.fILEToolStripMenuItem.Name = "fILEToolStripMenuItem";
-            this.fILEToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
-            this.fILEToolStripMenuItem.Text = "FILE";
-            // 
-            // importToolStripMenuItem
-            // 
-            this.importToolStripMenuItem.Enabled = false;
-            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.importToolStripMenuItem.Text = "import...";
-            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
-            // 
-            // exportToolStripMenuItem
-            // 
-            this.exportToolStripMenuItem.Enabled = false;
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exportToolStripMenuItem.Text = "export...";
-            // 
-            // aBOUTToolStripMenuItem
-            // 
-            this.aBOUTToolStripMenuItem.Name = "aBOUTToolStripMenuItem";
-            this.aBOUTToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.aBOUTToolStripMenuItem.Text = "ABOUT";
-            this.aBOUTToolStripMenuItem.Click += new System.EventHandler(this.aBOUTToolStripMenuItem_Click);
+            this.button_select_delimitator.Location = new System.Drawing.Point(52, 86);
+            this.button_select_delimitator.Name = "button_select_delimitator";
+            this.button_select_delimitator.Size = new System.Drawing.Size(75, 23);
+            this.button_select_delimitator.TabIndex = 1;
+            this.button_select_delimitator.Text = "OK";
+            this.button_select_delimitator.UseVisualStyleBackColor = true;
+            this.button_select_delimitator.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(174, 123);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Google Meet Logs Navigator";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -128,12 +102,9 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button_login;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fILEToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aBOUTToolStripMenuItem;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button_select_delimitator;
     }
 }
 

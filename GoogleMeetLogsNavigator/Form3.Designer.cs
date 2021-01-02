@@ -29,6 +29,7 @@ namespace GoogleMeetLogsNavigator
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.panel1 = new System.Windows.Forms.Panel();
             this.button_filter = new System.Windows.Forms.Button();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
@@ -42,7 +43,9 @@ namespace GoogleMeetLogsNavigator
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.aBOUTToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -73,10 +76,10 @@ namespace GoogleMeetLogsNavigator
             // 
             // button_filter
             // 
-            this.button_filter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.button_filter.Location = new System.Drawing.Point(251, 410);
+            this.button_filter.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.button_filter.Location = new System.Drawing.Point(237, 411);
             this.button_filter.Name = "button_filter";
-            this.button_filter.Size = new System.Drawing.Size(178, 28);
+            this.button_filter.Size = new System.Drawing.Size(178, 29);
             this.button_filter.TabIndex = 15;
             this.button_filter.Text = "Filtering";
             this.button_filter.UseVisualStyleBackColor = true;
@@ -87,80 +90,11 @@ namespace GoogleMeetLogsNavigator
             this.checkedListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.checkedListBox1.BackColor = System.Drawing.Color.Gainsboro;
+            this.checkedListBox1.CheckOnClick = true;
             this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
-            "Date",
-            "EventName",
-            "EventDescription",
-            "MeetingCode",
-            "PartecipantIdentifier",
-            "PartecipantName",
-            "ExternalPartecipantIdentifier",
-            "ClientType",
-            "MeetingOwnerEmail",
-            "ProductType",
-            "Duration",
-            "CallEvaluationOn5",
-            "IPAddress",
-            "City",
-            "Nation",
-            "ActionCause",
-            "ActionDescription",
-            "VisualizedDestinationName",
-            "DestinationEmailsAddresses",
-            "DestinationPhoneNumber",
-            "CalendarEventIdentifier",
-            "ConferenceID",
-            "NETRoundTrip",
-            "TransportProtocol",
-            "PredictedBandWidthLoading",
-            "PredictedBandWidthUploading",
-            "MaxReceptionAudioPacketsLost",
-            "AverageReceptionAudioPacketsLost",
-            "AudioReceptionDuration",
-            "BitRatioAudioSending",
-            "MaxSendingAudioPacketsLost",
-            "AverageSendingAudioPacketsLost",
-            "AudioSendingDuration",
-            "AverageReceptionFlickering",
-            "MaxReceptionFilckering",
-            "AverageSendingFlickering",
-            "BitRatioScreencastReception",
-            "AverageScreecastReception",
-            "LongSideMedianScreencastReception",
-            "MaxReceptionScreencastPacketsLost",
-            "AverageReceptionScreencastPacketsLost",
-            "ScreencastReceptionDuration",
-            "ShortSideMedianScreencastReception",
-            "BitRatioScreencastSending",
-            "AverageScreecastSending",
-            "LongSideMedianScreencastSending",
-            "MaxSendingScreencastPacketsLost",
-            "AverageSendingScreencastPacketsLost",
-            "ScreencastSendingDuration",
-            "ShortSideMedianScreencastSending",
-            "AverageVideoReception",
-            "LongSideMedianVideoReception",
-            "MaxVideoReceptionPacketsLost",
-            "AverageVideoReceptionPacketsLost",
-            "ReceptionVideoDuration",
-            "ShortSideMedianVideoReception",
-            "BitRatioVideoSending",
-            "AverageVideoSending",
-            "LongSideMedianVideoSending",
-            "MaxSendingVideoPacketsLost",
-            "AverageSendingVideoPacketsLost",
-            "VideoSendingDuration",
-            "ShortSideMedianVideoSending",
-            "NetworkCongestion",
-            "MeetingStartDate",
-            "MeetingEndDate",
-            "MeetingEnteringDate",
-            "TotalMeetingUserPartecipation",
-            "CommonEuropeanTimeType"});
-            this.checkedListBox1.Location = new System.Drawing.Point(251, 74);
+            this.checkedListBox1.Location = new System.Drawing.Point(237, 71);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(178, 319);
+            this.checkedListBox1.Size = new System.Drawing.Size(178, 334);
             this.checkedListBox1.TabIndex = 14;
             this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             // 
@@ -168,12 +102,12 @@ namespace GoogleMeetLogsNavigator
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(248, 45);
+            this.label2.Location = new System.Drawing.Point(356, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 18);
             this.label2.TabIndex = 13;
             this.label2.Text = "Search:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // comboBox1
             // 
@@ -181,7 +115,7 @@ namespace GoogleMeetLogsNavigator
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "All"});
-            this.comboBox1.Location = new System.Drawing.Point(435, 44);
+            this.comboBox1.Location = new System.Drawing.Point(421, 44);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(118, 21);
             this.comboBox1.TabIndex = 12;
@@ -194,10 +128,11 @@ namespace GoogleMeetLogsNavigator
             | System.Windows.Forms.AnchorStyles.Left)));
             this.listBox2.BackColor = System.Drawing.Color.Gainsboro;
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(12, 71);
+            this.listBox2.Location = new System.Drawing.Point(12, 72);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(219, 368);
             this.listBox2.TabIndex = 3;
+            this.listBox2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox_DrawItem);
             this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
             // text_search
@@ -215,14 +150,17 @@ namespace GoogleMeetLogsNavigator
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(435, 74);
+            this.dataGridView1.Location = new System.Drawing.Point(421, 71);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(354, 364);
+            this.dataGridView1.Size = new System.Drawing.Size(368, 367);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.Visible = false;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -235,7 +173,7 @@ namespace GoogleMeetLogsNavigator
             this.label1.Size = new System.Drawing.Size(219, 44);
             this.label1.TabIndex = 4;
             this.label1.Text = "Files";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // listBox1
@@ -256,6 +194,7 @@ namespace GoogleMeetLogsNavigator
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fILEToolStripMenuItem,
             this.aBOUTToolStripMenuItem});
+            this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -265,9 +204,12 @@ namespace GoogleMeetLogsNavigator
             // 
             // fILEToolStripMenuItem
             // 
+            this.fILEToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.fILEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importToolStripMenuItem,
-            this.exportToolStripMenuItem});
+            this.toolStripSeparator1,
+            this.exportToolStripMenuItem,
+            this.toolStripSeparator2});
             this.fILEToolStripMenuItem.Name = "fILEToolStripMenuItem";
             this.fILEToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.fILEToolStripMenuItem.Text = "FILE";
@@ -277,15 +219,25 @@ namespace GoogleMeetLogsNavigator
             // 
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
             this.importToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-            this.importToolStripMenuItem.Text = "import...";
+            this.importToolStripMenuItem.Text = "Import...";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(116, 6);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-            this.exportToolStripMenuItem.Text = "export...";
+            this.exportToolStripMenuItem.Text = "Export...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(116, 6);
             // 
             // aBOUTToolStripMenuItem
             // 
@@ -300,6 +252,7 @@ namespace GoogleMeetLogsNavigator
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form3";
             this.Text = "Google Meet Logs Navigator";
             this.panel1.ResumeLayout(false);
@@ -328,5 +281,7 @@ namespace GoogleMeetLogsNavigator
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button_filter;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

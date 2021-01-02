@@ -21,10 +21,5 @@ namespace GoogleMeetLogsNavigator
         {
             this.Close();
         }
-
-        private void About_form_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
