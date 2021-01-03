@@ -31,9 +31,9 @@ namespace GoogleMeetLogsNavigator
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(About_form));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.Titolo_about = new System.Windows.Forms.Label();
             this.cloase_about_button = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,6 +47,15 @@ namespace GoogleMeetLogsNavigator
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(292, 273);
             this.panel1.TabIndex = 1;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.Color.Gainsboro;
+            this.richTextBox1.Location = new System.Drawing.Point(12, 75);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(270, 149);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // Titolo_about
             // 
@@ -66,18 +75,9 @@ namespace GoogleMeetLogsNavigator
             this.cloase_about_button.Name = "cloase_about_button";
             this.cloase_about_button.Size = new System.Drawing.Size(125, 31);
             this.cloase_about_button.TabIndex = 1;
-            this.cloase_about_button.Text = "Close";
+            this.cloase_about_button.Text = "CLOSE";
             this.cloase_about_button.UseVisualStyleBackColor = false;
             this.cloase_about_button.Click += new System.EventHandler(this.cloase_about_button_Click);
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BackColor = System.Drawing.Color.Gainsboro;
-            this.richTextBox1.Location = new System.Drawing.Point(12, 75);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(270, 149);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // About_form
             // 
@@ -85,6 +85,7 @@ namespace GoogleMeetLogsNavigator
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(291, 270);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "About_form";
             this.Text = "About Us";
             this.panel1.ResumeLayout(false);
