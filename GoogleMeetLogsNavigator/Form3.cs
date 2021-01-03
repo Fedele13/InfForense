@@ -36,6 +36,7 @@ namespace GoogleMeetLogsNavigator
         private IList<GoogleMeetLogModel> listLog;
         private string _supportedLanguage = "it";
         private Encoding csvEncoding = Encoding.UTF8;
+        private bool AllChecked = false;
         public Form3()
         {
             InitializeComponent();
@@ -56,7 +57,7 @@ namespace GoogleMeetLogsNavigator
             logItem = new LogItem();
            
             columns = typeof(GoogleMeetLogModel).GetProperties().Select(item => item.Name).ToList();
-         
+            checkedListBox1.Items.Add("All");
             foreach (var value in columns)
             {
                 comboBox1.Items.Add(value);
@@ -67,6 +68,7 @@ namespace GoogleMeetLogsNavigator
                     checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf(value), true);
                 }
             }
+            
             var appSettings = ConfigurationManager.AppSettings;
             if (appSettings.Count > 0)
             {
@@ -147,6 +149,8 @@ namespace GoogleMeetLogsNavigator
                 var gmdc = new GoogleMeetMissingDataCalculator(gcsvr);
                 IDictionary<string, IList<GoogleMeetLogModel>> dicLog = gmdc.MeetingLogsDictionary;
                 IList<GoogleMeetLogModel> listAllMeeting = new List<GoogleMeetLogModel>();
+                var logAllItem = new LogItem { codiceRiunione = "AllMeeting", logListModel = listAllMeeting };
+                listBox2.Items.Add(logAllItem);
                 foreach (KeyValuePair<string, IList<GoogleMeetLogModel>> kvp in dicLog)
                 {
                     var logitem = new LogItem { codiceRiunione = kvp.Key, logListModel = kvp.Value };
@@ -156,9 +160,8 @@ namespace GoogleMeetLogsNavigator
                     }
                     listBox2.Items.Add(logitem);
                 }
-                var logAllItem = new LogItem { codiceRiunione = "AllMeeting", logListModel = listAllMeeting };
-                listBox2.Items.Add(logAllItem);
-               
+                
+
             }
             catch (Exception ex)
             {
@@ -238,25 +241,36 @@ namespace GoogleMeetLogsNavigator
                     }
                     dt.Rows.Add(dr);
 
-                    /*
-                    dt.Rows.Add(model.Date.ConvertGoogleDateTimeInString(model.CommonEuropeanTimeType), model.EventName, model.EventDescription, model.MeetingCode, model.PartecipantIdentifier, model.ExternalPartecipantIdentifier, model.ClientType
-                        , model.MeetingOwnerEmail, model.ProductType, model.Duration, model.CallEvaluationOn5, model.PartecipantName, model.IPAddress,
-                        model.City, model.Nation, model.ActionCause, model.ActionDescription, model.VisualizedDestinationName, model.DestinationEmailsAddresses,
-                        model.DestinationPhoneNumber, model.CalendarEventIdentifier, model.ConferenceID, model.NETRoundTrip, model.TransportProtocol,
-                        model.PredictedBandWidthLoading, model.PredictedBandWidthUploading, model.MaxReceptionAudioPacketsLost, model.AverageReceptionAudioPacketsLost,
-                        model.AudioReceptionDuration, model.BitRatioAudioSending, model.MaxSendingAudioPacketsLost, model.AverageSendingAudioPacketsLost, model.AudioSendingDuration, model.AverageReceptionFlickering,
-                        model.MaxReceptionFilckering, model.AverageSendingFlickering, model.BitRatioScreencastReception, model.AverageScreecastReception, model.LongSideMedianScreencastReception,
-                        model.MaxReceptionScreencastPacketsLost, model.AverageReceptionScreencastPacketsLost, model.ScreencastReceptionDuration, model.ShortSideMedianScreencastReception,
-                        model.BitRatioScreencastSending, model.AverageScreecastSending, model.LongSideMedianScreencastSending, model.MaxSendingScreencastPacketsLost,
-                        model.AverageSendingScreencastPacketsLost, model.ScreencastSendingDuration, model.ShortSideMedianScreencastSending, model.AverageVideoReception, model.LongSideMedianVideoReception,
-                        model.MaxVideoReceptionPacketsLost, model.AverageVideoReceptionPacketsLost, model.ReceptionVideoDuration, model.ShortSideMedianVideoReception,
-                        model.BitRatioVideoSending, model.AverageVideoSending, model.LongSideMedianVideoSending, model.MaxSendingVideoPacketsLost, model.AverageSendingVideoPacketsLost,
-                        model.VideoSendingDuration, model.ShortSideMedianVideoSending, model.NetworkCongestion, model.MeetingStartDate, model.MeetingEndDate, model.MeetingEnteringDate,
-                        model.TotalMeetingUserPartecipation, model.CommonEuropeanTimeType);
-                    */
-
                 }
                 dataGridView1.DataSource = dt;
+
+                if (checkedListBox1.CheckedItems.Count > 0)
+                {
+                    foreach (var value in columns)
+                    {
+
+                        this.dataGridView1.Columns[value].Visible = false;
+                        foreach (string s in checkedListBox1.CheckedItems)
+                        {
+                            if (s == "All")
+                            {
+                                continue;
+                            }
+                            this.dataGridView1.Columns[s].Visible = true;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var value in mandatoryColumns)
+                    {
+                        checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf(value), true);
+                        this.dataGridView1.Columns[value].Visible = true;
+
+                    }
+
+                }
+
             }
             catch (Exception ex)
             {
@@ -271,9 +285,44 @@ namespace GoogleMeetLogsNavigator
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            bool actuallyChecked = checkedListBox1.GetItemChecked(checkedListBox1.Items.IndexOf("All"));
 
-        }
+            if (actuallyChecked == false && AllChecked == true)
+            {
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                {
+                    checkedListBox1.SetItemChecked(i, false);
+                }
+            }
+            if(AllChecked == false && actuallyChecked == true) {
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                {
+                    checkedListBox1.SetItemChecked(i, true);
+                }
+            }
+            if(actuallyChecked == true)
+            {
+                bool allItemsAreChecked = true;
+                
+                for(int i = 0; i< checkedListBox1.Items.Count; i++)
+                {
+                    if (checkedListBox1.GetItemChecked(i) == false)
+                    {
+                        allItemsAreChecked = false;
+                        break;
+                    }
+                }
+                if(allItemsAreChecked == false)
+                {
+                    actuallyChecked= false;
+                    checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf("All"), false);
+                }
+            }
+            AllChecked = actuallyChecked;
+        } 
 
+     
+          
         private void button_filter_Click(object sender, EventArgs e)
         {
             try
@@ -282,10 +331,14 @@ namespace GoogleMeetLogsNavigator
                 {
                     foreach (var value in columns)
                     {
-                        String comboItem = value;
-                        this.dataGridView1.Columns[comboItem].Visible = false;
-                        foreach (String s in checkedListBox1.CheckedItems)
+                        
+                        this.dataGridView1.Columns[value].Visible = false;
+                        foreach (string s in checkedListBox1.CheckedItems)
                         {
+                            if (s == "All")
+                            {
+                                continue;
+                            }
                             this.dataGridView1.Columns[s].Visible = true;
                         }
                     }
@@ -294,8 +347,8 @@ namespace GoogleMeetLogsNavigator
                 {
                     foreach (var value in columns)
                     {
-                        String comboItem = value;
-                        this.dataGridView1.Columns[comboItem].Visible = true;
+                       
+                        this.dataGridView1.Columns[value].Visible = false;
 
                     }
 
