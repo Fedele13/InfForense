@@ -17,6 +17,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.nteface
         public void SetCSVDelimiter(string delimiter);
 
         /// <summary>
+        /// Set the Header csv language
+        /// </summary>
+        /// <param name="language">Header csv language</param>
+        public void SetCSVHeaderLanguage(string language);
+
+        /// <summary>
         /// Set the configuration dictionary to build the csv file with selected columns
         /// </summary>
         /// <param name="configurationDictioanry">The Configuration Dictionary <columnName, true/false></param>

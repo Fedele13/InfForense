@@ -34,6 +34,11 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// </summary>
         private Encoding _encoding = Encoding.UTF8;
 
+        /// <summary>
+        /// Language used to find the header of csv file
+        /// </summary>
+        private string _supportedLanguage = "it";
+
         #endregion
 
         #region .ctor
@@ -42,43 +47,54 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// The Constructor
         /// </summary>
         /// <param name="configurationDictionary">The Configuration Dictionary</param>
-        public GoogleMeetCSVWriter(IDictionary<CSVHeaderEnum, bool> configurationDictionary)
+        /// <param name="language">The language used for csv headers</param>
+        public GoogleMeetCSVWriter(IDictionary<CSVHeaderEnum, bool> configurationDictionary, string language = "it")
         {
             if (configurationDictionary != null)
             {
                 this._configurationDictionary = configurationDictionary;
             }
+            this._supportedLanguage = language;
         }
 
         /// <summary>
         /// The Constructor
         /// </summary>
         /// <param name="delimiter">The delimiter to use to build csv file</param>
-        public GoogleMeetCSVWriter(string delimiter = ",")
+        /// <param name="language">The language used for csv headers</param>
+        public GoogleMeetCSVWriter(string delimiter = ",", string language = "it")
         {
             this._csvDelimiter = delimiter;
+            this._supportedLanguage = language;
         }
 
         /// <summary>
         /// The Constructor
         /// </summary>
         /// <param name="encoding"></param>
-        public GoogleMeetCSVWriter(Encoding encoding)
+        /// <param name="language">The language used for csv headers</param>
+        public GoogleMeetCSVWriter(Encoding encoding, string language = "it")
         {
             if (encoding != null)
             {
                 this._encoding = encoding;
             }
+            else
+            {
+                throw new ArgumentNullException("L'encoder è nullo. Selezionare un encoder valido");
+            }
+            this._supportedLanguage = language;
         }
 
         /// <summary>
         /// The Constructor
         /// </summary>
         /// <param name="configurationDictionary">The Configuration Dictionary</param>
+        /// <param name="encoding">Encoder to use to create text content into csv file</param>
         /// <param name="delimiter">The delimiter to use to build csv file</param>
-        public GoogleMeetCSVWriter(IDictionary<CSVHeaderEnum, bool> configurationDictionary, Encoding encoding, string delimiter = ",")
+        /// <param name="language">The csv header language</param>
+        public GoogleMeetCSVWriter(IDictionary<CSVHeaderEnum, bool> configurationDictionary, Encoding encoding, string delimiter = ",", string language = "it")
         {
-
             if (configurationDictionary != null)
             {
                 this._configurationDictionary = configurationDictionary;
@@ -88,7 +104,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
             {
                 this._encoding = encoding;
             }
+            else
+            {
+                throw new ArgumentNullException("L'encoder è nullo. Selezionare un encoder valido");
+            }
 
+            this._supportedLanguage = language;
             this._csvDelimiter = delimiter;
         }
 
@@ -121,6 +142,15 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         {
             this._encoding = encoding;
         }
+        /// <summary>
+        /// Set the Header csv language
+        /// </summary>
+        /// <param name="language">Header csv language</param>
+        public void SetCSVHeaderLanguage(string language)
+        {
+            this._supportedLanguage = language;
+        }
+
 
         /// <summary>
         /// Create csv contetn
@@ -129,6 +159,36 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// <return>The string content in csv format</return>
         /// <exception cref="Exception.WriterException">
         public string ToGoogleMeetCsv(IList<IGoogleMeetLogTO> logs)
+        {
+            if (this._supportedLanguage == "it")
+                return exportTransferObjectITA(logs);
+            throw new Exception.WriterException("La lingua configurata da usare per l'header del csv non è al momento gestita");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static IDictionary<CSVHeaderEnum, bool> GetDefaultConfiguration()
+        {
+            IDictionary<CSVHeaderEnum, bool> defaultConfigurationDictionary = new Dictionary<CSVHeaderEnum, bool>();
+
+            for (int headerEnum = 9; headerEnum < Enum.GetValues(typeof(CSVHeaderEnum)).Length; ++headerEnum)
+            {
+                defaultConfigurationDictionary.Add((CSVHeaderEnum)headerEnum, true);
+            }
+            return defaultConfigurationDictionary;
+        }
+
+        #endregion
+
+        #region
+        /// <summary>
+        /// Return the csv content with ITA csv header
+        /// </summary>
+        /// <param name="logs">The logs</param>
+        /// <returns>The csv content with ITA csv header</returns>
+        private string exportTransferObjectITA(IList<IGoogleMeetLogTO> logs)
         {
             using (var mem = new MemoryStream())
             using (var writer = new StreamWriter(mem))
@@ -457,22 +517,6 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public static IDictionary<CSVHeaderEnum, bool> GetDefaultConfiguration()
-        {
-            IDictionary<CSVHeaderEnum, bool> defaultConfigurationDictionary = new Dictionary<CSVHeaderEnum, bool>();
-
-            for (int headerEnum = 9; headerEnum < Enum.GetValues(typeof(CSVHeaderEnum)).Length; ++headerEnum)
-            {
-                defaultConfigurationDictionary.Add((CSVHeaderEnum)headerEnum, true);
-            }
-            return defaultConfigurationDictionary;
-        }
-
         #endregion
     }
 }

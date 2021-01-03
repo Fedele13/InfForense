@@ -334,7 +334,7 @@ namespace GoogleMeetLogsNavigator
                     csvDelimiter = form1.Delimitator;
                 }
                 IList<IGoogleMeetLogTO> logs = listLog.Select(i => i.MapObjectModelInTransferObjectITA()).Cast<IGoogleMeetLogTO>().ToList();
-                ICSVWriter<IGoogleMeetLogTO> writer = new GoogleMeetCSVWriter(exportConfiguration, csvEncoding, csvDelimiter);
+                ICSVWriter<IGoogleMeetLogTO> writer = new GoogleMeetCSVWriter(exportConfiguration, csvEncoding, csvDelimiter, _supportedLanguage);
                 string s = writer.ToGoogleMeetCsv(logs);
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.Filter = "CSV files (*.csv)|*.csv";
