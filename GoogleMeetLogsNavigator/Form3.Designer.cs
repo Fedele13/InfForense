@@ -76,10 +76,13 @@ namespace GoogleMeetLogsNavigator
             // 
             // button_filter
             // 
-            this.button_filter.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button_filter.Location = new System.Drawing.Point(237, 411);
+            this.button_filter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_filter.AutoSize = true;
+            this.button_filter.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button_filter.Location = new System.Drawing.Point(298, 415);
             this.button_filter.Name = "button_filter";
-            this.button_filter.Size = new System.Drawing.Size(178, 29);
+            this.button_filter.Size = new System.Drawing.Size(53, 23);
             this.button_filter.TabIndex = 15;
             this.button_filter.Text = "Filtering";
             this.button_filter.UseVisualStyleBackColor = true;

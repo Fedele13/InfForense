@@ -30,7 +30,6 @@ C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\bin\Debu
 C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\bin\Debug\System.Threading.Tasks.Extensions.xml
-C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.csprojAssemblyReference.cache
 C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.About_form.resources
 C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.Download_Form.resources
 C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.Form1.resources
@@ -51,3 +50,4 @@ C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\bin\Debu
 C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\bin\Debug\System.Security.AccessControl.xml
 C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\bin\Debug\System.Security.Permissions.xml
 C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\Marco\source\repos\Fedele13\InfForense\GoogleMeetLogsNavigator\obj\Debug\GoogleMeetLogsNavigator.csprojAssemblyReference.cache
