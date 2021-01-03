@@ -2,7 +2,6 @@
 using GoogleMeetLogsNavigator.GoogleParser.Interface;
 using GoogleMeetLogsNavigator.TransferObject;
 using GoogleMeetLogsNavigator.TransferObject.Interface;
-using GoogleMeetLogsNavigator.TransferObject.ToITA;
 using GoogleMeetLogsNavigator.Utility;
 using System;
 using System.Collections.Generic;
@@ -124,9 +123,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// </summary>
         /// <param name="_csvReader">The CSV reader</param>
         /// <returns>List of GoogleMeetLogTOITA</returns>
-        private IList<GoogleMeetLogTOITA> getTransferObjectListITA(CsvReader csvReader)
+        private IList<GoogleMeetLogTO> getTransferObjectListITA(CsvReader csvReader)
         {
-            IList<GoogleMeetLogTOITA> toList = new List<GoogleMeetLogTOITA>();
+            IList<GoogleMeetLogTO> toList = new List<GoogleMeetLogTO>();
 
             int i = 0;
             while (csvReader.Read())
@@ -138,7 +137,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                     continue;
                 }
                 ++i;
-                GoogleMeetLogTOITA to = new GoogleMeetLogTOITA();
+                GoogleMeetLogTO to = new GoogleMeetLogTO();
 
                 /*Mandatory*/
                 to.Date = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeader.Date)) ? throw new ArgumentException("Il campo Data non può essere vuoto") : csvReader.GetField(Constants.CSVHeader.Date).Replace(",", "");

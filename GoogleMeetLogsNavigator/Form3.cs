@@ -16,6 +16,7 @@ using static System.Windows.Forms.CheckedListBox;
 using System.Drawing;
 using System.Configuration;
 using System.Threading;
+using CsvHelper.Configuration.Attributes;
 
 namespace GoogleMeetLogsNavigator
 {
@@ -53,7 +54,9 @@ namespace GoogleMeetLogsNavigator
             comboBox1.SelectedItem = "All";
             comboBox1.SelectedText = "All";
             logItem = new LogItem();
+           
             columns = typeof(GoogleMeetLogModel).GetProperties().Select(item => item.Name).ToList();
+         
             foreach (var value in columns)
             {
                 comboBox1.Items.Add(value);

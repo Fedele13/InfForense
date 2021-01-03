@@ -2,7 +2,6 @@
 using GoogleMeetLogsNavigator.TransferObject;
 using GoogleMeetLogsNavigator.TransferObject.Exception;
 using GoogleMeetLogsNavigator.TransferObject.Interface;
-using GoogleMeetLogsNavigator.TransferObject.ToITA;
 using System;
 
 namespace GoogleMeetLogsNavigator.Utility
@@ -282,7 +281,7 @@ namespace GoogleMeetLogsNavigator.Utility
         {
             try
             {
-                return new GoogleMeetLogTOITA
+                return new GoogleMeetLogTO
                 {
                     Date = googleMeetLogModel.Date.ConvertGoogleDateTimeInString(googleMeetLogModel.CommonEuropeanTimeType),
                     EventName = googleMeetLogModel.EventName,
