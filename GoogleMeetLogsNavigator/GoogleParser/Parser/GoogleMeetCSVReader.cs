@@ -97,7 +97,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
             }
             catch (System.Exception ex)
             {
-                throw new Exception.ReaderException(ex.Message, ex);
+                throw new Exception.ReaderException("Errore durante la lettura del file Controlla che il delimitatore scelto sia corretto./n" + ex.Message, ex);
             }
         }
 
