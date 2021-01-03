@@ -15,6 +15,7 @@ using System.Text;
 using static System.Windows.Forms.CheckedListBox;
 using System.Drawing;
 using System.Configuration;
+using System.Threading;
 
 namespace GoogleMeetLogsNavigator
 {
@@ -344,12 +345,21 @@ namespace GoogleMeetLogsNavigator
 
                 if (result == DialogResult.OK)
                 {
+                    bool written = false;
+                    Thread cursorThread = new Thread(() =>
+                    {
+                        Cursor.Current = Cursors.WaitCursor;
+                        while (!written) ;
+                        Cursor.Current = Cursors.Default;
+                    });
+                    cursorThread.Start();
                     using (Stream stream = File.Open(saveFileDialog1.FileName, FileMode.Create))
                     using (StreamWriter sw = new StreamWriter(stream))
                     {
                         sw.Write(s);
+                        written = true;
                     }
-
+                    cursorThread.Abort();
                 }
             }
             catch (Exception ex)
