@@ -26,7 +26,7 @@ namespace GoogleMeetLogsNavigator.Utility
             partecipantLog.EffectiveMeetingDurationInMinutes = meetingTime.TotalMinutes;
             partecipantLog.EffectiveMeetingDurationInHours = meetingTime;
 
-            if (meetingTime.TotalSeconds > partecipantLog.TotalMeetingUserPartecipationInSeconds)
+            if (meetingTime.TotalSeconds < partecipantLog.TotalMeetingUserPartecipationInSeconds)
             {
                 partecipantLog.TotalMeetingUserPartecipationInSeconds = meetingTime.TotalSeconds;
             }

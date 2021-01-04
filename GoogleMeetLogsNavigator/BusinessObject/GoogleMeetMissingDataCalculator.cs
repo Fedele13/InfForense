@@ -186,7 +186,7 @@ namespace GoogleMeetLogsNavigator.BO
                                         partecipantLog.TotalMeetingUserPartecipationInSeconds = 0.ToString();
                                     }
 
-                                    if (partecipantLog.EffectiveMeetingEndDate.ConvertGooogleMeetDataInDateTime(this._language).Subtract(EffectiveMeetingStartDate).TotalSeconds > double.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds))
+                                    if (partecipantLog.EffectiveMeetingEndDate.ConvertGooogleMeetDataInDateTime(this._language).Subtract(EffectiveMeetingStartDate).TotalSeconds < double.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds))
                                     {
                                         partecipantLog.TotalMeetingUserPartecipationInSeconds = partecipantLog.EffectiveMeetingEndDate.ConvertGooogleMeetDataInDateTime(this._language).Subtract(EffectiveMeetingStartDate).TotalSeconds.ToString();
                                     }
