@@ -354,9 +354,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                 //Mandatory
                 to.Duration = csvReader.GetField(Constants.CSVHeaderEN.Duration);
-                to.Duration = csvReader.GetField(Constants.CSVHeaderEN.EffectiveMeetingDurationInSeconds);
-                to.Duration = csvReader.GetField(Constants.CSVHeaderEN.EffectiveMeetingDurationInMinutes);
-                to.Duration = csvReader.GetField(Constants.CSVHeaderEN.EffectiveMeetingDurationInHours);
+                to.EffectiveMeetingDurationInSeconds = csvReader.GetField(Constants.CSVHeaderEN.EffectiveMeetingDurationInSeconds);
+                to.EffectiveMeetingDurationInMinutes = csvReader.GetField(Constants.CSVHeaderEN.EffectiveMeetingDurationInMinutes);
+                to.EffectiveMeetingDurationInHours = csvReader.GetField(Constants.CSVHeaderEN.EffectiveMeetingDurationInHours);
 
                 to.CallEvaluationOn5 = csvReader.GetField(Constants.CSVHeaderEN.CallEvaluationOn5);
 
