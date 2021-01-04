@@ -21,15 +21,20 @@ namespace GoogleMeetLogsNavigator.Utility
             {
                 partecipantLog.TotalMeetingUserPartecipationInSeconds = 0;
             }
+            TimeSpan meetingTime = partecipantLog.EffectiveMeetingEndDate.Subtract(partecipantLog.EffectiveMeetingStartDate);
+            partecipantLog.EffectiveMeetingDurationInSeconds = meetingTime.TotalSeconds;
+            partecipantLog.EffectiveMeetingDurationInMinutes = meetingTime.TotalMinutes;
+            partecipantLog.EffectiveMeetingDurationInHours = meetingTime;
+
+            if (meetingTime.TotalSeconds > partecipantLog.TotalMeetingUserPartecipationInSeconds)
+            {
+                partecipantLog.TotalMeetingUserPartecipationInSeconds = meetingTime.TotalSeconds;
+            }
 
             TimeSpan partecipantTime = TimeSpan.FromSeconds(partecipantLog.TotalMeetingUserPartecipationInSeconds);
             partecipantLog.TotalMeetingUserPartecipationInMinutes = partecipantTime.TotalMinutes;
             partecipantLog.TotalMeetingUserPartecipationInHours = partecipantTime;
             partecipantLog.TotalMeetingUserPartecipationInDecimal = partecipantTime.TotalHours;
-            TimeSpan meetingTime = partecipantLog.EffectiveMeetingEndDate.Subtract(partecipantLog.EffectiveMeetingStartDate);
-            partecipantLog.EffectiveMeetingDurationInSeconds = meetingTime.TotalSeconds;
-            partecipantLog.EffectiveMeetingDurationInMinutes = meetingTime.TotalMinutes;
-            partecipantLog.EffectiveMeetingDurationInHours = meetingTime;
 
             return partecipantLog;
         }

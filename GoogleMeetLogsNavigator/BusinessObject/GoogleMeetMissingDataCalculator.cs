@@ -185,8 +185,19 @@ namespace GoogleMeetLogsNavigator.BO
                                     {
                                         partecipantLog.TotalMeetingUserPartecipationInSeconds = 0.ToString();
                                     }
+
+                                    if (partecipantLog.EffectiveMeetingEndDate.ConvertGooogleMeetDataInDateTime(this._language).Subtract(EffectiveMeetingStartDate).TotalSeconds > double.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds))
+                                    {
+                                        partecipantLog.TotalMeetingUserPartecipationInSeconds = partecipantLog.EffectiveMeetingEndDate.ConvertGooogleMeetDataInDateTime(this._language).Subtract(EffectiveMeetingStartDate).TotalSeconds.ToString();
+                                    }
                                 }
                             }
+
+                            if (isDateTimeToUpdate(partecipantLog.EffectiveMeetingStartDate))
+                                partecipantLog.EffectiveMeetingStartDate = partecipantLog.MeetingStartDate;
+
+                            if (isDateTimeToUpdate(partecipantLog.EffectiveMeetingEndDate))
+                                partecipantLog.EffectiveMeetingEndDate = partecipantLog.MeetingEndDate;
 
                             TimeSpan time = TimeSpan.FromSeconds(double.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds));
 
@@ -200,7 +211,6 @@ namespace GoogleMeetLogsNavigator.BO
                             {
                                 partecipantLog.TotalMeetingUserPartecipationInDecimal = time.TotalHours.ToString();
                             }
-
 
                             if (string.IsNullOrEmpty(partecipantLog.EffectiveMeetingDurationInSeconds) || this._forceUpdate)
                             {
