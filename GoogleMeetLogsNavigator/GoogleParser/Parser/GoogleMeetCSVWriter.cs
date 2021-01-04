@@ -227,9 +227,13 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                     //Mandatory
                     csvWriter.WriteField(Constants.CSVHeaderITA.Duration);
-                    csvWriter.WriteField(Constants.CSVHeaderITA.EffectiveMeetingDurationInSeconds);
-                    csvWriter.WriteField(Constants.CSVHeaderITA.EffectiveMeetingDurationInMinutes);
-                    csvWriter.WriteField(Constants.CSVHeaderITA.EffectiveMeetingDurationInHours);
+
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingDurationInSeconds) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingDurationInSeconds])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.EffectiveMeetingDurationInSeconds);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingDurationInMinutes) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingDurationInMinutes])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.EffectiveMeetingDurationInMinutes);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingDurationInHours) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingDurationInHours])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.EffectiveMeetingDurationInHours);
 
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CallEvaluationOn5) && this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
                         csvWriter.WriteField(Constants.CSVHeaderITA.CallEvaluationOn5);
@@ -394,9 +398,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                         //Mandatory
                         csvWriter.WriteField(log.Duration);
-                        csvWriter.WriteField(log.EffectiveMeetingDurationInSeconds);
-                        csvWriter.WriteField(log.EffectiveMeetingDurationInMinutes);
-                        csvWriter.WriteField(log.EffectiveMeetingDurationInHours);
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingDurationInSeconds) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingDurationInSeconds])
+                            csvWriter.WriteField(log.EffectiveMeetingDurationInSeconds);
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingDurationInMinutes) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingDurationInMinutes])
+                            csvWriter.WriteField(log.EffectiveMeetingDurationInMinutes);
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingDurationInHours) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingDurationInHours])
+                            csvWriter.WriteField(log.EffectiveMeetingDurationInHours);
 
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CallEvaluationOn5) && this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
                             csvWriter.WriteField(log.CallEvaluationOn5.GetSafeString());
@@ -588,9 +595,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                     //Mandatory
                     csvWriter.WriteField(Constants.CSVHeaderEN.Duration);
-                    csvWriter.WriteField(Constants.CSVHeaderEN.EffectiveMeetingDurationInSeconds);
-                    csvWriter.WriteField(Constants.CSVHeaderEN.EffectiveMeetingDurationInMinutes);
-                    csvWriter.WriteField(Constants.CSVHeaderEN.EffectiveMeetingDurationInHours);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingDurationInSeconds) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingDurationInSeconds])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.EffectiveMeetingDurationInSeconds);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingDurationInMinutes) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingDurationInMinutes])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.EffectiveMeetingDurationInMinutes);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingDurationInHours) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingDurationInHours])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.EffectiveMeetingDurationInHours);
 
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CallEvaluationOn5) && this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
                         csvWriter.WriteField(Constants.CSVHeaderEN.CallEvaluationOn5);
@@ -755,9 +765,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                         //Mandatory
                         csvWriter.WriteField(log.Duration);
-                        csvWriter.WriteField(log.EffectiveMeetingDurationInSeconds);
-                        csvWriter.WriteField(log.EffectiveMeetingDurationInMinutes);
-                        csvWriter.WriteField(log.EffectiveMeetingDurationInHours);
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingDurationInSeconds) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingDurationInSeconds])
+                            csvWriter.WriteField(log.EffectiveMeetingDurationInSeconds);
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingDurationInMinutes) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingDurationInMinutes])
+                            csvWriter.WriteField(log.EffectiveMeetingDurationInMinutes);
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingDurationInHours) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingDurationInHours])
+                            csvWriter.WriteField(log.EffectiveMeetingDurationInHours);
 
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CallEvaluationOn5) && this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
                             csvWriter.WriteField(log.CallEvaluationOn5.GetSafeString());

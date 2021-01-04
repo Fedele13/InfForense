@@ -17,9 +17,9 @@ namespace GoogleMeetLogsNavigator.Model
         public string MeetingOwnerEmail { get; set; }
         public string ProductType { get; set; }
         public int Duration { get; set; }
-        public TimeSpan EffectiveMeetingDurationInHours { get; set; }
         public double EffectiveMeetingDurationInSeconds{ get; set; }
         public double EffectiveMeetingDurationInMinutes{ get; set; }
+        public TimeSpan EffectiveMeetingDurationInHours { get; set; }
         public string CallEvaluationOn5 { get; set; }
         public string PartecipantName { get; set; }
         public string IPAddress { get; set; }
