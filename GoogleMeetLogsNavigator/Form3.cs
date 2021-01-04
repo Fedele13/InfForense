@@ -29,20 +29,25 @@ namespace GoogleMeetLogsNavigator
         LogItem logItem;
         String selectComboItem;
         string csvDelimiter = ",";
+        private DateTime dataPickerValueIni;
+        private DateTime dataPickerValueFin;
         private IList<string> columns;
         private IList<string> mandatoryColumns = new List<string> { CSVHeaderEnum.Date.ToString(), CSVHeaderEnum.EventName.ToString(),
             CSVHeaderEnum.EventDescription.ToString(), CSVHeaderEnum.MeetingCode.ToString(),CSVHeaderEnum.PartecipantIdentifier.ToString(),
             CSVHeaderEnum.ExternalPartecipantIdentifier.ToString(), CSVHeaderEnum.Duration.ToString(),CSVHeaderEnum.PartecipantName.ToString()
             ,CSVHeaderEnum.ClientType.ToString()
         };
-        private IList<GoogleMeetLogModel> listLog;
-        private string _supportedLanguage = Constants.Langauges.ITA;
+        private IList<GoogleMeetLogModel> actualListLog;
+        private string _supportedLanguage = "it";
         private Encoding csvEncoding = Encoding.UTF8;
         private bool AllChecked = false;
+       
         public Form3()
         {
 
             InitializeComponent();
+            dateTimePicker_inizio_previsto.Format = DateTimePickerFormat.Time;
+            dateTimePicker_fine_previsto.Format = DateTimePickerFormat.Time;
             text_search.Visible = false;
             dataGridView1.Visible = false;
             listBox2.Visible = false;
@@ -51,12 +56,18 @@ namespace GoogleMeetLogsNavigator
             button_filter.Visible = false;
             label2.Visible = false;
             exportToolStripMenuItem.Enabled = false;
+            dateTimePicker_inizio_previsto.Visible = false;
+            dateTimePicker_fine_previsto.Visible = false;
+            label3.Visible = false;
+            label4.Visible = false;
             listBox1.DisplayMember = "Title";
             listBox1.ValueMember = "Path";
             listBox2.DisplayMember = "codiceRiunione";
             listBox2.ValueMember = "logListModel";
             comboBox1.SelectedItem = "All";
             comboBox1.SelectedText = "All";
+            comboLanguage.SelectedItem = "it";
+            comboLanguage.SelectedText = "it";
             logItem = new LogItem();
            
             columns = typeof(GoogleMeetLogModel).GetProperties().Select(item => item.Name).ToList();
@@ -71,12 +82,7 @@ namespace GoogleMeetLogsNavigator
                     checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf(value), true);
                 }
             }
-            
-            var appSettings = ConfigurationManager.AppSettings;
-            if (appSettings.Count > 0)
-            {
-                _supportedLanguage = string.IsNullOrEmpty(appSettings["Langauge"]) ? _supportedLanguage : appSettings["Langauge"];
-            }
+           
 
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -101,6 +107,10 @@ namespace GoogleMeetLogsNavigator
                 button_filter.Visible = false;
                 label2.Visible = false;
                 exportToolStripMenuItem.Enabled = false;
+                dateTimePicker_inizio_previsto.Visible = false;
+                dateTimePicker_fine_previsto.Visible = false;
+                label3.Visible = false;
+                label4.Visible = false;
                 label1.Text = "Files";
                 listBox2.Items.Clear();
                 listBox1.Items.Clear();
@@ -122,7 +132,7 @@ namespace GoogleMeetLogsNavigator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message,"ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -136,10 +146,15 @@ namespace GoogleMeetLogsNavigator
         {
             try
             {
+                var selectedItems = listBox1.SelectedItems.Cast<FileItem>();
+                if (selectedItems == null || selectedItems.Count()==0)
+                {
+                    return;
+                }
                 label1.Text = "Meeting codes";
                 listBox2.Visible = true;
-
-                var selectedItems = listBox1.SelectedItems.Cast<FileItem>();
+                label5.Visible = false;
+                //comboLanguage.Visible = false;
                 var all = string.Join(Environment.NewLine, selectedItems.Select(x => x.Path));
                 using (Form1 form1 = new Form1())
                 {
@@ -167,7 +182,7 @@ namespace GoogleMeetLogsNavigator
             catch (Exception ex)
             {
                 label1.Text = "Files";
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -212,7 +227,7 @@ namespace GoogleMeetLogsNavigator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -221,6 +236,11 @@ namespace GoogleMeetLogsNavigator
         {
             try
             {
+                if (listBox2.SelectedItem==null)
+                {
+                    return;
+                }
+
                 checkedListBox1.Visible = true;
                 dataGridView1.Visible = true;
                 comboBox1.Visible = true;
@@ -228,18 +248,37 @@ namespace GoogleMeetLogsNavigator
                 button_filter.Visible = true;
                 label2.Visible = true;
                 exportToolStripMenuItem.Enabled = true;
+                dateTimePicker_inizio_previsto.Visible = true;
+                dateTimePicker_fine_previsto.Visible = true;
+                label3.Visible = true;
+                label4.Visible = true;
                 comboBox1.SelectedItem = "All";
-                logItem = (LogItem)listBox2.SelectedItem;
-                listLog = (IList<GoogleMeetLogModel>)logItem.logListModel;
+                var logItem = (LogItem)listBox2.SelectedItem;
+                actualListLog = (IList<GoogleMeetLogModel>)logItem.logListModel;
+                
                 dt.Rows.Clear();
                 DataRow dr;
-                foreach (GoogleMeetLogModel model in listLog)
+               
+                //if (defaultDateInizialized)
+                //{
+                //    dataPickerValueIni = logItem.logListModel.FirstOrDefault().MeetingStartDate;
+                //    dataPickerValueFin = logItem.logListModel.FirstOrDefault().MeetingEndDate;
+                //    defaultDateInizialized = false;
+                //}
+
+                dateTimePicker_inizio_previsto.Value = logItem.logListModel.FirstOrDefault().EffectiveMeetingStartDate;
+                dateTimePicker_fine_previsto.Value = logItem.logListModel.FirstOrDefault().EffectiveMeetingEndDate;
+
+
+                foreach (GoogleMeetLogModel model in actualListLog)
                 {
+
                     dr = dt.NewRow();
                     foreach (var value in columns)
                     {
                         dr[value] = model.GetType().GetProperty(value).GetValue(model);
                     }
+
                     dt.Rows.Add(dr);
 
                 }
@@ -275,7 +314,7 @@ namespace GoogleMeetLogsNavigator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -358,7 +397,7 @@ namespace GoogleMeetLogsNavigator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -386,13 +425,13 @@ namespace GoogleMeetLogsNavigator
                 {
                     exportConfiguration = GoogleMeetCSVWriter.GetDefaultConfiguration();
                 }
-                using (Form1 form1 = new Form1())
-                {
-                    form1.ShowDialog();
-                    csvDelimiter = form1.Delimitator;
-                }
-                IList<IGoogleMeetLogTO> logs = listLog.Select(i => i.MapObjectModelInTransferObject(this._supportedLanguage)).Cast<IGoogleMeetLogTO>().ToList();
-                ICSVWriter<IGoogleMeetLogTO> writer = new GoogleMeetCSVWriter(exportConfiguration, csvEncoding, csvDelimiter, _supportedLanguage);
+                //using (Form1 form1 = new Form1())
+                //{
+                //    form1.ShowDialog();
+                //    csvDelimiter = form1.Delimitator;
+                //}
+                IList<IGoogleMeetLogTO> logs = actualListLog.Select(i => i.MapObjectModelInTransferObject(_supportedLanguage)).Cast<IGoogleMeetLogTO>().ToList();
+                ICSVWriter<IGoogleMeetLogTO> writer = new GoogleMeetCSVWriter(exportConfiguration, csvEncoding, ",", _supportedLanguage);
                 string s = writer.ToGoogleMeetCsv(logs);
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.Filter = "CSV files (*.csv)|*.csv";
@@ -421,7 +460,7 @@ namespace GoogleMeetLogsNavigator
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -442,6 +481,104 @@ namespace GoogleMeetLogsNavigator
                 SizeF size = e.Graphics.MeasureString(item.ToString(), e.Font);
                 e.Graphics.DrawString(item.ToString(), e.Font, brush, e.Bounds.Left + (e.Bounds.Width / 2 - size.Width / 2), e.Bounds.Top + (e.Bounds.Height / 2 - size.Height / 2));
             }
+        }
+
+        private void dateTimePicker_inizio_previsto_ValueChanged(object sender, EventArgs e)
+        {
+            var logItem = (LogItem)listBox2.SelectedItem;
+            
+            if (logItem.logListModel.Where(item => item.Date == logItem.logListModel.Select(log => log.Date).Min()).FirstOrDefault().EffectiveMeetingStartDate == dateTimePicker_inizio_previsto.Value)
+            {
+                return;
+
+            }
+
+            if(dateTimePicker_inizio_previsto.Value < logItem.logListModel.Where(item => item.Date == logItem.logListModel.Select(log => log.Date).Min()).FirstOrDefault().Date.AddHours(-12))
+            {
+                MessageBox.Show("Non è possibile iniziare una riunione più di 12 ore prima della data dell'evento meno recende della riunione in esame","WARNING",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                return;
+
+            }
+           
+            IList<GoogleMeetLogModel> newModel = new List<GoogleMeetLogModel>();
+            foreach(GoogleMeetLogModel mod in actualListLog)
+            {
+
+                mod.EffectiveMeetingStartDate = dateTimePicker_inizio_previsto.Value;
+                GoogleMeetLogModel actualModel = TimesHelper.changeEffectiveDateTime(mod);
+                newModel.Add(actualModel);
+            }
+
+
+            dt.Rows.Clear();
+            DataRow dr;
+            foreach (GoogleMeetLogModel mod in newModel)
+            {
+                dr = dt.NewRow();
+                foreach (var value in columns)
+                {
+                  
+                        dr[value] = mod.GetType().GetProperty(value).GetValue(mod);
+   
+                }
+
+
+                dt.Rows.Add(dr);
+
+            }
+            dataGridView1.DataSource = dt;
+            dataPickerValueIni = dateTimePicker_inizio_previsto.Value;
+        }
+
+        private void dateTimePicker_fine_previsto_ValueChanged(object sender, EventArgs e)
+        {
+            var logItem = (LogItem)listBox2.SelectedItem;
+            if (logItem.logListModel.Where(item => item.Date == logItem.logListModel.Select(log => log.Date).Max()).FirstOrDefault().EffectiveMeetingEndDate == dateTimePicker_fine_previsto.Value)
+            {
+                return;
+            }
+
+            if (dateTimePicker_inizio_previsto.Value < logItem.logListModel.Where(item => item.Date == logItem.logListModel.Select(log => log.Date).Max()).FirstOrDefault().Date.AddHours(-12))
+            {
+                MessageBox.Show("Non è possibile iniziare una riunione più di 12 ore prima della data dell'evento più recende della riunione in esame","WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+
+            }
+
+            IList<GoogleMeetLogModel> newModel = new List<GoogleMeetLogModel>();
+            foreach (GoogleMeetLogModel mod in actualListLog)
+            {
+
+                mod.EffectiveMeetingEndDate = dateTimePicker_fine_previsto.Value;
+                GoogleMeetLogModel actualModel = TimesHelper.changeEffectiveDateTime(mod);
+                newModel.Add(actualModel);
+            }
+
+
+            dt.Rows.Clear();
+            DataRow dr;
+            foreach (GoogleMeetLogModel mod in newModel)
+            {
+                dr = dt.NewRow();
+                foreach (var value in columns)
+                {
+
+                    dr[value] = mod.GetType().GetProperty(value).GetValue(mod);
+
+                }
+
+
+                dt.Rows.Add(dr);
+
+            }
+            dataGridView1.DataSource = dt;
+            dataPickerValueFin = dateTimePicker_fine_previsto.Value;
+
+        }
+
+        private void comboLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _supportedLanguage = comboLanguage.SelectedItem.ToString();
         }
     }
     public class FileItem

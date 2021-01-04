@@ -87,6 +87,7 @@
     <Compile Include="GoogleParser\Exception\WriterException.cs" />
     <Compile Include="TransferObject\Exception\TransferException.cs" />
     <Compile Include="TransferObject\Interface\IGoogleMeetLogTO.cs" />
+    <Compile Include="Utility\TimesHelper.cs" />
     <Compile Include="Utility\Constants.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
