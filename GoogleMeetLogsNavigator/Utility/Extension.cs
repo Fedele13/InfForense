@@ -17,9 +17,9 @@ namespace GoogleMeetLogsNavigator.Utility
         /// 
         /// </summary>
         /// <param name="googleDate"></param>
-        /// <param name="commonEuropeanTime"></param>
+        /// <param name="timeZone"></param>
         /// <returns></returns>
-        public static DateTime ConvertGooogleMeetDataInDateTime(this string googleDate, string language, out string commonEuropeanTime)
+        public static DateTime ConvertGooogleMeetDataInDateTime(this string googleDate, string language, out string timeZone)
         {
             if (string.IsNullOrEmpty(language) ||language == "it")
             {
@@ -27,7 +27,7 @@ namespace GoogleMeetLogsNavigator.Utility
                 string[] date = googleDate.Split(' ');
                 string[] hours = date[3].Split(':');
                 int monthInt = GetGoogleMonthIntITA(date[1]);
-                commonEuropeanTime = date[4];
+                timeZone = date[4];
                 return new DateTime(int.Parse(date[2]), monthInt, int.Parse(date[0]), int.Parse(hours[0]), int.Parse(hours[1]), int.Parse(hours[2]));
             }
             if (language == "en")
@@ -41,7 +41,7 @@ namespace GoogleMeetLogsNavigator.Utility
                 {
                     hour += 12;
                 }
-                commonEuropeanTime = date[5];
+                timeZone = date[5];
                 return new DateTime(int.Parse(date[2]), monthInt, int.Parse(date[1]), hour, int.Parse(hours[1]), int.Parse(hours[2]));
             }
 
@@ -404,9 +404,13 @@ namespace GoogleMeetLogsNavigator.Utility
                     VideoSendShortSideMedian = string.IsNullOrEmpty(googleMeetLogTO.VideoSendShortSideMedian) ? 0 : int.Parse(googleMeetLogTO.VideoSendShortSideMedian),
                     NetworkCongestionRatio = googleMeetLogTO.NetworkCongestionRatio,
                     MeetingStartDate = googleMeetLogTO.MeetingStartDate.GetSafeString().ConvertGooogleMeetDataInDateTime(languageForDateString),
-                    EffectiveMeetingStartDate = googleMeetLogTO.EffectiveMeetingStartDate.GetSafeString().ConvertGooogleMeetDataInDateTime(languageForDateString),
+                    EffectiveMeetingStartDate = string.IsNullOrEmpty(googleMeetLogTO.EffectiveMeetingStartDate) 
+                                ? googleMeetLogTO.MeetingStartDate.GetSafeString().ConvertGooogleMeetDataInDateTime(languageForDateString) 
+                                : googleMeetLogTO.EffectiveMeetingStartDate.ConvertGooogleMeetDataInDateTime(languageForDateString),
                     MeetingEndDate = googleMeetLogTO.MeetingEndDate.GetSafeString().ConvertGooogleMeetDataInDateTime(languageForDateString),
-                    EffectiveMeetingEndDate = googleMeetLogTO.EffectiveMeetingEndDate.GetSafeString().ConvertGooogleMeetDataInDateTime(languageForDateString),
+                    EffectiveMeetingEndDate = string.IsNullOrEmpty(googleMeetLogTO.EffectiveMeetingEndDate) 
+                                ? googleMeetLogTO.MeetingEndDate.GetSafeString().ConvertGooogleMeetDataInDateTime(languageForDateString)
+                                : googleMeetLogTO.EffectiveMeetingEndDate.ConvertGooogleMeetDataInDateTime(languageForDateString),
                     MeetingEnteringDate = googleMeetLogTO.MeetingEnteringDate.GetSafeString().ConvertGooogleMeetDataInDateTime(languageForDateString),
                     TotalMeetingUserPartecipationInDecimal = string.IsNullOrEmpty(googleMeetLogTO.TotalMeetingUserPartecipationInDecimal) ? 0.0 : double.Parse(googleMeetLogTO.TotalMeetingUserPartecipationInDecimal),
                     TotalMeetingUserPartecipationInSeconds = string.IsNullOrEmpty(googleMeetLogTO.TotalMeetingUserPartecipationInSeconds) ? 0 : int.Parse(googleMeetLogTO.TotalMeetingUserPartecipationInSeconds),
@@ -529,12 +533,18 @@ namespace GoogleMeetLogsNavigator.Utility
         /// 
         /// </summary>
         /// <param name="googleDateTime"></param>
-        /// <param name="cet"></param>
+        /// <param name="timeZone"></param>
         /// <returns></returns>
-        public static string ConvertGoogleDateTimeInString(this DateTime googleDateTime, string cet, string language)
+        public static string ConvertGoogleDateTimeInString(this DateTime googleDateTime, string timeZone, string language)
         {
+            if (googleDateTime == null)
+            {
+                googleDateTime = DateTime.MinValue;
+            }
+
             if (string.IsNullOrEmpty(language) || language == "it")
             {
+               
                 return string.Format("{0} {1} {2} {3}:{4}:{5} {6}",
                     googleDateTime.Day,
                     GetGoogleMonthStringITA(googleDateTime.Month),
@@ -542,7 +552,7 @@ namespace GoogleMeetLogsNavigator.Utility
                     (googleDateTime.Hour > 9 ? googleDateTime.Hour.ToString() : ("0" + googleDateTime.Hour.ToString())),
                     (googleDateTime.Minute > 9 ? googleDateTime.Minute.ToString() : ("0" + googleDateTime.Minute.ToString())),
                     (googleDateTime.Second > 9 ? googleDateTime.Second.ToString() : ("0" + googleDateTime.Second.ToString())),
-                    string.IsNullOrEmpty(cet) ? string.Empty : cet);
+                    string.IsNullOrEmpty(timeZone) ? string.Empty : timeZone);
             }
             if (language == "en")
             {
@@ -558,7 +568,7 @@ namespace GoogleMeetLogsNavigator.Utility
                    (googleDateTime.Minute > 9 ? googleDateTime.Minute.ToString() : ("0" + googleDateTime.Minute.ToString())),
                    (googleDateTime.Second > 9 ? googleDateTime.Second.ToString() : ("0" + googleDateTime.Second.ToString())),
                    antePostMeridian,
-                   string.IsNullOrEmpty(cet) ? string.Empty : cet);
+                   string.IsNullOrEmpty(timeZone) ? string.Empty : timeZone);
             }
 
             throw new ArgumentException("Input language is not valid");
