@@ -31,7 +31,17 @@ namespace GoogleMeetLogsNavigator
         private void button1_Click_1(object sender, EventArgs e)
         {
             comboDelimitatorItem = (string)comboBox1.SelectedItem;
-            this.Close();
+            if (string.IsNullOrEmpty(comboDelimitatorItem))
+            {
+                comboDelimitatorItem = comboBox1.Text;
+            }
+            if (string.IsNullOrEmpty(comboDelimitatorItem) == false)
+            {
+                this.Close();
+                return;
+            }
+
+            MessageBox.Show("Inserisci o seleziona un delimitatore", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }
