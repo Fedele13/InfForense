@@ -101,6 +101,7 @@ namespace GoogleMeetLogsNavigator.BO
 
             IList<IGoogleMeetLogTO> filteredLogs = new List<IGoogleMeetLogTO>();
 
+            string triedLangauge = this._language;
             if (string.IsNullOrEmpty(this._language) || this._language == Constants.Langauges.ITA)
             {
                 filteredLogs = logs.Where(item => item.EventName == Constants.EventsToConsider.CallExitITA).ToList();
@@ -109,11 +110,23 @@ namespace GoogleMeetLogsNavigator.BO
             {
                 filteredLogs = logs.Where(item => item.EventName == Constants.EventsToConsider.CallExitEN).ToList();
             }
-            else
+            else if (filteredLogs.Count == 0)
             {
-                throw new ArgumentException("La lingua non è supportata");
+                if (triedLangauge == Constants.Langauges.ITA)
+                {
+                    filteredLogs = logs.Where(item => item.EventName == Constants.EventsToConsider.CallExitEN).ToList();
+                }
+                else if (triedLangauge == Constants.Langauges.EN)
+                {
+                    filteredLogs = logs.Where(item => item.EventName == Constants.EventsToConsider.CallExitITA).ToList();
+                }
+                else
+                {
+                    throw new BusinessObject.Exception.CalculationException("Non è stato possibile trovare elementi per il calcolo dei dati in nessuna lingua al momento supportata");
+                }
             }
-            
+            //questa parte di codice è un po' azzardata ma ci proviamo
+          
             string timeZone = string.Empty;
             DateTime minDateTime = filteredLogs.Select(item =>item.Date.ConvertGooogleMeetDataInDateTime(this._language, out timeZone)).Min();
             int meetingDurationInSeconds = int.Parse(filteredLogs.Where(item => item.Date == minDateTime.ConvertGoogleDateTimeInString(timeZone, this._language)).Select(item => item.Duration).FirstOrDefault());
