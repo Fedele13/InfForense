@@ -180,11 +180,11 @@ namespace GoogleMeetLogsNavigator.BO
                                 partecipantLog.TotalMeetingUserPartecipationInMinutes = time.TotalMinutes.ToString();
 
                             if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipationInHours) || this._forceUpdate)
-                                partecipantLog.TotalMeetingUserPartecipationInHours = new DateTime(0,0,0,time.Hours,time.Minutes, time.Seconds).ToString();
+                                partecipantLog.TotalMeetingUserPartecipationInHours = time.ToString();
 
                             if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipationInDecimal) || this._forceUpdate)
                             {
-                                partecipantLog.TotalMeetingUserPartecipationInHours = time.TotalHours.ToString();
+                                partecipantLog.TotalMeetingUserPartecipationInDecimal = time.TotalHours.ToString();
                             }
 
 
@@ -209,7 +209,7 @@ namespace GoogleMeetLogsNavigator.BO
                                 partecipantLog.EffectiveMeetingDurationInMinutes = time.TotalMinutes.ToString();
 
                             if (string.IsNullOrEmpty(partecipantLog.EffectiveMeetingDurationInHours) || this._forceUpdate)
-                                partecipantLog.EffectiveMeetingDurationInHours = new DateTime(0, 0, 0, time.Hours, time.Minutes, time.Seconds).ToString();
+                                partecipantLog.EffectiveMeetingDurationInHours = time.ToString();
 
                             if (string.IsNullOrEmpty(partecipantLog.TimeZone) || this._forceUpdate)
                                 partecipantLog.TimeZone = timeZone;

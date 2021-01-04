@@ -17,7 +17,7 @@ namespace GoogleMeetLogsNavigator.Model
         public string MeetingOwnerEmail { get; set; }
         public string ProductType { get; set; }
         public int Duration { get; set; }
-        public double EffectiveMeetingDurationInHours { get; set; }
+        public TimeSpan EffectiveMeetingDurationInHours { get; set; }
         public double EffectiveMeetingDurationInSeconds{ get; set; }
         public double EffectiveMeetingDurationInMinutes{ get; set; }
         public string CallEvaluationOn5 { get; set; }
@@ -80,9 +80,9 @@ namespace GoogleMeetLogsNavigator.Model
         public DateTime EffectiveMeetingEndDate { get; set; }
         public DateTime MeetingEnteringDate { get; set; }
         public double TotalMeetingUserPartecipationInDecimal { get; set; }
-        public int TotalMeetingUserPartecipationInSeconds { get; set; }
-        public int TotalMeetingUserPartecipationInMinutes { get; set; }
-        public int TotalMeetingUserPartecipationInHours { get; set; }
+        public double TotalMeetingUserPartecipationInSeconds { get; set; }
+        public double TotalMeetingUserPartecipationInMinutes { get; set; }
+        public TimeSpan TotalMeetingUserPartecipationInHours { get; set; }
         public string TimeZone { get; set; }
 
     }

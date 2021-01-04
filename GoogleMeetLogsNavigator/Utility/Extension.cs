@@ -347,7 +347,7 @@ namespace GoogleMeetLogsNavigator.Utility
                     MeetingOwnerEmail = googleMeetLogTO.MeetingOwnerEmail,
                     ProductType = googleMeetLogTO.ProductType,
                     Duration = string.IsNullOrEmpty(googleMeetLogTO.Duration) ? 0 : int.Parse(googleMeetLogTO.Duration),
-                    EffectiveMeetingDurationInHours = string.IsNullOrEmpty(googleMeetLogTO.EffectiveMeetingDurationInHours) ? 0 : double.Parse(googleMeetLogTO.EffectiveMeetingDurationInHours),
+                    EffectiveMeetingDurationInHours = string.IsNullOrEmpty(googleMeetLogTO.EffectiveMeetingDurationInHours) ? new TimeSpan() : TimeSpan.Parse(googleMeetLogTO.EffectiveMeetingDurationInHours),
                     EffectiveMeetingDurationInSeconds = string.IsNullOrEmpty(googleMeetLogTO.EffectiveMeetingDurationInSeconds) ? 0 : double.Parse(googleMeetLogTO.EffectiveMeetingDurationInSeconds),
                     EffectiveMeetingDurationInMinutes = string.IsNullOrEmpty(googleMeetLogTO.EffectiveMeetingDurationInMinutes) ? 0 : double.Parse(googleMeetLogTO.EffectiveMeetingDurationInMinutes),
                     CallEvaluationOn5 = googleMeetLogTO.CallEvaluationOn5,
@@ -413,9 +413,9 @@ namespace GoogleMeetLogsNavigator.Utility
                                 : googleMeetLogTO.EffectiveMeetingEndDate.ConvertGooogleMeetDataInDateTime(languageForDateString),
                     MeetingEnteringDate = googleMeetLogTO.MeetingEnteringDate.GetSafeString().ConvertGooogleMeetDataInDateTime(languageForDateString),
                     TotalMeetingUserPartecipationInDecimal = string.IsNullOrEmpty(googleMeetLogTO.TotalMeetingUserPartecipationInDecimal) ? 0.0 : double.Parse(googleMeetLogTO.TotalMeetingUserPartecipationInDecimal),
-                    TotalMeetingUserPartecipationInSeconds = string.IsNullOrEmpty(googleMeetLogTO.TotalMeetingUserPartecipationInSeconds) ? 0 : int.Parse(googleMeetLogTO.TotalMeetingUserPartecipationInSeconds),
-                    TotalMeetingUserPartecipationInMinutes = string.IsNullOrEmpty(googleMeetLogTO.TotalMeetingUserPartecipationInMinutes) ? 0 : int.Parse(googleMeetLogTO.TotalMeetingUserPartecipationInMinutes),
-                    TotalMeetingUserPartecipationInHours = string.IsNullOrEmpty(googleMeetLogTO.TotalMeetingUserPartecipationInHours) ? 0 : int.Parse(googleMeetLogTO.TotalMeetingUserPartecipationInHours),
+                    TotalMeetingUserPartecipationInSeconds = string.IsNullOrEmpty(googleMeetLogTO.TotalMeetingUserPartecipationInSeconds) ? 0.0 : double.Parse(googleMeetLogTO.TotalMeetingUserPartecipationInSeconds),
+                    TotalMeetingUserPartecipationInMinutes = string.IsNullOrEmpty(googleMeetLogTO.TotalMeetingUserPartecipationInMinutes) ? 0.0 : double.Parse(googleMeetLogTO.TotalMeetingUserPartecipationInMinutes),
+                    TotalMeetingUserPartecipationInHours = string.IsNullOrEmpty(googleMeetLogTO.TotalMeetingUserPartecipationInHours) ? new TimeSpan() : TimeSpan.Parse(googleMeetLogTO.TotalMeetingUserPartecipationInHours),
                     TimeZone = googleMeetLogTO.TimeZone
                 };
             }
