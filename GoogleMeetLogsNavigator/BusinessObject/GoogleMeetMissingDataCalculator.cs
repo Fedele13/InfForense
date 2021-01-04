@@ -174,17 +174,17 @@ namespace GoogleMeetLogsNavigator.BO
                                 }
                             }
 
+                            TimeSpan time = TimeSpan.FromSeconds(double.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds));
+
                             if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipationInMinutes) || this._forceUpdate)
-                                partecipantLog.TotalMeetingUserPartecipationInMinutes = int.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds) <= 0 ? 0.ToString() : (int.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds) / 60).ToString();
+                                partecipantLog.TotalMeetingUserPartecipationInMinutes = time.TotalMinutes.ToString();
 
                             if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipationInHours) || this._forceUpdate)
-                                partecipantLog.TotalMeetingUserPartecipationInHours = int.Parse(partecipantLog.TotalMeetingUserPartecipationInMinutes) <= 0 ? 0.ToString() : (int.Parse(partecipantLog.TotalMeetingUserPartecipationInMinutes) / 60).ToString();
+                                partecipantLog.TotalMeetingUserPartecipationInHours = new DateTime(0,0,0,time.Hours,time.Minutes, time.Seconds).ToString();
 
                             if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipationInDecimal) || this._forceUpdate)
                             {
-                                TimeSpan time = TimeSpan.FromSeconds(double.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds));
-                                double dec = time.Hours + time.Minutes > 0 ? (time.Minutes / 60) : 0 + time.Seconds > 0 ? (time.Seconds / 3600) : 0;
-                                partecipantLog.TotalMeetingUserPartecipationInHours = dec.ToString();
+                                partecipantLog.TotalMeetingUserPartecipationInHours = time.TotalHours.ToString();
                             }
 
 
@@ -201,15 +201,15 @@ namespace GoogleMeetLogsNavigator.BO
                                     effectiveMeetingStartDate = partecipantLog.EffectiveMeetingStartDate;
                                 }
 
-                                TimeSpan time = effectiveMeetingEndDate.ConvertGooogleMeetDataInDateTime(this._language).Subtract(effectiveMeetingStartDate.ConvertGooogleMeetDataInDateTime(this._language));
+                                time = effectiveMeetingEndDate.ConvertGooogleMeetDataInDateTime(this._language).Subtract(effectiveMeetingStartDate.ConvertGooogleMeetDataInDateTime(this._language));
                                 partecipantLog.EffectiveMeetingDurationInSeconds = time.TotalSeconds.ToString();
                             }
 
                             if (string.IsNullOrEmpty(partecipantLog.EffectiveMeetingDurationInMinutes) || this._forceUpdate)
-                                partecipantLog.EffectiveMeetingDurationInMinutes = int.Parse(partecipantLog.EffectiveMeetingDurationInSeconds) <= 0 ? 0.ToString() : (int.Parse(partecipantLog.EffectiveMeetingDurationInSeconds) / 60).ToString();
+                                partecipantLog.EffectiveMeetingDurationInMinutes = time.TotalMinutes.ToString();
 
                             if (string.IsNullOrEmpty(partecipantLog.EffectiveMeetingDurationInHours) || this._forceUpdate)
-                                partecipantLog.EffectiveMeetingDurationInHours = int.Parse(partecipantLog.EffectiveMeetingDurationInMinutes) <= 0 ? 0.ToString() : (int.Parse(partecipantLog.EffectiveMeetingDurationInMinutes) / 60).ToString();
+                                partecipantLog.EffectiveMeetingDurationInHours = new DateTime(0, 0, 0, time.Hours, time.Minutes, time.Seconds).ToString();
 
                             if (string.IsNullOrEmpty(partecipantLog.TimeZone) || this._forceUpdate)
                                 partecipantLog.TimeZone = timeZone;
