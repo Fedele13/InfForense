@@ -162,6 +162,8 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         {
             if (this._supportedLanguage == Constants.Langauges.ITA)
                 return exportTransferObjectITA(logs);
+            if (this._supportedLanguage == Constants.Langauges.EN)
+                return exportTransferObjectEN(logs);
             throw new Exception.WriterException("La lingua configurata da usare per l'header del csv non è al momento gestita");
         }
 
@@ -173,7 +175,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         {
             IDictionary<CSVHeaderEnum, bool> defaultConfigurationDictionary = new Dictionary<CSVHeaderEnum, bool>();
 
-            for (int headerEnum = 9; headerEnum < Enum.GetValues(typeof(CSVHeaderEnum)).Length; ++headerEnum)
+            for (int headerEnum = 12; headerEnum < Enum.GetValues(typeof(CSVHeaderEnum)).Length; ++headerEnum)
             {
                 defaultConfigurationDictionary.Add((CSVHeaderEnum)headerEnum, true);
             }
@@ -225,6 +227,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                     //Mandatory
                     csvWriter.WriteField(Constants.CSVHeaderITA.Duration);
+                    csvWriter.WriteField(Constants.CSVHeaderITA.EffectiveMeetingDurationInSeconds);
+                    csvWriter.WriteField(Constants.CSVHeaderITA.EffectiveMeetingDurationInMinutes);
+                    csvWriter.WriteField(Constants.CSVHeaderITA.EffectiveMeetingDurationInHours);
 
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CallEvaluationOn5) && this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
                         csvWriter.WriteField(Constants.CSVHeaderITA.CallEvaluationOn5);
@@ -340,8 +345,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingStartDate) && this._configurationDictionary[CSVHeaderEnum.MeetingStartDate])
                         csvWriter.WriteField(Constants.CSVHeaderITA.MeetingStartDate);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingStartDate) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingStartDate])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.EffectiveMeetingStartDate);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEndDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEndDate])
                         csvWriter.WriteField(Constants.CSVHeaderITA.MeetingEndDate);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingEndDate) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingEndDate])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.EffectiveMeetingEndDate);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEnteringDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEnteringDate])
                         csvWriter.WriteField(Constants.CSVHeaderITA.MeetingEnteringDate);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal])
@@ -385,6 +394,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                         //Mandatory
                         csvWriter.WriteField(log.Duration);
+                        csvWriter.WriteField(log.EffectiveMeetingDurationInSeconds);
+                        csvWriter.WriteField(log.EffectiveMeetingDurationInMinutes);
+                        csvWriter.WriteField(log.EffectiveMeetingDurationInHours);
 
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CallEvaluationOn5) && this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
                             csvWriter.WriteField(log.CallEvaluationOn5.GetSafeString());
@@ -500,8 +512,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingStartDate) && this._configurationDictionary[CSVHeaderEnum.MeetingStartDate])
                             csvWriter.WriteField(log.MeetingStartDate.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingStartDate) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingStartDate])
+                            csvWriter.WriteField(log.EffectiveMeetingStartDate.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEndDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEndDate])
                             csvWriter.WriteField(log.MeetingEndDate.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingEndDate) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingEndDate])
+                            csvWriter.WriteField(log.EffectiveMeetingEndDate.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEnteringDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEnteringDate])
                             csvWriter.WriteField(log.MeetingEnteringDate.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal])
@@ -572,6 +588,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                     //Mandatory
                     csvWriter.WriteField(Constants.CSVHeaderEN.Duration);
+                    csvWriter.WriteField(Constants.CSVHeaderEN.EffectiveMeetingDurationInSeconds);
+                    csvWriter.WriteField(Constants.CSVHeaderEN.EffectiveMeetingDurationInMinutes);
+                    csvWriter.WriteField(Constants.CSVHeaderEN.EffectiveMeetingDurationInHours);
 
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CallEvaluationOn5) && this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
                         csvWriter.WriteField(Constants.CSVHeaderEN.CallEvaluationOn5);
@@ -687,8 +706,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingStartDate) && this._configurationDictionary[CSVHeaderEnum.MeetingStartDate])
                         csvWriter.WriteField(Constants.CSVHeaderEN.MeetingStartDate);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingStartDate) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingStartDate])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.EffectiveMeetingStartDate);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEndDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEndDate])
                         csvWriter.WriteField(Constants.CSVHeaderEN.MeetingEndDate);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingEndDate) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingEndDate])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.EffectiveMeetingEndDate);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEnteringDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEnteringDate])
                         csvWriter.WriteField(Constants.CSVHeaderEN.MeetingEnteringDate);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal])
@@ -732,6 +755,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                         //Mandatory
                         csvWriter.WriteField(log.Duration);
+                        csvWriter.WriteField(log.EffectiveMeetingDurationInSeconds);
+                        csvWriter.WriteField(log.EffectiveMeetingDurationInMinutes);
+                        csvWriter.WriteField(log.EffectiveMeetingDurationInHours);
 
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CallEvaluationOn5) && this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
                             csvWriter.WriteField(log.CallEvaluationOn5.GetSafeString());
@@ -847,8 +873,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingStartDate) && this._configurationDictionary[CSVHeaderEnum.MeetingStartDate])
                             csvWriter.WriteField(log.MeetingStartDate.GetSafeString());
+                        if(this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingStartDate) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingStartDate])
+                            csvWriter.WriteField(log.EffectiveMeetingStartDate.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEndDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEndDate])
                             csvWriter.WriteField(log.MeetingEndDate.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EffectiveMeetingEndDate) && this._configurationDictionary[CSVHeaderEnum.EffectiveMeetingEndDate])
+                            csvWriter.WriteField(log.EffectiveMeetingEndDate.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEnteringDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEnteringDate])
                             csvWriter.WriteField(log.MeetingEnteringDate.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal])

@@ -149,7 +149,6 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 {
                     to.Date = to.Date.Replace("\"", "");
                 }
-                to.Date = to.Date.Trim();
                 to.EventName = csvReader.GetField(Constants.CSVHeaderITA.EventName);
                 to.EventDescription = csvReader.GetField(Constants.CSVHeaderITA.EventDescription);
                 to.MeetingCode = csvReader.GetField(Constants.CSVHeaderITA.MeetingCode);
@@ -164,7 +163,10 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                     
                 //Mandatory
                 to.Duration = csvReader.GetField(Constants.CSVHeaderITA.Duration);
-                        
+                to.Duration = csvReader.GetField(Constants.CSVHeaderITA.EffectiveMeetingDurationInSeconds);
+                to.Duration = csvReader.GetField(Constants.CSVHeaderITA.EffectiveMeetingDurationInMinutes);
+                to.Duration = csvReader.GetField(Constants.CSVHeaderITA.EffectiveMeetingDurationInHours);
+
                 to.CallEvaluationOn5 = csvReader.GetField(Constants.CSVHeaderITA.CallEvaluationOn5);
                     
                 to.PartecipantName = csvReader.GetField(Constants.CSVHeaderITA.PartecipantName);
@@ -284,9 +286,13 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 to.TargetPhoneNumber = csvReader.GetField(Constants.CSVHeaderITA.TargetPhoneNumber);
                         
                 to.MeetingStartDate = csvReader.GetField(Constants.CSVHeaderITA.MeetingStartDate);
-                        
+
+                to.EffectiveMeetingStartDate = csvReader.GetField(Constants.CSVHeaderITA.EffectiveMeetingStartDate);
+
                 to.MeetingEndDate = csvReader.GetField(Constants.CSVHeaderITA.MeetingEndDate);
-                        
+
+                to.EffectiveMeetingEndDate = csvReader.GetField(Constants.CSVHeaderITA.EffectiveMeetingEndDate);
+
                 to.MeetingEnteringDate = csvReader.GetField(Constants.CSVHeaderITA.MeetingEnteringDate);
                         
                 to.TotalMeetingUserPartecipationInDecimal = csvReader.GetField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInDecimal);
@@ -348,6 +354,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                 //Mandatory
                 to.Duration = csvReader.GetField(Constants.CSVHeaderEN.Duration);
+                to.Duration = csvReader.GetField(Constants.CSVHeaderEN.EffectiveMeetingDurationInSeconds);
+                to.Duration = csvReader.GetField(Constants.CSVHeaderEN.EffectiveMeetingDurationInMinutes);
+                to.Duration = csvReader.GetField(Constants.CSVHeaderEN.EffectiveMeetingDurationInHours);
 
                 to.CallEvaluationOn5 = csvReader.GetField(Constants.CSVHeaderEN.CallEvaluationOn5);
 
@@ -459,7 +468,11 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                 to.MeetingStartDate = csvReader.GetField(Constants.CSVHeaderEN.MeetingStartDate);
 
+                to.EffectiveMeetingStartDate = csvReader.GetField(Constants.CSVHeaderEN.EffectiveMeetingStartDate);
+
                 to.MeetingEndDate = csvReader.GetField(Constants.CSVHeaderEN.MeetingEndDate);
+
+                to.EffectiveMeetingEndDate = csvReader.GetField(Constants.CSVHeaderEN.EffectiveMeetingEndDate);
 
                 to.MeetingEnteringDate = csvReader.GetField(Constants.CSVHeaderEN.MeetingEnteringDate);
 

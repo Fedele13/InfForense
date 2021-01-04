@@ -163,8 +163,6 @@ namespace GoogleMeetLogsNavigator
                     }
                     listBox2.Items.Add(logitem);
                 }
-                
-
             }
             catch (Exception ex)
             {

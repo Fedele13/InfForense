@@ -15,8 +15,10 @@
         ExternalPartecipantIdentifier,
         PartecipantName,
         Duration,
+        EffectiveMeetingDurationInHours,
+        EffectiveMeetingDurationInSeconds,
+        EffectiveMeetingDurationInMinutes,
         ClientType,
-
         #endregion
 
         MeetingOwnerEmail,
@@ -84,12 +86,12 @@
         MeetingStartDate,
         EffectiveMeetingStartDate,
         MeetingEndDate,
+        EffectiveMeetingEndDate,
         MeetingEnteringDate,
         TotalMeetingUserPartecipationInDecimal,
         TotalMeetingUserPartecipationInSeconds,
         TotalMeetingUserPartecipationInMinutes,
         TotalMeetingUserPartecipationInHours,
         CommonEuropeanTimeType
-
     }
 }

@@ -31,9 +31,15 @@ namespace GoogleMeetLogsNavigator.TransferObject
         public string ProductType { get; set; }
       
         public string Duration { get; set; }
-      
+
+        public string EffectiveMeetingDurationInHours { get; set; }
+        
+        public string EffectiveMeetingDurationInSeconds { get; set; }
+   
+        public string EffectiveMeetingDurationInMinutes { get; set; } 
+
         public string CallEvaluationOn5 { get; set; }
-     
+   
         public string IPAddress { get; set; }
       
         public string City { get; set; }
@@ -142,6 +148,7 @@ namespace GoogleMeetLogsNavigator.TransferObject
         public string MeetingStartDate { get; set; }
 
         public string EffectiveMeetingStartDate { get; set; }
+        public string EffectiveMeetingEndDate { get; set; }
 
         public string MeetingEndDate { get; set; }
        

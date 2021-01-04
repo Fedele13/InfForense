@@ -114,17 +114,17 @@ namespace GoogleMeetLogsNavigator.BO
                 throw new ArgumentException("La lingua non è supportata");
             }
             
-            string cet = string.Empty;
-            DateTime minDateTime = filteredLogs.Select(item =>item.Date.ConvertGooogleMeetDataInDateTime(this._language, out cet)).Min();
-            int meetingDurationInSeconds = int.Parse(filteredLogs.Where(item => item.Date == minDateTime.ConvertGoogleDateTimeInString(cet, this._language)).Select(item => item.Duration).FirstOrDefault());
-            string meetingStartDate = minDateTime.ConvertGoogleDateTimeInString(cet, this._language); ;
+            string timeZone = string.Empty;
+            DateTime minDateTime = filteredLogs.Select(item =>item.Date.ConvertGooogleMeetDataInDateTime(this._language, out timeZone)).Min();
+            int meetingDurationInSeconds = int.Parse(filteredLogs.Where(item => item.Date == minDateTime.ConvertGoogleDateTimeInString(timeZone, this._language)).Select(item => item.Duration).FirstOrDefault());
+            string meetingStartDate = minDateTime.ConvertGoogleDateTimeInString(timeZone, this._language); ;
             string meetingEndDate = string.Empty;
             if (meetingDurationInSeconds > 0)
             {
-                meetingStartDate = minDateTime.AddSeconds(-meetingDurationInSeconds).ConvertGoogleDateTimeInString(cet, this._language);
+                meetingStartDate = minDateTime.AddSeconds(-meetingDurationInSeconds).ConvertGoogleDateTimeInString(timeZone, this._language);
             }
 
-            meetingEndDate = filteredLogs.Select(item => item.Date.ConvertGooogleMeetDataInDateTime(this._language, out cet)).Max().ConvertGoogleDateTimeInString(cet, this._language);
+            meetingEndDate = filteredLogs.Select(item => item.Date.ConvertGooogleMeetDataInDateTime(this._language, out timeZone)).Max().ConvertGoogleDateTimeInString(timeZone, this._language);
 
             foreach (IGoogleMeetLogTO log in filteredLogs)
             {
@@ -150,7 +150,7 @@ namespace GoogleMeetLogsNavigator.BO
                                 partecipantLog.MeetingEndDate = meetingEndDate;
 
                             if (isDateTimeToUpdate(partecipantLog.MeetingEnteringDate) || this._forceUpdate)
-                                partecipantLog.MeetingEnteringDate = partecipantLog.Date.ConvertGooogleMeetDataInDateTime(this._language, out string cet2).AddSeconds(-int.Parse(partecipantLog.Duration)).ConvertGoogleDateTimeInString(cet2, this._language);
+                                partecipantLog.MeetingEnteringDate = partecipantLog.Date.ConvertGooogleMeetDataInDateTime(this._language, out string timeZone2).AddSeconds(-int.Parse(partecipantLog.Duration)).ConvertGoogleDateTimeInString(timeZone2, this._language);
 
                             if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipationInSeconds) || this._forceUpdate)
                             {
@@ -160,11 +160,19 @@ namespace GoogleMeetLogsNavigator.BO
                                 }
                                 else
                                 {
-                                    TimeSpan result = partecipantLog.MeetingEnteringDate.ConvertGooogleMeetDataInDateTime(this._language).Subtract(partecipantLog.EffectiveMeetingStartDate.ConvertGooogleMeetDataInDateTime(this._language));
-                                    partecipantLog.TotalMeetingUserPartecipationInSeconds = result.TotalSeconds.ToString();
+                                    DateTime PartecipantMeetingEndDate = partecipantLog.Date.ConvertGooogleMeetDataInDateTime(this._language);
+                                    DateTime EffectiveMeetingStartDate = partecipantLog.EffectiveMeetingStartDate.ConvertGooogleMeetDataInDateTime(this._language);
+                                    if (PartecipantMeetingEndDate > EffectiveMeetingStartDate)
+                                    {
+                                        TimeSpan result = PartecipantMeetingEndDate.Subtract(EffectiveMeetingStartDate);
+                                        partecipantLog.TotalMeetingUserPartecipationInSeconds = result.TotalSeconds.ToString();
+                                    }
+                                    else
+                                    {
+                                        partecipantLog.TotalMeetingUserPartecipationInSeconds = 0.ToString();
+                                    }
                                 }
                             }
-                                
 
                             if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipationInMinutes) || this._forceUpdate)
                                 partecipantLog.TotalMeetingUserPartecipationInMinutes = int.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds) <= 0 ? 0.ToString() : (int.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds) / 60).ToString();
@@ -175,12 +183,36 @@ namespace GoogleMeetLogsNavigator.BO
                             if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipationInDecimal) || this._forceUpdate)
                             {
                                 TimeSpan time = TimeSpan.FromSeconds(double.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds));
-                                double dec = time.Hours + (time.Minutes / 60) + (time.Seconds / 3600);
+                                double dec = time.Hours + time.Minutes > 0 ? (time.Minutes / 60) : 0 + time.Seconds > 0 ? (time.Seconds / 3600) : 0;
                                 partecipantLog.TotalMeetingUserPartecipationInHours = dec.ToString();
                             }
-                                
+
+
+                            if (string.IsNullOrEmpty(partecipantLog.EffectiveMeetingDurationInSeconds) || this._forceUpdate)
+                            {
+                                string effectiveMeetingEndDate = meetingEndDate;
+                                if (string.IsNullOrEmpty(partecipantLog.EffectiveMeetingEndDate) == false)
+                                {
+                                    effectiveMeetingEndDate = partecipantLog.EffectiveMeetingEndDate;
+                                }
+                                string effectiveMeetingStartDate = meetingStartDate;
+                                if (string.IsNullOrEmpty(partecipantLog.EffectiveMeetingStartDate) == false)
+                                {
+                                    effectiveMeetingStartDate = partecipantLog.EffectiveMeetingStartDate;
+                                }
+
+                                TimeSpan time = effectiveMeetingEndDate.ConvertGooogleMeetDataInDateTime(this._language).Subtract(effectiveMeetingStartDate.ConvertGooogleMeetDataInDateTime(this._language));
+                                partecipantLog.EffectiveMeetingDurationInSeconds = time.TotalSeconds.ToString();
+                            }
+
+                            if (string.IsNullOrEmpty(partecipantLog.EffectiveMeetingDurationInMinutes) || this._forceUpdate)
+                                partecipantLog.EffectiveMeetingDurationInMinutes = int.Parse(partecipantLog.EffectiveMeetingDurationInSeconds) <= 0 ? 0.ToString() : (int.Parse(partecipantLog.EffectiveMeetingDurationInSeconds) / 60).ToString();
+
+                            if (string.IsNullOrEmpty(partecipantLog.EffectiveMeetingDurationInHours) || this._forceUpdate)
+                                partecipantLog.EffectiveMeetingDurationInHours = int.Parse(partecipantLog.EffectiveMeetingDurationInMinutes) <= 0 ? 0.ToString() : (int.Parse(partecipantLog.EffectiveMeetingDurationInMinutes) / 60).ToString();
+
                             if (string.IsNullOrEmpty(partecipantLog.TimeZone) || this._forceUpdate)
-                                partecipantLog.TimeZone = cet;
+                                partecipantLog.TimeZone = timeZone;
 
                             resultDictionary.Add(key, partecipantLog);
                         }

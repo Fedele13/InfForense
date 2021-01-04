@@ -15,6 +15,10 @@
             public const string Date = "Data";
             public const string EventName = "Nome evento";
             public const string EventDescription = "Descrizione evento";
+            public const string Duration = "Durata";
+            public const string EffectiveMeetingDurationInSeconds = "Durata effettiva del meeting in secondi";
+            public const string EffectiveMeetingDurationInMinutes = "Durata effettiva del meeting in minuti";
+            public const string EffectiveMeetingDurationInHours = "Durata effettiva del meeting in ore";
             public const string MeetingCode = "Codice riunione";
             public const string PartecipantIdentifier = "Identificatore partecipante";
             public const string PartecipantName = "Nome partecipante";
@@ -28,7 +32,6 @@
 
             public const string MeetingOwnerEmail = "Email organizzatore";
             public const string ProductType = "Tipo di prodotto";
-            public const string Duration = "Durata";
             public const string CallEvaluationOn5 = "Valutazione chiamata su 5";
             public const string IPAddress = "Indirizzo IP";
             public const string City = "CittÃ ";
@@ -96,7 +99,9 @@
             public const string NetworkCongestionRatio = "Rapporto congestione della rete";
 
             public const string MeetingStartDate = "Data inizio meeting";
+            public const string EffectiveMeetingStartDate = "Data inizio meeting effettiva";
             public const string MeetingEndDate = "Data fine meeting";
+            public const string EffectiveMeetingEndDate = "Data fine meeting effettiva";
             public const string MeetingEnteringDate = "Data di entrata nel meeting";
             public const string TotalMeetingUserPartecipationInDecimal = "Totale tempo partecipazione";
             public const string TotalMeetingUserPartecipationInSeconds = "Totale tempo partecipazione in secondi";
@@ -119,6 +124,10 @@
             public const string EventName = "Event Name";
             public const string EventDescription = "Event Description";
             public const string MeetingCode = "Meeting Code";
+            public const string Duration = "Duration";
+            public const string EffectiveMeetingDurationInSeconds = "Effective meeting duration in seconds";
+            public const string EffectiveMeetingDurationInMinutes = "Effective meeting duration in minutes";
+            public const string EffectiveMeetingDurationInHours = "Effective meeting duration in hours";
             public const string PartecipantIdentifier = "Participant Identifier";
             public const string PartecipantName = "Participant Name";
             public const string ExternalPartecipantIdentifier = "Participant Outside Organisation";
@@ -128,10 +137,8 @@
 
             #region Optional Data
 
-
             public const string MeetingOwnerEmail = "Organizer Email";
             public const string ProductType = "Product Type,Duration";
-            public const string Duration = "Duration";
             public const string CallEvaluationOn5 = "Call Rating out of 5";
             public const string IPAddress = "IP Address";
             public const string City = "City";
@@ -194,7 +201,9 @@
             public const string NetworkCongestionRatio = "Network Congestion Ratio";
 
             public const string MeetingStartDate = "Start Meeting Date";
+            public const string EffectiveMeetingStartDate = "Data inizio meeting effettiva";
             public const string MeetingEndDate = "End Meeting Date";
+            public const string EffectiveMeetingEndDate = "Data fine meeting effettiva";
             public const string MeetingEnteringDate = "Entering Meeting Date";
             public const string TotalMeetingUserPartecipationInDecimal = "Total User Partecipation";
             public const string TotalMeetingUserPartecipationInSeconds = "Total User Partecipation in seconds";

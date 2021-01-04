@@ -21,6 +21,9 @@ namespace GoogleMeetLogsNavigator.TransferObject.Interface
         string MeetingOwnerEmail { get; set; }
         string ProductType { get; set; }
         string Duration { get; set; }
+        string EffectiveMeetingDurationInHours { get; set; }
+        string EffectiveMeetingDurationInSeconds { get; set; }
+        string EffectiveMeetingDurationInMinutes { get; set; }
         string CallEvaluationOn5 { get; set; }
         string PartecipantName { get; set; }
         string IPAddress { get; set; }
@@ -79,6 +82,7 @@ namespace GoogleMeetLogsNavigator.TransferObject.Interface
         string MeetingStartDate { get; set; }
         string EffectiveMeetingStartDate { get; set; }
         string MeetingEndDate { get; set; }
+        string EffectiveMeetingEndDate { get; set; }
         string MeetingEnteringDate { get; set; }
         public string TotalMeetingUserPartecipationInDecimal { get; set; }
         public string TotalMeetingUserPartecipationInSeconds { get; set; }
