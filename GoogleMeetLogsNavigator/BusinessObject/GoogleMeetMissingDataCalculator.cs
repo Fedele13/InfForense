@@ -110,7 +110,8 @@ namespace GoogleMeetLogsNavigator.BO
             {
                 filteredLogs = logs.Where(item => item.EventName == Constants.EventsToConsider.CallExitEN).ToList();
             }
-            else if (filteredLogs.Count == 0)
+            
+            if (filteredLogs.Count == 0)
             {
                 if (triedLangauge == Constants.Langauges.ITA)
                 {
