@@ -75,6 +75,10 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 {
                     recordsList = getTransferObjectListITA(this._csvReader).ToList().ConvertAll(item => (IGoogleMeetLogTO)item);
                 }
+                else if (this._langauge == "en")
+                {
+                    recordsList = getTransferObjectListEN(this._csvReader).ToList().ConvertAll(item => (IGoogleMeetLogTO)item);
+                }
                 else
                 {
                     throw new InvalidOperationException("La lingua selezionata non è supportata");
@@ -119,10 +123,10 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         #region private method
 
         /// <summary>
-        /// Get the GoogleMeetLogTOITA
+        /// Get the GoogleMeetLogTO ITA
         /// </summary>
         /// <param name="_csvReader">The CSV reader</param>
-        /// <returns>List of GoogleMeetLogTOITA</returns>
+        /// <returns>List of GoogleMeetLogTO ITA</returns>
         private IList<GoogleMeetLogTO> getTransferObjectListITA(CsvReader csvReader)
         {
             IList<GoogleMeetLogTO> toList = new List<GoogleMeetLogTO>();
@@ -140,158 +144,337 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 GoogleMeetLogTO to = new GoogleMeetLogTO();
 
                 /*Mandatory*/
-                to.Date = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeader.Date)) ? throw new ArgumentException("Il campo Data non può essere vuoto") : csvReader.GetField(Constants.CSVHeader.Date).Replace(",", "");
+                to.Date = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeaderITA.Date)) ? throw new ArgumentException("Il campo Data non può essere vuoto") : csvReader.GetField(Constants.CSVHeaderITA.Date).Replace(",", "");
                 if (to.Date.StartsWith("\"") && to.Date.EndsWith("\""))
                 {
                     to.Date = to.Date.Replace("\"", "");
                 }
-                to.EventName = csvReader.GetField(Constants.CSVHeader.EventName);
-                to.EventDescription = csvReader.GetField(Constants.CSVHeader.EventDescription);
-                to.MeetingCode = csvReader.GetField(Constants.CSVHeader.MeetingCode);
-                to.PartecipantIdentifier = csvReader.GetField(Constants.CSVHeader.PartecipantIdentifier);
-                to.ExternalPartecipantIdentifier = csvReader.GetField(Constants.CSVHeader.ExternalPartecipantIdentifier);
-                to.ClientType = csvReader.GetField(Constants.CSVHeader.ClientType);
+                to.EventName = csvReader.GetField(Constants.CSVHeaderITA.EventName);
+                to.EventDescription = csvReader.GetField(Constants.CSVHeaderITA.EventDescription);
+                to.MeetingCode = csvReader.GetField(Constants.CSVHeaderITA.MeetingCode);
+                to.PartecipantIdentifier = csvReader.GetField(Constants.CSVHeaderITA.PartecipantIdentifier);
+                to.ExternalPartecipantIdentifier = csvReader.GetField(Constants.CSVHeaderITA.ExternalPartecipantIdentifier);
+                to.ClientType = csvReader.GetField(Constants.CSVHeaderITA.ClientType);
                 /*Mandatory*/
                     
-                to.MeetingOwnerEmail = csvReader.GetField(Constants.CSVHeader.MeetingOwnerEmail);
+                to.MeetingOwnerEmail = csvReader.GetField(Constants.CSVHeaderITA.MeetingOwnerEmail);
                      
-                to.ProductType = csvReader.GetField(Constants.CSVHeader.ProductType);
+                to.ProductType = csvReader.GetField(Constants.CSVHeaderITA.ProductType);
                     
                 //Mandatory
-                to.Duration = csvReader.GetField(Constants.CSVHeader.Duration);
+                to.Duration = csvReader.GetField(Constants.CSVHeaderITA.Duration);
                         
-                to.CallEvaluationOn5 = csvReader.GetField(Constants.CSVHeader.CallEvaluationOn5);
+                to.CallEvaluationOn5 = csvReader.GetField(Constants.CSVHeaderITA.CallEvaluationOn5);
                     
-                to.PartecipantName = csvReader.GetField(Constants.CSVHeader.PartecipantName);
+                to.PartecipantName = csvReader.GetField(Constants.CSVHeaderITA.PartecipantName);
                        
-                to.IPAddress = csvReader.GetField(Constants.CSVHeader.IPAddress);
+                to.IPAddress = csvReader.GetField(Constants.CSVHeaderITA.IPAddress);
                        
-                to.City = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeader.City))
-                    ? csvReader.GetField(Constants.CSVHeader.City2)
-                    : csvReader.GetField(Constants.CSVHeader.City);
+                to.City = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeaderITA.City))
+                    ? csvReader.GetField(Constants.CSVHeaderITA.City2)
+                    : csvReader.GetField(Constants.CSVHeaderITA.City);
                        
-                to.Nation = csvReader.GetField(Constants.CSVHeader.Nation);
+                to.Nation = csvReader.GetField(Constants.CSVHeaderITA.Country);
                     
-                to.NETRoundTrip = csvReader.GetField(Constants.CSVHeader.NETRoundTrip);
+                to.NETRoundTrip = csvReader.GetField(Constants.CSVHeaderITA.NETRoundTrip);
            
-                to.TransportProtocol = csvReader.GetField(Constants.CSVHeader.TransportProtocol);
+                to.TransportProtocol = csvReader.GetField(Constants.CSVHeaderITA.TransportProtocol);
                         
-                to.PredictedBandWidthLoading = csvReader.GetField(Constants.CSVHeader.PredictedBandWidthLoading);
+                to.EstimatedUploadBandwidthInkbps = csvReader.GetField(Constants.CSVHeaderITA.EstimatedUploadBandwidthInkbps);
                         
-                to.PredictedBandWidthUploading = csvReader.GetField(Constants.CSVHeader.PredictedBandWidthUploading);
+                to.EstimatedDownloadBandwidthInkbps = csvReader.GetField(Constants.CSVHeaderITA.EstimatedDownloadBandwidthInkbps);
                         
-                to.MaxReceptionAudioPacketsLost = csvReader.GetField(Constants.CSVHeader.MaxReceptionAudioPacketsLost);
+                to.AudioReceivePacketLossMax = csvReader.GetField(Constants.CSVHeaderITA.AudioReceivePacketLossMax);
                         
-                to.AverageReceptionAudioPacketsLost = csvReader.GetField(Constants.CSVHeader.AverageReceptionAudioPacketsLost);
+                to.AudioReceivePacketLossMean = csvReader.GetField(Constants.CSVHeaderITA.AudioReceivePacketLossMean);
                         
-                to.AudioReceptionDuration = csvReader.GetField(Constants.CSVHeader.AudioReceptionDuration);
+                to.AudioReceiveDuration = csvReader.GetField(Constants.CSVHeaderITA.AudioReceiveDuration);
                         
-                to.BitRatioAudioSending = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeader.BitRatioAudioSending))
-                        ? csvReader.GetField(Constants.CSVHeader.BitRatioAudioSending2)
-                        : csvReader.GetField(Constants.CSVHeader.BitRatioAudioSending);
+                to.BitRatioAudioSending = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeaderITA.BitRatioAudioSending))
+                        ? csvReader.GetField(Constants.CSVHeaderITA.BitRatioAudioSending2)
+                        : csvReader.GetField(Constants.CSVHeaderITA.BitRatioAudioSending);
                         
-                to.MaxSendingAudioPacketsLost = csvReader.GetField(Constants.CSVHeader.MaxSendingAudioPacketsLost);
+                to.AudioSendPacketLossMax = csvReader.GetField(Constants.CSVHeaderITA.AudioSendPacketLossMax);
                         
-                to.AverageSendingAudioPacketsLost = csvReader.GetField(Constants.CSVHeader.AverageSendingAudioPacketsLost);
+                to.AudioSendPacketLossMean = csvReader.GetField(Constants.CSVHeaderITA.AudioSendPacketLossMean);
                         
-                to.AudioSendingDuration = csvReader.GetField(Constants.CSVHeader.AudioSendingDuration);
+                to.AudioSendDuration = csvReader.GetField(Constants.CSVHeaderITA.AudioSendDuration);
                         
-                to.CalendarEventIdentifier = csvReader.GetField(Constants.CSVHeader.CalendarEventIdentifier);
+                to.CalendarEventIdentifier = csvReader.GetField(Constants.CSVHeaderITA.CalendarEventIdentifier);
                         
-                to.ConferenceID = csvReader.GetField(Constants.CSVHeader.ConferenceID);
+                to.ConferenceID = csvReader.GetField(Constants.CSVHeaderITA.ConferenceID);
                         
-                to.AverageReceptionFlickering = csvReader.GetField(Constants.CSVHeader.AverageReceptionFlickering);
+                to.NetworkRecvJitterMeaninms = csvReader.GetField(Constants.CSVHeaderITA.NetworkRecvJitterMeaninms);
                         
-                to.MaxReceptionFilckering = csvReader.GetField(Constants.CSVHeader.MaxReceptionFilckering);
+                to.NetworkRecvJitterMaxinms = csvReader.GetField(Constants.CSVHeaderITA.NetworkRecvJitterMaxinms);
                         
-                to.AverageSendingFlickering = csvReader.GetField(Constants.CSVHeader.AverageSendingFlickering);
+                to.NetworkSendJitterMeaninms = csvReader.GetField(Constants.CSVHeaderITA.NetworkRecvJitterMeaninms);
                         
-                to.BitRatioScreencastReception = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeader.BitRatioScreencastReception))
-                        ? csvReader.GetField(Constants.CSVHeader.BitRatioScreencastReception2)
-                        : csvReader.GetField(Constants.CSVHeader.BitRatioScreencastReception);
+                to.BitRatioScreencastReception = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeaderITA.BitRatioScreencastReception))
+                        ? csvReader.GetField(Constants.CSVHeaderITA.BitRatioScreencastReception2)
+                        : csvReader.GetField(Constants.CSVHeaderITA.BitRatioScreencastReception);
                         
-                to.AverageScreecastReception = csvReader.GetField(Constants.CSVHeader.AverageScreecastReception);
+                to.ScreencastReceiveFPSMean = csvReader.GetField(Constants.CSVHeaderITA.ScreencastReceiveFPSMean);
                         
-                to.LongSideMedianScreencastReception = csvReader.GetField(Constants.CSVHeader.LongSideMedianScreencastReception);
+                to.ScreencastReceiveLongSideMedian = csvReader.GetField(Constants.CSVHeaderITA.ScreencastReceiveLongSideMedian);
                         
-                to.MaxReceptionScreencastPacketsLost = csvReader.GetField(Constants.CSVHeader.MaxReceptionScreencastPacketsLost);
+                to.ScreencastReceivePacketLossMax = csvReader.GetField(Constants.CSVHeaderITA.ScreencastReceivePacketLossMax);
                         
-                to.AverageReceptionScreencastPacketsLost = csvReader.GetField(Constants.CSVHeader.AverageReceptionScreencastPacketsLost);
+                to.ScreencastReceivePacketLossMean = csvReader.GetField(Constants.CSVHeaderITA.ScreencastReceivePacketLossMean);
                         
-                to.ScreencastReceptionDuration = csvReader.GetField(Constants.CSVHeader.ScreencastReceptionDuration);
+                to.ScreencastReceiveDuration = csvReader.GetField(Constants.CSVHeaderITA.ScreencastReceiveDuration);
                         
-                to.ShortSideMedianScreencastReception = csvReader.GetField(Constants.CSVHeader.ShortSideMedianScreencastReception);
+                to.ScreencastReceiveShortSideMedian = csvReader.GetField(Constants.CSVHeaderITA.ScreencastReceiveShortSideMedian);
                         
-                to.BitRatioScreencastSending = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeader.BitRatioScreencastSending))
-                        ? csvReader.GetField(Constants.CSVHeader.BitRatioScreencastSending2)
-                        : csvReader.GetField(Constants.CSVHeader.BitRatioScreencastSending);
+                to.BitRatioScreencastSending = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeaderITA.BitRatioScreencastSending))
+                        ? csvReader.GetField(Constants.CSVHeaderITA.BitRatioScreencastSending2)
+                        : csvReader.GetField(Constants.CSVHeaderITA.BitRatioScreencastSending);
                         
-                to.AverageScreecastSending = csvReader.GetField(Constants.CSVHeader.AverageScreecastSending);
+                to.AverageScreecastSending = csvReader.GetField(Constants.CSVHeaderITA.ScreencastSendFPSMean);
                         
-                to.LongSideMedianScreencastSending = csvReader.GetField(Constants.CSVHeader.LongSideMedianScreencastSending);
+                to.ScreencastSendLongSideMedian = csvReader.GetField(Constants.CSVHeaderITA.ScreencastSendLongSideMedian);
                         
-                to.MaxSendingScreencastPacketsLost = csvReader.GetField(Constants.CSVHeader.MaxSendingScreencastPacketsLost);
+                to.ScreencastSendPacketLossMax = csvReader.GetField(Constants.CSVHeaderITA.ScreencastSendPacketLossMax);
                         
-                to.AverageSendingScreencastPacketsLost = csvReader.GetField(Constants.CSVHeader.AverageSendingScreencastPacketsLost);
+                to.ScreencastSendPacketLossMean = csvReader.GetField(Constants.CSVHeaderITA.ScreencastSendPacketLossMean);
                         
-                to.ScreencastSendingDuration = csvReader.GetField(Constants.CSVHeader.ScreencastSendingDuration);
+                to.ScreencastSendDuration = csvReader.GetField(Constants.CSVHeaderITA.ScreencastSendDuration);
                         
-                to.ShortSideMedianScreencastSending = csvReader.GetField(Constants.CSVHeader.ShortSideMedianScreencastSending);
+                to.ScreencastSendShortSideMedian = csvReader.GetField(Constants.CSVHeaderITA.ScreencastSendShortSideMedian);
                         
-                to.AverageVideoReception = csvReader.GetField(Constants.CSVHeader.AverageVideoReception);
+                to.VideoReceiveFPSMean = csvReader.GetField(Constants.CSVHeaderITA.VideoReceiveFPSMean);
                         
-                to.LongSideMedianVideoReception = csvReader.GetField(Constants.CSVHeader.LongSideMedianVideoReception);
+                to.VideoReceiveLongSideMedian = csvReader.GetField(Constants.CSVHeaderITA.VideoReceiveLongSideMedian);
                         
-                to.MaxVideoReceptionPacketsLost = csvReader.GetField(Constants.CSVHeader.MaxVideoReceptionPacketsLost);
+                to.VideoReceivePacketLossMax = csvReader.GetField(Constants.CSVHeaderITA.VideoReceivePacketLossMax);
                         
-                to.AverageVideoReceptionPacketsLost = csvReader.GetField(Constants.CSVHeader.AverageVideoReceptionPacketsLost);
+                to.VideoReceivePacketLossMean = csvReader.GetField(Constants.CSVHeaderITA.VideoReceivePacketLossMean);
                         
-                to.ReceptionVideoDuration = csvReader.GetField(Constants.CSVHeader.ReceptionVideoDuration);
+                to.VideoReceiveDuration = csvReader.GetField(Constants.CSVHeaderITA.VideoReceiveDuration);
                         
-                to.ShortSideMedianVideoReception = csvReader.GetField(Constants.CSVHeader.ShortSideMedianVideoReception);
+                to.VideoReceiveShortSideMedian = csvReader.GetField(Constants.CSVHeaderITA.VideoReceiveShortSideMedian);
                         
-                to.NetworkCongestion = csvReader.GetField(Constants.CSVHeader.NetworkCongestion);
+                to.NetworkCongestionRatio = csvReader.GetField(Constants.CSVHeaderITA.NetworkCongestionRatio);
                         
-                to.BitRatioVideoSending = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeader.BitRatioVideoSending))
-                        ? csvReader.GetField(Constants.CSVHeader.BitRatioVideoSending2)
-                        : csvReader.GetField(Constants.CSVHeader.BitRatioVideoSending);
+                to.BitRatioVideoSending = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeaderITA.BitRatioVideoSending))
+                        ? csvReader.GetField(Constants.CSVHeaderITA.BitRatioVideoSending2)
+                        : csvReader.GetField(Constants.CSVHeaderITA.BitRatioVideoSending);
                         
-                to.AverageVideoSending = csvReader.GetField(Constants.CSVHeader.AverageVideoSending);
+                to.VideoSendFPSMean = csvReader.GetField(Constants.CSVHeaderITA.VideoSendFPSMean);
                         
-                to.LongSideMedianVideoSending = csvReader.GetField(Constants.CSVHeader.LongSideMedianVideoSending);
+                to.VideoSendLongSideMedian = csvReader.GetField(Constants.CSVHeaderITA.VideoSendLongSideMedian);
                         
-                to.MaxSendingVideoPacketsLost = csvReader.GetField(Constants.CSVHeader.MaxSendingVideoPacketsLost);
+                to.VideoSendPacketLossMax = csvReader.GetField(Constants.CSVHeaderITA.VideoSendPacketLossMax);
                         
-                to.AverageSendingVideoPacketsLost = csvReader.GetField(Constants.CSVHeader.AverageSendingVideoPacketsLost);
+                to.VideoSendPacketLossMean = csvReader.GetField(Constants.CSVHeaderITA.VideoSendPacketLossMean);
                         
-                to.VideoSendingDuration = csvReader.GetField(Constants.CSVHeader.VideoSendingDuration);
+                to.VideoSendDuration = csvReader.GetField(Constants.CSVHeaderITA.VideoSendDuration);
                         
-                to.ShortSideMedianVideoSending = csvReader.GetField(Constants.CSVHeader.ShortSideMedianVideoSending);
+                to.VideoSendShortSideMedian = csvReader.GetField(Constants.CSVHeaderITA.VideoSendShortSideMedian);
                         
-                to.ActionCause = csvReader.GetField(Constants.CSVHeader.ActionCause);
+                to.ActionReason = csvReader.GetField(Constants.CSVHeaderITA.ActionReason);
                         
-                to.ActionDescription = csvReader.GetField(Constants.CSVHeader.ActionDescription);
+                to.ActionDescription = csvReader.GetField(Constants.CSVHeaderITA.ActionDescription);
                         
-                to.VisualizedDestinationNames = csvReader.GetField(Constants.CSVHeader.VisualizedDestinationNames);
+                to.TargetDisplayNames = csvReader.GetField(Constants.CSVHeaderITA.TargetDisplayNames);
                         
-                to.DestinationEmailsAddresses = csvReader.GetField(Constants.CSVHeader.DestinationEmailsAddresses);
+                to.TargetEmail = csvReader.GetField(Constants.CSVHeaderITA.TargetEmail);
                         
-                to.DestinationPhoneNumber = csvReader.GetField(Constants.CSVHeader.DestinationPhoneNumber);
+                to.TargetPhoneNumber = csvReader.GetField(Constants.CSVHeaderITA.TargetPhoneNumber);
                         
-                to.MeetingStartDate = csvReader.GetField(Constants.CSVHeader.MeetingStartDate);
+                to.MeetingStartDate = csvReader.GetField(Constants.CSVHeaderITA.MeetingStartDate);
                         
-                to.MeetingEndDate = csvReader.GetField(Constants.CSVHeader.MeetingEndDate);
+                to.MeetingEndDate = csvReader.GetField(Constants.CSVHeaderITA.MeetingEndDate);
                         
-                to.MeetingEnteringDate = csvReader.GetField(Constants.CSVHeader.MeetingEnteringDate);
+                to.MeetingEnteringDate = csvReader.GetField(Constants.CSVHeaderITA.MeetingEnteringDate);
                         
-                to.TotalMeetingUserPartecipation = csvReader.GetField(Constants.CSVHeader.TotalMeetingUserPartecipation);
-                        
-                to.CommonEuropeanTimeType = csvReader.GetField(Constants.CSVHeader.CommonEuropeanTimeType);
+                to.TotalMeetingUserPartecipationInDecimal = csvReader.GetField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInDecimal);
+
+                to.TotalMeetingUserPartecipationInHours = csvReader.GetField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInHours);
+
+                to.TotalMeetingUserPartecipationInMinutes = csvReader.GetField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInMinutes);
+
+                to.TotalMeetingUserPartecipationInSeconds = csvReader.GetField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInSeconds);
+
+                to.TimeZone = csvReader.GetField(Constants.CSVHeaderITA.TimeZone);
 
                 toList.Add(to);
             }
 
             Debug.WriteLine("Record: " + (i-1));
+            return toList;
+        }
+
+        /// <summary>
+        /// Get the GoogleMeetLogTO EN
+        /// </summary>
+        /// <param name="_csvReader">The CSV reader</param>
+        /// <returns>List of GoogleMeetLogTO EN</returns>
+        private IList<GoogleMeetLogTO> getTransferObjectListEN(CsvReader csvReader)
+        {
+            IList<GoogleMeetLogTO> toList = new List<GoogleMeetLogTO>();
+
+            int i = 0;
+            while (csvReader.Read())
+            {
+                if (i == 0)
+                {
+                    csvReader.ReadHeader();
+                    ++i;
+                    continue;
+                }
+                ++i;
+                GoogleMeetLogTO to = new GoogleMeetLogTO();
+
+                /*Mandatory*/
+                to.Date = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeaderITA.Date)) ? throw new ArgumentException("Il campo Data non può essere vuoto") : csvReader.GetField(Constants.CSVHeaderITA.Date).Replace(",", "");
+                if (to.Date.StartsWith("\"") && to.Date.EndsWith("\""))
+                {
+                    to.Date = to.Date.Replace("\"", "");
+                }
+                to.EventName = csvReader.GetField(Constants.CSVHeaderEN.EventName);
+                to.EventDescription = csvReader.GetField(Constants.CSVHeaderEN.EventDescription);
+                to.MeetingCode = csvReader.GetField(Constants.CSVHeaderEN.MeetingCode);
+                to.PartecipantIdentifier = csvReader.GetField(Constants.CSVHeaderEN.PartecipantIdentifier);
+                to.ExternalPartecipantIdentifier = csvReader.GetField(Constants.CSVHeaderEN.ExternalPartecipantIdentifier);
+                to.ClientType = csvReader.GetField(Constants.CSVHeaderEN.ClientType);
+                /*Mandatory*/
+
+                to.MeetingOwnerEmail = csvReader.GetField(Constants.CSVHeaderEN.MeetingOwnerEmail);
+
+                to.ProductType = csvReader.GetField(Constants.CSVHeaderEN.ProductType);
+
+                //Mandatory
+                to.Duration = csvReader.GetField(Constants.CSVHeaderEN.Duration);
+
+                to.CallEvaluationOn5 = csvReader.GetField(Constants.CSVHeaderEN.CallEvaluationOn5);
+
+                to.PartecipantName = csvReader.GetField(Constants.CSVHeaderEN.PartecipantName);
+
+                to.IPAddress = csvReader.GetField(Constants.CSVHeaderEN.IPAddress);
+
+                to.City = csvReader.GetField(Constants.CSVHeaderEN.City);
+
+                to.Nation = csvReader.GetField(Constants.CSVHeaderEN.Country);
+
+                to.NETRoundTrip = csvReader.GetField(Constants.CSVHeaderEN.NETRoundTrip);
+
+                to.TransportProtocol = csvReader.GetField(Constants.CSVHeaderEN.TransportProtocol);
+
+                to.EstimatedUploadBandwidthInkbps = csvReader.GetField(Constants.CSVHeaderEN.EstimatedUploadBandwidthInkbps);
+
+                to.EstimatedDownloadBandwidthInkbps = csvReader.GetField(Constants.CSVHeaderEN.EstimatedDownloadBandwidthInkbps);
+
+                to.AudioReceivePacketLossMax = csvReader.GetField(Constants.CSVHeaderEN.AudioReceivePacketLossMax);
+
+                to.AudioReceivePacketLossMean = csvReader.GetField(Constants.CSVHeaderEN.AudioReceivePacketLossMean);
+
+                to.AudioReceiveDuration = csvReader.GetField(Constants.CSVHeaderEN.AudioReceiveDuration);
+
+                to.BitRatioAudioSending = csvReader.GetField(Constants.CSVHeaderEN.BitRatioAudioSending);
+
+                to.AudioSendPacketLossMax = csvReader.GetField(Constants.CSVHeaderEN.AudioSendPacketLossMax);
+
+                to.AudioSendPacketLossMean = csvReader.GetField(Constants.CSVHeaderEN.AudioSendPacketLossMean);
+
+                to.AudioSendDuration = csvReader.GetField(Constants.CSVHeaderEN.AudioSendDuration);
+
+                to.CalendarEventIdentifier = csvReader.GetField(Constants.CSVHeaderEN.CalendarEventIdentifier);
+
+                to.ConferenceID = csvReader.GetField(Constants.CSVHeaderEN.ConferenceID);
+
+                to.NetworkRecvJitterMeaninms = csvReader.GetField(Constants.CSVHeaderEN.NetworkRecvJitterMeaninms);
+
+                to.NetworkRecvJitterMaxinms = csvReader.GetField(Constants.CSVHeaderEN.NetworkRecvJitterMaxinms);
+
+                to.NetworkSendJitterMeaninms = csvReader.GetField(Constants.CSVHeaderEN.NetworkRecvJitterMeaninms);
+
+                to.BitRatioScreencastReception = csvReader.GetField(Constants.CSVHeaderEN.BitRatioScreencastReception);
+
+                to.ScreencastReceiveFPSMean = csvReader.GetField(Constants.CSVHeaderEN.ScreencastReceiveFPSMean);
+
+                to.ScreencastReceiveLongSideMedian = csvReader.GetField(Constants.CSVHeaderEN.ScreencastReceiveLongSideMedian);
+
+                to.ScreencastReceivePacketLossMax = csvReader.GetField(Constants.CSVHeaderEN.ScreencastReceivePacketLossMax);
+
+                to.ScreencastReceivePacketLossMean = csvReader.GetField(Constants.CSVHeaderEN.ScreencastReceivePacketLossMean);
+
+                to.ScreencastReceiveDuration = csvReader.GetField(Constants.CSVHeaderEN.ScreencastReceiveDuration);
+
+                to.ScreencastReceiveShortSideMedian = csvReader.GetField(Constants.CSVHeaderEN.ScreencastReceiveShortSideMedian);
+
+                to.BitRatioScreencastSending = csvReader.GetField(Constants.CSVHeaderEN.BitRatioScreencastSending);
+
+                to.AverageScreecastSending = csvReader.GetField(Constants.CSVHeaderEN.ScreencastSendFPSMean);
+
+                to.ScreencastSendLongSideMedian = csvReader.GetField(Constants.CSVHeaderEN.ScreencastSendLongSideMedian);
+
+                to.ScreencastSendPacketLossMax = csvReader.GetField(Constants.CSVHeaderEN.ScreencastSendPacketLossMax);
+
+                to.ScreencastSendPacketLossMean = csvReader.GetField(Constants.CSVHeaderEN.ScreencastSendPacketLossMean);
+
+                to.ScreencastSendDuration = csvReader.GetField(Constants.CSVHeaderEN.ScreencastSendDuration);
+
+                to.ScreencastSendShortSideMedian = csvReader.GetField(Constants.CSVHeaderEN.ScreencastSendShortSideMedian);
+
+                to.VideoReceiveFPSMean = csvReader.GetField(Constants.CSVHeaderEN.VideoReceiveFPSMean);
+
+                to.VideoReceiveLongSideMedian = csvReader.GetField(Constants.CSVHeaderEN.VideoReceiveLongSideMedian);
+
+                to.VideoReceivePacketLossMax = csvReader.GetField(Constants.CSVHeaderEN.VideoReceivePacketLossMax);
+
+                to.VideoReceivePacketLossMean = csvReader.GetField(Constants.CSVHeaderEN.VideoReceivePacketLossMean);
+
+                to.VideoReceiveDuration = csvReader.GetField(Constants.CSVHeaderEN.VideoReceiveDuration);
+
+                to.VideoReceiveShortSideMedian = csvReader.GetField(Constants.CSVHeaderEN.VideoReceiveShortSideMedian);
+
+                to.NetworkCongestionRatio = csvReader.GetField(Constants.CSVHeaderEN.NetworkCongestionRatio);
+
+                to.BitRatioVideoSending = csvReader.GetField(Constants.CSVHeaderITA.BitRatioVideoSending);
+
+                to.VideoSendFPSMean = csvReader.GetField(Constants.CSVHeaderEN.VideoSendFPSMean);
+
+                to.VideoSendLongSideMedian = csvReader.GetField(Constants.CSVHeaderEN.VideoSendLongSideMedian);
+
+                to.VideoSendPacketLossMax = csvReader.GetField(Constants.CSVHeaderEN.VideoSendPacketLossMax);
+
+                to.VideoSendPacketLossMean = csvReader.GetField(Constants.CSVHeaderEN.VideoSendPacketLossMean);
+
+                to.VideoSendDuration = csvReader.GetField(Constants.CSVHeaderEN.VideoSendDuration);
+
+                to.VideoSendShortSideMedian = csvReader.GetField(Constants.CSVHeaderEN.VideoSendShortSideMedian);
+
+                to.ActionReason = csvReader.GetField(Constants.CSVHeaderEN.ActionReason);
+
+                to.ActionDescription = csvReader.GetField(Constants.CSVHeaderEN.ActionDescription);
+
+                to.TargetDisplayNames = csvReader.GetField(Constants.CSVHeaderEN.TargetDisplayNames);
+
+                to.TargetEmail = csvReader.GetField(Constants.CSVHeaderEN.TargetEmail);
+
+                to.TargetPhoneNumber = csvReader.GetField(Constants.CSVHeaderEN.TargetPhoneNumber);
+
+                to.MeetingStartDate = csvReader.GetField(Constants.CSVHeaderEN.MeetingStartDate);
+
+                to.MeetingEndDate = csvReader.GetField(Constants.CSVHeaderEN.MeetingEndDate);
+
+                to.MeetingEnteringDate = csvReader.GetField(Constants.CSVHeaderEN.MeetingEnteringDate);
+
+                to.TotalMeetingUserPartecipationInDecimal = csvReader.GetField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInDecimal);
+
+                to.TotalMeetingUserPartecipationInHours = csvReader.GetField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInHours);
+
+                to.TotalMeetingUserPartecipationInMinutes = csvReader.GetField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInMinutes);
+
+                to.TotalMeetingUserPartecipationInSeconds = csvReader.GetField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInSeconds);
+
+                to.TimeZone = csvReader.GetField(Constants.CSVHeaderEN.TimeZone);
+
+                toList.Add(to);
+            }
+
+            Debug.WriteLine("Record: " + (i - 1));
             return toList;
         }
 

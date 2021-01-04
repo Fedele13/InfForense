@@ -17,9 +17,14 @@ namespace GoogleMeetLogsNavigator.BO
         #region private
 
         /// <summary>
-        /// The reader
+        /// The reader dictionary
         /// </summary>
-        private ICSVReader<GoogleMeetingTO> _reader = null;
+        private IDictionary<string, IList<IGoogleMeetLogTO>> _readerDictionary = null;
+
+        /// <summary>
+        /// True force update, no otherwise
+        /// </summary>
+        private bool _forceUpdate = false;
 
         #endregion
 
@@ -30,17 +35,21 @@ namespace GoogleMeetLogsNavigator.BO
         /// </summary>
         /// <param name="reader">The ICSVReader instance</param>
         /// <exception cref="BusinessObject.Exception.CalculationException"></exception>
-        public GoogleMeetMissingDataCalculator(ICSVReader<GoogleMeetingTO> reader)
+        public GoogleMeetMissingDataCalculator(IDictionary<string, IList<IGoogleMeetLogTO>> readerDictionary, bool forceUpdate = false)
         {
-            this._reader = reader;
-
+            if (readerDictionary == null)
+            {
+                throw new ArgumentNullException("readerDictionary is null");
+            }
+            this._readerDictionary = readerDictionary;
+            this._forceUpdate = forceUpdate;
             this.MeetingLogsDictionary = new Dictionary<string, IList<GoogleMeetLogModel>>();
-            foreach (string meetingKey in reader.MeetingDictionary.Keys)
+            foreach (string meetingKey in this._readerDictionary.Keys)
             {
                 IList<GoogleMeetLogModel> logsModel = new List<GoogleMeetLogModel>();
                 try
                 {
-                    IDictionary<string, IGoogleMeetLogTO> resultAdditionalDataDictionary = calculateAdditionalData(reader.MeetingDictionary[meetingKey]);
+                    IDictionary<string, IGoogleMeetLogTO> resultAdditionalDataDictionary = calculateAdditionalData(this._readerDictionary[meetingKey]);
 
                     foreach (string keyLog in resultAdditionalDataDictionary.Keys)
                     {
@@ -48,7 +57,7 @@ namespace GoogleMeetLogsNavigator.BO
                         {
                             string[] keysLog = splitKeyLog(keyLog);
 
-                            IGoogleMeetLogTO log = reader.MeetingDictionary[meetingKey].
+                            IGoogleMeetLogTO log = this._readerDictionary[meetingKey].
                                 Where(item => item.Date == keysLog[0] && getPartecipantLogIdentifier(item) == keysLog[1] && item.ClientType == keysLog[2]).FirstOrDefault();
 
                             logsModel.Add(log.MapTransferObjectITAInModel());
@@ -84,7 +93,7 @@ namespace GoogleMeetLogsNavigator.BO
 
             IDictionary<string, IGoogleMeetLogTO> resultDictionary = new Dictionary<string, IGoogleMeetLogTO>();
 
-            IList<IGoogleMeetLogTO> filteredLogs = logs.Where(item => item.EventName == Constants.EventsToConsider.CallExit).ToList();
+            IList<IGoogleMeetLogTO> filteredLogs = logs.Where(item => item.EventName == Constants.EventsToConsider.CallExitITA).ToList();
             string cet = string.Empty;
             DateTime minDateTime = filteredLogs.Select(item =>item.Date.ConvertGooogleMeetDataInDateTime(out cet)).Min();
             int meetingDurationInSeconds = int.Parse(filteredLogs.Where(item => item.Date == minDateTime.ConvertGoogleDateTimeInString(cet)).Select(item => item.Duration).FirstOrDefault());
@@ -114,20 +123,35 @@ namespace GoogleMeetLogsNavigator.BO
                                 continue;
                             }
 
-                            if (isDateTimeToUpdate(partecipantLog.MeetingStartDate))
+                            if (isDateTimeToUpdate(partecipantLog.MeetingStartDate) || this._forceUpdate)
                                 partecipantLog.MeetingStartDate = meetingStartDate;
 
-                            if (isDateTimeToUpdate(partecipantLog.MeetingEndDate))
+                            DateTime effectiveMeetingStartDateString = partecipantLog.EffectiveMeetingStartDate.ConvertGooogleMeetDataInDateTime();
+
+                            if (isDateTimeToUpdate(partecipantLog.MeetingEndDate) || this._forceUpdate)
                                 partecipantLog.MeetingEndDate = meetingEndDate;
 
-                            if (isDateTimeToUpdate(partecipantLog.MeetingEnteringDate))
+                            if (isDateTimeToUpdate(partecipantLog.MeetingEnteringDate) || this._forceUpdate)
                                 partecipantLog.MeetingEnteringDate = partecipantLog.Date.ConvertGooogleMeetDataInDateTime(out string cet2).AddSeconds(-int.Parse(partecipantLog.Duration)).ConvertGoogleDateTimeInString(cet2);
 
-                            if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipation))
-                                partecipantLog.TotalMeetingUserPartecipation = partecipantsLogs.Sum(item => int.Parse(item.Duration)).ToString();
+                            if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipationInSeconds) || this._forceUpdate)
+                                partecipantLog.TotalMeetingUserPartecipationInSeconds = partecipantsLogs.Sum(item => int.Parse(item.Duration)).ToString();
 
-                            if (string.IsNullOrEmpty(partecipantLog.CommonEuropeanTimeType))
-                                partecipantLog.CommonEuropeanTimeType = cet;
+                            if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipationInMinutes) || this._forceUpdate)
+                                partecipantLog.TotalMeetingUserPartecipationInMinutes = int.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds) <= 0 ? 0.ToString() : (int.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds) / 60).ToString();
+
+                            if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipationInHours) || this._forceUpdate)
+                                partecipantLog.TotalMeetingUserPartecipationInHours = int.Parse(partecipantLog.TotalMeetingUserPartecipationInMinutes) <= 0 ? 0.ToString() : (int.Parse(partecipantLog.TotalMeetingUserPartecipationInMinutes) / 60).ToString();
+
+                            if (string.IsNullOrEmpty(partecipantLog.TotalMeetingUserPartecipationInDecimal) || this._forceUpdate)
+                            {
+                                TimeSpan time = TimeSpan.FromSeconds(double.Parse(partecipantLog.TotalMeetingUserPartecipationInSeconds));
+                                double dec = time.Hours + (time.Minutes / 60) + (time.Seconds / 3600);
+                                partecipantLog.TotalMeetingUserPartecipationInHours = dec.ToString();
+                            }
+                                
+                            if (string.IsNullOrEmpty(partecipantLog.TimeZone) || this._forceUpdate)
+                                partecipantLog.TimeZone = cet;
 
                             resultDictionary.Add(key, partecipantLog);
                         }

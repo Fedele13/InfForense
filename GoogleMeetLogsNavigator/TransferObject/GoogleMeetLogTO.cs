@@ -40,15 +40,15 @@ namespace GoogleMeetLogsNavigator.TransferObject
      
         public string Nation { get; set; }
        
-        public string ActionCause { get; set; }
+        public string ActionReason { get; set; }
       
         public string ActionDescription { get; set; }
        
-        public string VisualizedDestinationNames { get; set; }
+        public string TargetDisplayNames { get; set; }
      
-        public string DestinationEmailsAddresses { get; set; }
+        public string TargetEmail { get; set; }
      
-        public string DestinationPhoneNumber { get; set; }
+        public string TargetPhoneNumber { get; set; }
 
         public string CalendarEventIdentifier { get; set; }
        
@@ -58,95 +58,103 @@ namespace GoogleMeetLogsNavigator.TransferObject
       
         public string TransportProtocol { get; set; }
      
-        public string PredictedBandWidthLoading { get; set; }
+        public string EstimatedUploadBandwidthInkbps { get; set; }
      
-        public string PredictedBandWidthUploading { get; set; }
+        public string EstimatedDownloadBandwidthInkbps { get; set; }
 
       
-        public string MaxReceptionAudioPacketsLost { get; set; }
+        public string AudioReceivePacketLossMax { get; set; }
       
-        public string AverageReceptionAudioPacketsLost { get; set; }
+        public string AudioReceivePacketLossMean { get; set; }
      
-        public string AudioReceptionDuration { get; set; }
+        public string AudioReceiveDuration { get; set; }
      
         public string BitRatioAudioSending { get; set; }
    
-        public string MaxSendingAudioPacketsLost { get; set; }
+        public string AudioSendPacketLossMax { get; set; }
       
-        public string AverageSendingAudioPacketsLost { get; set; }
+        public string AudioSendPacketLossMean { get; set; }
     
-        public string AudioSendingDuration { get; set; }
+        public string AudioSendDuration { get; set; }
    
-        public string AverageReceptionFlickering { get; set; }
+        public string NetworkRecvJitterMeaninms { get; set; }
  
-        public string MaxReceptionFilckering { get; set; }
+        public string NetworkRecvJitterMaxinms { get; set; }
       
-        public string AverageSendingFlickering { get; set; }
+        public string NetworkSendJitterMeaninms { get; set; }
         
         public string BitRatioScreencastReception { get; set; }
  
-        public string AverageScreecastReception { get; set; }
+        public string ScreencastReceiveFPSMean { get; set; }
    
-        public string LongSideMedianScreencastReception { get; set; }
+        public string ScreencastReceiveLongSideMedian { get; set; }
      
-        public string MaxReceptionScreencastPacketsLost { get; set; }
+        public string ScreencastReceivePacketLossMax { get; set; }
      
-        public string AverageReceptionScreencastPacketsLost { get; set; }
+        public string ScreencastReceivePacketLossMean { get; set; }
       
-        public string ScreencastReceptionDuration { get; set; }
+        public string ScreencastReceiveDuration { get; set; }
        
-        public string ShortSideMedianScreencastReception { get; set; }
+        public string ScreencastReceiveShortSideMedian { get; set; }
       
         public string BitRatioScreencastSending { get; set; }
 
         public string AverageScreecastSending { get; set; }
        
-        public string LongSideMedianScreencastSending { get; set; }
+        public string ScreencastSendLongSideMedian { get; set; }
       
-        public string MaxSendingScreencastPacketsLost { get; set; }
+        public string ScreencastSendPacketLossMax { get; set; }
       
-        public string AverageSendingScreencastPacketsLost { get; set; }
+        public string ScreencastSendPacketLossMean { get; set; }
        
-        public string ScreencastSendingDuration { get; set; }
+        public string ScreencastSendDuration { get; set; }
       
-        public string ShortSideMedianScreencastSending { get; set; }
+        public string ScreencastSendShortSideMedian { get; set; }
       
-        public string AverageVideoReception { get; set; }
+        public string VideoReceiveFPSMean { get; set; }
     
-        public string LongSideMedianVideoReception { get; set; }
+        public string VideoReceiveLongSideMedian { get; set; }
    
-        public string MaxVideoReceptionPacketsLost { get; set; }
+        public string VideoReceivePacketLossMax { get; set; }
      
-        public string AverageVideoReceptionPacketsLost { get; set; }
+        public string VideoReceivePacketLossMean { get; set; }
        
-        public string ReceptionVideoDuration { get; set; }
+        public string VideoReceiveDuration { get; set; }
      
-        public string ShortSideMedianVideoReception { get; set; }
+        public string VideoReceiveShortSideMedian { get; set; }
       
         public string BitRatioVideoSending { get; set; }
       
-        public string AverageVideoSending { get; set; }
+        public string VideoSendFPSMean { get; set; }
       
-        public string LongSideMedianVideoSending { get; set; }
+        public string VideoSendLongSideMedian { get; set; }
        
-        public string MaxSendingVideoPacketsLost { get; set; }
+        public string VideoSendPacketLossMax { get; set; }
        
-        public string AverageSendingVideoPacketsLost { get; set; }
+        public string VideoSendPacketLossMean { get; set; }
     
-        public string VideoSendingDuration { get; set; }
+        public string VideoSendDuration { get; set; }
        
-        public string ShortSideMedianVideoSending { get; set; }
+        public string VideoSendShortSideMedian { get; set; }
        
-        public string NetworkCongestion { get; set; }
+        public string NetworkCongestionRatio { get; set; }
       
         public string MeetingStartDate { get; set; }
-      
+
+        public string EffectiveMeetingStartDate { get; set; }
+
         public string MeetingEndDate { get; set; }
        
         public string MeetingEnteringDate { get; set; }
-     
-        public string TotalMeetingUserPartecipation { get; set; }
-       
-        public string CommonEuropeanTimeType { get; set; }
+
+        public string TotalMeetingUserPartecipationInDecimal { get; set; }
+
+        public string TotalMeetingUserPartecipationInSeconds { get; set; }
+
+        public string TotalMeetingUserPartecipationInMinutes { get; set; }
+
+        public string TotalMeetingUserPartecipationInHours { get; set; }
+
+        public string TimeZone { get; set; }
     }
 }

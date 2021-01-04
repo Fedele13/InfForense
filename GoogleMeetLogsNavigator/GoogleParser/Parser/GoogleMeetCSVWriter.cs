@@ -209,145 +209,151 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 try
                 {
                     /*Mandatory*/
-                    csvWriter.WriteField(Constants.CSVHeader.Date);
-                    csvWriter.WriteField(Constants.CSVHeader.EventName);
-                    csvWriter.WriteField(Constants.CSVHeader.EventDescription);
-                    csvWriter.WriteField(Constants.CSVHeader.MeetingCode);
-                    csvWriter.WriteField(Constants.CSVHeader.PartecipantIdentifier);
-                    csvWriter.WriteField(Constants.CSVHeader.ExternalPartecipantIdentifier);
-                    csvWriter.WriteField(Constants.CSVHeader.ClientType);
+                    csvWriter.WriteField(Constants.CSVHeaderITA.Date);
+                    csvWriter.WriteField(Constants.CSVHeaderITA.EventName);
+                    csvWriter.WriteField(Constants.CSVHeaderITA.EventDescription);
+                    csvWriter.WriteField(Constants.CSVHeaderITA.MeetingCode);
+                    csvWriter.WriteField(Constants.CSVHeaderITA.PartecipantIdentifier);
+                    csvWriter.WriteField(Constants.CSVHeaderITA.ExternalPartecipantIdentifier);
+                    csvWriter.WriteField(Constants.CSVHeaderITA.ClientType);
                     /*Mandatory*/
 
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingOwnerEmail) && this._configurationDictionary[CSVHeaderEnum.MeetingOwnerEmail])
-                        csvWriter.WriteField(Constants.CSVHeader.MeetingOwnerEmail);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.MeetingOwnerEmail);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ProductType) && this._configurationDictionary[CSVHeaderEnum.ProductType])
-                        csvWriter.WriteField(Constants.CSVHeader.ProductType);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ProductType);
 
                     //Mandatory
-                    csvWriter.WriteField(Constants.CSVHeader.Duration);
+                    csvWriter.WriteField(Constants.CSVHeaderITA.Duration);
 
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CallEvaluationOn5) && this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
-                        csvWriter.WriteField(Constants.CSVHeader.CallEvaluationOn5);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.CallEvaluationOn5);
 
-                    csvWriter.WriteField(Constants.CSVHeader.PartecipantName);
+                    csvWriter.WriteField(Constants.CSVHeaderITA.PartecipantName);
 
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.IPAddress) && this._configurationDictionary[CSVHeaderEnum.IPAddress])
-                        csvWriter.WriteField(Constants.CSVHeader.IPAddress);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.IPAddress);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.City) && this._configurationDictionary[CSVHeaderEnum.City])
-                        csvWriter.WriteField(Constants.CSVHeader.City2);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.Nation) && this._configurationDictionary[CSVHeaderEnum.Nation])
-                        csvWriter.WriteField(Constants.CSVHeader.Nation);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.City2);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.Country) && this._configurationDictionary[CSVHeaderEnum.Country])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.Country);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NETRoundTrip) && this._configurationDictionary[CSVHeaderEnum.NETRoundTrip])
-                        csvWriter.WriteField(Constants.CSVHeader.NETRoundTrip);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.NETRoundTrip);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TransportProtocol) && this._configurationDictionary[CSVHeaderEnum.TransportProtocol])
-                        csvWriter.WriteField(Constants.CSVHeader.TransportProtocol);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.PredictedBandWidthLoading) && this._configurationDictionary[CSVHeaderEnum.PredictedBandWidthLoading])
-                        csvWriter.WriteField(Constants.CSVHeader.PredictedBandWidthLoading);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.PredictedBandWidthUploading) && this._configurationDictionary[CSVHeaderEnum.PredictedBandWidthUploading])
-                        csvWriter.WriteField(Constants.CSVHeader.PredictedBandWidthUploading);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxReceptionAudioPacketsLost) && this._configurationDictionary[CSVHeaderEnum.MaxReceptionAudioPacketsLost])
-                        csvWriter.WriteField(Constants.CSVHeader.MaxReceptionAudioPacketsLost);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageReceptionAudioPacketsLost) && this._configurationDictionary[CSVHeaderEnum.AverageReceptionAudioPacketsLost])
-                        csvWriter.WriteField(Constants.CSVHeader.AverageReceptionAudioPacketsLost);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceptionDuration) && this._configurationDictionary[CSVHeaderEnum.AudioReceptionDuration])
-                        csvWriter.WriteField(Constants.CSVHeader.AudioReceptionDuration);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.TransportProtocol);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EstimatedUploadBandwidthInkbps) && this._configurationDictionary[CSVHeaderEnum.EstimatedUploadBandwidthInkbps])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.EstimatedUploadBandwidthInkbps);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EstimatedDownloadBandwidthInkbps) && this._configurationDictionary[CSVHeaderEnum.EstimatedDownloadBandwidthInkbps])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.EstimatedDownloadBandwidthInkbps);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceivePacketLossMax) && this._configurationDictionary[CSVHeaderEnum.AudioReceivePacketLossMax])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.AudioReceivePacketLossMax);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceivePacketLossMean) && this._configurationDictionary[CSVHeaderEnum.AudioReceivePacketLossMean])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.AudioReceivePacketLossMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceiveDuration) && this._configurationDictionary[CSVHeaderEnum.AudioReceiveDuration])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.AudioReceiveDuration);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioAudioSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioAudioSending])
-                        csvWriter.WriteField(Constants.CSVHeader.BitRatioAudioSending2);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxSendingAudioPacketsLost) && this._configurationDictionary[CSVHeaderEnum.MaxSendingAudioPacketsLost])
-                        csvWriter.WriteField(Constants.CSVHeader.MaxSendingAudioPacketsLost);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageSendingAudioPacketsLost) && this._configurationDictionary[CSVHeaderEnum.AverageSendingAudioPacketsLost])
-                        csvWriter.WriteField(Constants.CSVHeader.AverageSendingAudioPacketsLost);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendingDuration) && this._configurationDictionary[CSVHeaderEnum.AudioSendingDuration])
-                        csvWriter.WriteField(Constants.CSVHeader.AudioSendingDuration);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.BitRatioAudioSending2);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.AudioSendPacketLossMax])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.AudioSendPacketLossMax);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendPacketLossMean) && this._configurationDictionary[CSVHeaderEnum.AudioSendPacketLossMean])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.AudioSendPacketLossMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendDuration) && this._configurationDictionary[CSVHeaderEnum.AudioSendDuration])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.AudioSendDuration);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CalendarEventIdentifier) && this._configurationDictionary[CSVHeaderEnum.CalendarEventIdentifier])
-                        csvWriter.WriteField(Constants.CSVHeader.CalendarEventIdentifier);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.CalendarEventIdentifier);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ConferenceID) && this._configurationDictionary[CSVHeaderEnum.ConferenceID])
-                        csvWriter.WriteField(Constants.CSVHeader.ConferenceID);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageReceptionFlickering) && this._configurationDictionary[CSVHeaderEnum.AverageReceptionFlickering])
-                        csvWriter.WriteField(Constants.CSVHeader.AverageReceptionFlickering);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxReceptionFilckering) && this._configurationDictionary[CSVHeaderEnum.MaxReceptionFilckering])
-                        csvWriter.WriteField(Constants.CSVHeader.MaxReceptionFilckering);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageSendingFlickering) && this._configurationDictionary[CSVHeaderEnum.AverageSendingFlickering])
-                        csvWriter.WriteField(Constants.CSVHeader.AverageSendingFlickering);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ConferenceID);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkRecvJitterMeaninms) && this._configurationDictionary[CSVHeaderEnum.NetworkRecvJitterMeaninms])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.NetworkRecvJitterMeaninms);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkRecvJitterMaxinms) && this._configurationDictionary[CSVHeaderEnum.NetworkRecvJitterMaxinms])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.NetworkRecvJitterMaxinms);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkSendJitterMeaninms) && this._configurationDictionary[CSVHeaderEnum.NetworkSendJitterMeaninms])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.NetworkSendJitterMeaninms);
 
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioScreencastReception) && this._configurationDictionary[CSVHeaderEnum.BitRatioScreencastReception])
-                        csvWriter.WriteField(Constants.CSVHeader.BitRatioScreencastReception2);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageScreecastReception) && this._configurationDictionary[CSVHeaderEnum.AverageScreecastReception])
-                        csvWriter.WriteField(Constants.CSVHeader.AverageScreecastReception);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.LongSideMedianScreencastReception) && this._configurationDictionary[CSVHeaderEnum.LongSideMedianScreencastReception])
-                        csvWriter.WriteField(Constants.CSVHeader.LongSideMedianScreencastReception);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxReceptionScreencastPacketsLost) && this._configurationDictionary[CSVHeaderEnum.MaxReceptionScreencastPacketsLost])
-                        csvWriter.WriteField(Constants.CSVHeader.MaxReceptionScreencastPacketsLost);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageReceptionScreencastPacketsLost) && this._configurationDictionary[CSVHeaderEnum.AverageReceptionScreencastPacketsLost])
-                        csvWriter.WriteField(Constants.CSVHeader.AverageReceptionScreencastPacketsLost);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceptionDuration) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceptionDuration])
-                        csvWriter.WriteField(Constants.CSVHeader.ScreencastReceptionDuration);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ShortSideMedianScreencastReception) && this._configurationDictionary[CSVHeaderEnum.ShortSideMedianScreencastReception])
-                        csvWriter.WriteField(Constants.CSVHeader.ShortSideMedianScreencastReception);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.BitRatioScreencastReception2);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveFPSMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveFPSMean])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ScreencastReceiveFPSMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveLongSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ScreencastReceiveLongSideMedian);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceivePacketLossMax) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceivePacketLossMax])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ScreencastReceivePacketLossMax);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceivePacketLossMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceivePacketLossMean])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ScreencastReceivePacketLossMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveDuration) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveDuration])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ScreencastReceiveDuration);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveShortSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ScreencastReceiveShortSideMedian);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioScreencastSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioScreencastSending])
-                        csvWriter.WriteField(Constants.CSVHeader.BitRatioScreencastSending2);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageScreecastSending) && this._configurationDictionary[CSVHeaderEnum.AverageScreecastSending])
-                        csvWriter.WriteField(Constants.CSVHeader.AverageScreecastSending);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.LongSideMedianScreencastSending) && this._configurationDictionary[CSVHeaderEnum.LongSideMedianScreencastSending])
-                        csvWriter.WriteField(Constants.CSVHeader.LongSideMedianScreencastSending);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxSendingScreencastPacketsLost) && this._configurationDictionary[CSVHeaderEnum.MaxSendingScreencastPacketsLost])
-                        csvWriter.WriteField(Constants.CSVHeader.MaxSendingScreencastPacketsLost);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageSendingScreencastPacketsLost) && this._configurationDictionary[CSVHeaderEnum.AverageSendingScreencastPacketsLost])
-                        csvWriter.WriteField(Constants.CSVHeader.AverageSendingScreencastPacketsLost);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendingDuration) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendingDuration])
-                        csvWriter.WriteField(Constants.CSVHeader.ScreencastSendingDuration);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ShortSideMedianScreencastSending) && this._configurationDictionary[CSVHeaderEnum.ShortSideMedianScreencastSending])
-                        csvWriter.WriteField(Constants.CSVHeader.ShortSideMedianScreencastSending);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.BitRatioScreencastSending2);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendFPSMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendFPSMean])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ScreencastSendFPSMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendLongSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ScreencastSendLongSideMedian);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendPacketLossMax])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ScreencastSendPacketLossMax);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendPacketLossMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendPacketLossMean])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ScreencastSendPacketLossMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendDuration) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendDuration])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ScreencastSendDuration);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendShortSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ScreencastSendShortSideMedian);
 
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageVideoReception) && this._configurationDictionary[CSVHeaderEnum.AverageVideoReception])
-                        csvWriter.WriteField(Constants.CSVHeader.AverageVideoReception);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.LongSideMedianVideoReception) && this._configurationDictionary[CSVHeaderEnum.LongSideMedianVideoReception])
-                        csvWriter.WriteField(Constants.CSVHeader.LongSideMedianVideoReception);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxVideoReceptionPacketsLost) && this._configurationDictionary[CSVHeaderEnum.MaxVideoReceptionPacketsLost])
-                        csvWriter.WriteField(Constants.CSVHeader.MaxVideoReceptionPacketsLost);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageVideoReceptionPacketsLost) && this._configurationDictionary[CSVHeaderEnum.AverageVideoReceptionPacketsLost])
-                        csvWriter.WriteField(Constants.CSVHeader.AverageVideoReceptionPacketsLost);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ReceptionVideoDuration) && this._configurationDictionary[CSVHeaderEnum.ReceptionVideoDuration])
-                        csvWriter.WriteField(Constants.CSVHeader.ReceptionVideoDuration);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ShortSideMedianVideoReception) && this._configurationDictionary[CSVHeaderEnum.ShortSideMedianVideoReception])
-                        csvWriter.WriteField(Constants.CSVHeader.ShortSideMedianVideoReception);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkCongestion) && this._configurationDictionary[CSVHeaderEnum.NetworkCongestion])
-                        csvWriter.WriteField(Constants.CSVHeader.NetworkCongestion);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveFPSMean) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveFPSMean])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.VideoReceiveFPSMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveLongSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.VideoReceiveLongSideMedian);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceivePacketLossMax) && this._configurationDictionary[CSVHeaderEnum.VideoReceivePacketLossMax])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.VideoReceivePacketLossMax);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceivePacketLossMean) && this._configurationDictionary[CSVHeaderEnum.VideoReceivePacketLossMean])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.VideoReceivePacketLossMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveDuration) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveDuration])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.VideoReceiveDuration);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveShortSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.VideoReceiveShortSideMedian);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkCongestionRatio) && this._configurationDictionary[CSVHeaderEnum.NetworkCongestionRatio])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.NetworkCongestionRatio);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioVideoSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioVideoSending])
-                        csvWriter.WriteField(Constants.CSVHeader.BitRatioVideoSending2);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageVideoSending) && this._configurationDictionary[CSVHeaderEnum.AverageVideoSending])
-                        csvWriter.WriteField(Constants.CSVHeader.AverageVideoSending);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.LongSideMedianVideoSending) && this._configurationDictionary[CSVHeaderEnum.LongSideMedianVideoSending])
-                        csvWriter.WriteField(Constants.CSVHeader.LongSideMedianVideoSending);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxSendingVideoPacketsLost) && this._configurationDictionary[CSVHeaderEnum.MaxSendingVideoPacketsLost])
-                        csvWriter.WriteField(Constants.CSVHeader.MaxSendingVideoPacketsLost);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageSendingVideoPacketsLost) && this._configurationDictionary[CSVHeaderEnum.AverageSendingVideoPacketsLost])
-                        csvWriter.WriteField(Constants.CSVHeader.AverageSendingVideoPacketsLost);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendingDuration) && this._configurationDictionary[CSVHeaderEnum.VideoSendingDuration])
-                        csvWriter.WriteField(Constants.CSVHeader.VideoSendingDuration);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ShortSideMedianVideoSending) && this._configurationDictionary[CSVHeaderEnum.ShortSideMedianVideoSending])
-                        csvWriter.WriteField(Constants.CSVHeader.ShortSideMedianVideoSending);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ActionCause) && this._configurationDictionary[CSVHeaderEnum.ActionCause])
-                        csvWriter.WriteField(Constants.CSVHeader.ActionCause);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.BitRatioVideoSending2);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendFPSMean) && this._configurationDictionary[CSVHeaderEnum.VideoSendFPSMean])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.VideoSendFPSMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoSendLongSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.VideoSendLongSideMedian);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.VideoSendPacketLossMax])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.VideoSendPacketLossMax);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendPacketLossMean) && this._configurationDictionary[CSVHeaderEnum.VideoSendPacketLossMean])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.VideoSendPacketLossMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendDuration) && this._configurationDictionary[CSVHeaderEnum.VideoSendDuration])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.VideoSendDuration);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoSendShortSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.VideoSendShortSideMedian);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ActionReason) && this._configurationDictionary[CSVHeaderEnum.ActionReason])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ActionReason);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ActionDescription) && this._configurationDictionary[CSVHeaderEnum.ActionDescription])
-                        csvWriter.WriteField(Constants.CSVHeader.ActionDescription);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VisualizedDestinationNames) && this._configurationDictionary[CSVHeaderEnum.VisualizedDestinationNames])
-                        csvWriter.WriteField(Constants.CSVHeader.VisualizedDestinationNames);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.DestinationEmailsAddresses) && this._configurationDictionary[CSVHeaderEnum.DestinationEmailsAddresses])
-                        csvWriter.WriteField(Constants.CSVHeader.DestinationEmailsAddresses);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.DestinationPhoneNumber) && this._configurationDictionary[CSVHeaderEnum.DestinationPhoneNumber])
-                        csvWriter.WriteField(Constants.CSVHeader.DestinationPhoneNumber);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.ActionDescription);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TargetDisplayNames) && this._configurationDictionary[CSVHeaderEnum.TargetDisplayNames])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.TargetDisplayNames);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TargetEmail) && this._configurationDictionary[CSVHeaderEnum.TargetEmail])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.TargetEmail);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TargetPhoneNumber) && this._configurationDictionary[CSVHeaderEnum.TargetPhoneNumber])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.TargetPhoneNumber);
 
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingStartDate) && this._configurationDictionary[CSVHeaderEnum.MeetingStartDate])
-                        csvWriter.WriteField(Constants.CSVHeader.MeetingStartDate);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.MeetingStartDate);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEndDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEndDate])
-                        csvWriter.WriteField(Constants.CSVHeader.MeetingEndDate);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.MeetingEndDate);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEnteringDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEnteringDate])
-                        csvWriter.WriteField(Constants.CSVHeader.MeetingEnteringDate);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipation) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipation])
-                        csvWriter.WriteField(Constants.CSVHeader.TotalMeetingUserPartecipation);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.MeetingEnteringDate);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInDecimal);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInHours) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInHours])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInHours);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInMinutes);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInSeconds) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInSeconds])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInSeconds);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CommonEuropeanTimeType) && this._configurationDictionary[CSVHeaderEnum.CommonEuropeanTimeType])
-                        csvWriter.WriteField(Constants.CSVHeader.CommonEuropeanTimeType);
+                        csvWriter.WriteField(Constants.CSVHeaderITA.TimeZone);
                 }
                 catch (System.Exception ex)
                 {
@@ -389,108 +395,108 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                             csvWriter.WriteField(log.IPAddress.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.City) && this._configurationDictionary[CSVHeaderEnum.City])
                             csvWriter.WriteField(log.City.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.Nation) && this._configurationDictionary[CSVHeaderEnum.Nation])
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.Country) && this._configurationDictionary[CSVHeaderEnum.Country])
                             csvWriter.WriteField(log.Nation.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NETRoundTrip) && this._configurationDictionary[CSVHeaderEnum.NETRoundTrip])
                             csvWriter.WriteField(log.NETRoundTrip.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TransportProtocol) && this._configurationDictionary[CSVHeaderEnum.TransportProtocol])
                             csvWriter.WriteField(log.TransportProtocol.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.PredictedBandWidthLoading) && this._configurationDictionary[CSVHeaderEnum.PredictedBandWidthLoading])
-                            csvWriter.WriteField(log.PredictedBandWidthLoading.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.PredictedBandWidthUploading) && this._configurationDictionary[CSVHeaderEnum.PredictedBandWidthUploading])
-                            csvWriter.WriteField(log.PredictedBandWidthUploading.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxReceptionAudioPacketsLost) && this._configurationDictionary[CSVHeaderEnum.MaxReceptionAudioPacketsLost])
-                            csvWriter.WriteField(log.MaxReceptionAudioPacketsLost.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageReceptionAudioPacketsLost) && this._configurationDictionary[CSVHeaderEnum.AverageReceptionAudioPacketsLost])
-                            csvWriter.WriteField(log.AverageReceptionAudioPacketsLost.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceptionDuration) && this._configurationDictionary[CSVHeaderEnum.AudioReceptionDuration])
-                            csvWriter.WriteField(log.AudioReceptionDuration.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EstimatedUploadBandwidthInkbps) && this._configurationDictionary[CSVHeaderEnum.EstimatedUploadBandwidthInkbps])
+                            csvWriter.WriteField(log.EstimatedUploadBandwidthInkbps.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EstimatedDownloadBandwidthInkbps) && this._configurationDictionary[CSVHeaderEnum.EstimatedDownloadBandwidthInkbps])
+                            csvWriter.WriteField(log.EstimatedDownloadBandwidthInkbps.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceivePacketLossMax) && this._configurationDictionary[CSVHeaderEnum.AudioReceivePacketLossMax])
+                            csvWriter.WriteField(log.AudioReceivePacketLossMax.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceivePacketLossMean) && this._configurationDictionary[CSVHeaderEnum.AudioReceivePacketLossMean])
+                            csvWriter.WriteField(log.AudioReceivePacketLossMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceiveDuration) && this._configurationDictionary[CSVHeaderEnum.AudioReceiveDuration])
+                            csvWriter.WriteField(log.AudioReceiveDuration.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioAudioSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioAudioSending])
                             csvWriter.WriteField(log.BitRatioAudioSending.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxSendingAudioPacketsLost) && this._configurationDictionary[CSVHeaderEnum.MaxSendingAudioPacketsLost])
-                            csvWriter.WriteField(log.MaxSendingAudioPacketsLost.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageSendingAudioPacketsLost) && this._configurationDictionary[CSVHeaderEnum.AverageSendingAudioPacketsLost])
-                            csvWriter.WriteField(log.AverageSendingAudioPacketsLost.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendingDuration) && this._configurationDictionary[CSVHeaderEnum.AudioSendingDuration])
-                            csvWriter.WriteField(log.AudioSendingDuration.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.AudioSendPacketLossMax])
+                            csvWriter.WriteField(log.AudioSendPacketLossMax.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendPacketLossMean) && this._configurationDictionary[CSVHeaderEnum.AudioSendPacketLossMean])
+                            csvWriter.WriteField(log.AudioSendPacketLossMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendDuration) && this._configurationDictionary[CSVHeaderEnum.AudioSendDuration])
+                            csvWriter.WriteField(log.AudioSendDuration.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CalendarEventIdentifier) && this._configurationDictionary[CSVHeaderEnum.CalendarEventIdentifier])
                             csvWriter.WriteField(log.CalendarEventIdentifier.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ConferenceID) && this._configurationDictionary[CSVHeaderEnum.ConferenceID])
                             csvWriter.WriteField(log.ConferenceID.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageReceptionFlickering) && this._configurationDictionary[CSVHeaderEnum.AverageReceptionFlickering])
-                            csvWriter.WriteField(log.AverageReceptionFlickering.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxReceptionFilckering) && this._configurationDictionary[CSVHeaderEnum.MaxReceptionFilckering])
-                            csvWriter.WriteField(log.MaxReceptionFilckering.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageSendingFlickering) && this._configurationDictionary[CSVHeaderEnum.AverageSendingFlickering])
-                            csvWriter.WriteField(log.AverageSendingFlickering.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkRecvJitterMeaninms) && this._configurationDictionary[CSVHeaderEnum.NetworkRecvJitterMeaninms])
+                            csvWriter.WriteField(log.NetworkRecvJitterMeaninms.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkRecvJitterMaxinms) && this._configurationDictionary[CSVHeaderEnum.NetworkRecvJitterMaxinms])
+                            csvWriter.WriteField(log.NetworkRecvJitterMaxinms.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkSendJitterMeaninms) && this._configurationDictionary[CSVHeaderEnum.NetworkSendJitterMeaninms])
+                            csvWriter.WriteField(log.NetworkSendJitterMeaninms.GetSafeString());
 
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioScreencastReception) && this._configurationDictionary[CSVHeaderEnum.BitRatioScreencastReception])
                             csvWriter.WriteField(log.BitRatioScreencastReception.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageScreecastReception) && this._configurationDictionary[CSVHeaderEnum.AverageScreecastReception])
-                            csvWriter.WriteField(log.AverageScreecastReception.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.LongSideMedianScreencastReception) && this._configurationDictionary[CSVHeaderEnum.LongSideMedianScreencastReception])
-                            csvWriter.WriteField(log.LongSideMedianScreencastReception.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxReceptionScreencastPacketsLost) && this._configurationDictionary[CSVHeaderEnum.MaxReceptionScreencastPacketsLost])
-                            csvWriter.WriteField(log.MaxReceptionScreencastPacketsLost.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageReceptionScreencastPacketsLost) && this._configurationDictionary[CSVHeaderEnum.AverageReceptionScreencastPacketsLost])
-                            csvWriter.WriteField(log.AverageReceptionScreencastPacketsLost.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceptionDuration) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceptionDuration])
-                            csvWriter.WriteField(log.ScreencastReceptionDuration.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ShortSideMedianScreencastReception) && this._configurationDictionary[CSVHeaderEnum.ShortSideMedianScreencastReception])
-                            csvWriter.WriteField(log.ShortSideMedianScreencastReception.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveFPSMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveFPSMean])
+                            csvWriter.WriteField(log.ScreencastReceiveFPSMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveLongSideMedian])
+                            csvWriter.WriteField(log.ScreencastReceiveLongSideMedian.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceivePacketLossMax) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceivePacketLossMax])
+                            csvWriter.WriteField(log.ScreencastReceivePacketLossMax.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceivePacketLossMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceivePacketLossMean])
+                            csvWriter.WriteField(log.ScreencastReceivePacketLossMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveDuration) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveDuration])
+                            csvWriter.WriteField(log.ScreencastReceiveDuration.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveShortSideMedian])
+                            csvWriter.WriteField(log.ScreencastReceiveShortSideMedian.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioScreencastSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioScreencastSending])
                             csvWriter.WriteField(log.BitRatioScreencastSending.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageScreecastSending) && this._configurationDictionary[CSVHeaderEnum.AverageScreecastSending])
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendFPSMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendFPSMean])
                             csvWriter.WriteField(log.AverageScreecastSending.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.LongSideMedianScreencastSending) && this._configurationDictionary[CSVHeaderEnum.LongSideMedianScreencastSending])
-                            csvWriter.WriteField(log.LongSideMedianScreencastSending.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxSendingScreencastPacketsLost) && this._configurationDictionary[CSVHeaderEnum.MaxSendingScreencastPacketsLost])
-                            csvWriter.WriteField(log.MaxSendingScreencastPacketsLost);
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageSendingScreencastPacketsLost) && this._configurationDictionary[CSVHeaderEnum.AverageSendingScreencastPacketsLost])
-                            csvWriter.WriteField(log.AverageSendingScreencastPacketsLost.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendingDuration) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendingDuration])
-                            csvWriter.WriteField(log.ScreencastSendingDuration.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ShortSideMedianScreencastSending) && this._configurationDictionary[CSVHeaderEnum.ShortSideMedianScreencastSending])
-                            csvWriter.WriteField(log.ShortSideMedianScreencastSending.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendLongSideMedian])
+                            csvWriter.WriteField(log.ScreencastSendLongSideMedian.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendPacketLossMax])
+                            csvWriter.WriteField(log.ScreencastSendPacketLossMax);
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendPacketLossMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendPacketLossMean])
+                            csvWriter.WriteField(log.ScreencastSendPacketLossMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendDuration) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendDuration])
+                            csvWriter.WriteField(log.ScreencastSendDuration.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendShortSideMedian])
+                            csvWriter.WriteField(log.ScreencastSendShortSideMedian.GetSafeString());
 
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageVideoReception) && this._configurationDictionary[CSVHeaderEnum.AverageVideoReception])
-                            csvWriter.WriteField(log.AverageVideoReception.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.LongSideMedianVideoReception) && this._configurationDictionary[CSVHeaderEnum.LongSideMedianVideoReception])
-                            csvWriter.WriteField(log.LongSideMedianVideoReception.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxVideoReceptionPacketsLost) && this._configurationDictionary[CSVHeaderEnum.MaxVideoReceptionPacketsLost])
-                            csvWriter.WriteField(log.MaxVideoReceptionPacketsLost.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageVideoReceptionPacketsLost) && this._configurationDictionary[CSVHeaderEnum.AverageVideoReceptionPacketsLost])
-                            csvWriter.WriteField(log.AverageVideoReceptionPacketsLost.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ReceptionVideoDuration) && this._configurationDictionary[CSVHeaderEnum.ReceptionVideoDuration])
-                            csvWriter.WriteField(log.ReceptionVideoDuration.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ShortSideMedianVideoReception) && this._configurationDictionary[CSVHeaderEnum.ShortSideMedianVideoReception])
-                            csvWriter.WriteField(log.ShortSideMedianVideoReception.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkCongestion) && this._configurationDictionary[CSVHeaderEnum.NetworkCongestion])
-                            csvWriter.WriteField(log.NetworkCongestion.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveFPSMean) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveFPSMean])
+                            csvWriter.WriteField(log.VideoReceiveFPSMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveLongSideMedian])
+                            csvWriter.WriteField(log.VideoReceiveLongSideMedian.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceivePacketLossMax) && this._configurationDictionary[CSVHeaderEnum.VideoReceivePacketLossMax])
+                            csvWriter.WriteField(log.VideoReceivePacketLossMax.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceivePacketLossMean) && this._configurationDictionary[CSVHeaderEnum.VideoReceivePacketLossMean])
+                            csvWriter.WriteField(log.VideoReceivePacketLossMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveDuration) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveDuration])
+                            csvWriter.WriteField(log.VideoReceiveDuration.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveShortSideMedian])
+                            csvWriter.WriteField(log.VideoReceiveShortSideMedian.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkCongestionRatio) && this._configurationDictionary[CSVHeaderEnum.NetworkCongestionRatio])
+                            csvWriter.WriteField(log.NetworkCongestionRatio.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioVideoSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioVideoSending])
                             csvWriter.WriteField(log.BitRatioVideoSending.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageVideoSending) && this._configurationDictionary[CSVHeaderEnum.AverageVideoSending])
-                            csvWriter.WriteField(log.AverageVideoSending.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.LongSideMedianVideoSending) && this._configurationDictionary[CSVHeaderEnum.LongSideMedianVideoSending])
-                            csvWriter.WriteField(log.LongSideMedianVideoSending.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MaxSendingVideoPacketsLost) && this._configurationDictionary[CSVHeaderEnum.MaxSendingVideoPacketsLost])
-                            csvWriter.WriteField(log.MaxSendingVideoPacketsLost.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AverageSendingVideoPacketsLost) && this._configurationDictionary[CSVHeaderEnum.AverageSendingVideoPacketsLost])
-                            csvWriter.WriteField(log.AverageSendingVideoPacketsLost.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendingDuration) && this._configurationDictionary[CSVHeaderEnum.VideoSendingDuration])
-                            csvWriter.WriteField(log.VideoSendingDuration.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ShortSideMedianVideoSending) && this._configurationDictionary[CSVHeaderEnum.ShortSideMedianVideoSending])
-                            csvWriter.WriteField(log.ShortSideMedianVideoSending.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ActionCause) && this._configurationDictionary[CSVHeaderEnum.ActionCause])
-                            csvWriter.WriteField(log.ActionCause.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendFPSMean) && this._configurationDictionary[CSVHeaderEnum.VideoSendFPSMean])
+                            csvWriter.WriteField(log.VideoSendFPSMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoSendLongSideMedian])
+                            csvWriter.WriteField(log.VideoSendLongSideMedian.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.VideoSendPacketLossMax])
+                            csvWriter.WriteField(log.VideoSendPacketLossMax.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendPacketLossMean) && this._configurationDictionary[CSVHeaderEnum.VideoSendPacketLossMean])
+                            csvWriter.WriteField(log.VideoSendPacketLossMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendDuration) && this._configurationDictionary[CSVHeaderEnum.VideoSendDuration])
+                            csvWriter.WriteField(log.VideoSendDuration.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoSendShortSideMedian])
+                            csvWriter.WriteField(log.VideoSendShortSideMedian.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ActionReason) && this._configurationDictionary[CSVHeaderEnum.ActionReason])
+                            csvWriter.WriteField(log.ActionReason.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ActionDescription) && this._configurationDictionary[CSVHeaderEnum.ActionDescription])
                             csvWriter.WriteField(log.ActionDescription.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VisualizedDestinationNames) && this._configurationDictionary[CSVHeaderEnum.VisualizedDestinationNames])
-                            csvWriter.WriteField(log.VisualizedDestinationNames.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.DestinationEmailsAddresses) && this._configurationDictionary[CSVHeaderEnum.DestinationEmailsAddresses])
-                            csvWriter.WriteField(log.DestinationEmailsAddresses.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.DestinationPhoneNumber) && this._configurationDictionary[CSVHeaderEnum.DestinationPhoneNumber])
-                            csvWriter.WriteField(log.DestinationPhoneNumber.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TargetDisplayNames) && this._configurationDictionary[CSVHeaderEnum.TargetDisplayNames])
+                            csvWriter.WriteField(log.TargetDisplayNames.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TargetEmail) && this._configurationDictionary[CSVHeaderEnum.TargetEmail])
+                            csvWriter.WriteField(log.TargetEmail.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TargetPhoneNumber) && this._configurationDictionary[CSVHeaderEnum.TargetPhoneNumber])
+                            csvWriter.WriteField(log.TargetPhoneNumber.GetSafeString());
 
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingStartDate) && this._configurationDictionary[CSVHeaderEnum.MeetingStartDate])
                             csvWriter.WriteField(log.MeetingStartDate.GetSafeString());
@@ -498,10 +504,363 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                             csvWriter.WriteField(log.MeetingEndDate.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEnteringDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEnteringDate])
                             csvWriter.WriteField(log.MeetingEnteringDate.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipation) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipation])
-                            csvWriter.WriteField(log.TotalMeetingUserPartecipation.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal])
+                            csvWriter.WriteField(log.TotalMeetingUserPartecipationInDecimal.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInSeconds) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInSeconds])
+                            csvWriter.WriteField(log.TotalMeetingUserPartecipationInSeconds.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes])
+                            csvWriter.WriteField(log.TotalMeetingUserPartecipationInMinutes.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInHours) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInHours])
+                            csvWriter.WriteField(log.TotalMeetingUserPartecipationInHours.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CommonEuropeanTimeType) && this._configurationDictionary[CSVHeaderEnum.CommonEuropeanTimeType])
-                            csvWriter.WriteField(log.CommonEuropeanTimeType.GetSafeString());
+                            csvWriter.WriteField(log.TimeZone.GetSafeString());
+
+                        csvWriter.NextRecord();
+                    }
+                    catch (System.Exception ex)
+                    {
+                        throw new Exception.WriterException($"Errore durante la scrittura dell {i + 1}-esimo record del contenuto del csv", ex);
+                    }
+                }
+
+                writer.Flush();
+
+                return this._encoding.GetString(mem.ToArray());
+
+            }
+        }
+
+        /// <summary>
+        /// Return the csv content with EN csv header
+        /// </summary>
+        /// <param name="logs">The logs</param>
+        /// <returns>The csv content with EN csv header</returns>
+        private string exportTransferObjectEN(IList<IGoogleMeetLogTO> logs)
+        {
+            using (var mem = new MemoryStream())
+            using (var writer = new StreamWriter(mem))
+            using (var csvWriter = new CsvWriter(writer, System.Globalization.CultureInfo.InvariantCulture))
+            {
+                csvWriter.Configuration.SanitizeForInjection = true;
+                csvWriter.Configuration.Delimiter = this._csvDelimiter;
+                csvWriter.Configuration.ShouldQuote = (field, context) =>
+                {
+                    return field.Contains(_csvDelimiter);
+                };
+
+                if (this._configurationDictionary == null)
+                {
+                    this._configurationDictionary = GetDefaultConfiguration();
+                }
+
+                try
+                {
+                    /*Mandatory*/
+                    csvWriter.WriteField(Constants.CSVHeaderEN.Date);
+                    csvWriter.WriteField(Constants.CSVHeaderEN.EventName);
+                    csvWriter.WriteField(Constants.CSVHeaderEN.EventDescription);
+                    csvWriter.WriteField(Constants.CSVHeaderEN.MeetingCode);
+                    csvWriter.WriteField(Constants.CSVHeaderEN.PartecipantIdentifier);
+                    csvWriter.WriteField(Constants.CSVHeaderEN.ExternalPartecipantIdentifier);
+                    csvWriter.WriteField(Constants.CSVHeaderEN.ClientType);
+                    /*Mandatory*/
+
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingOwnerEmail) && this._configurationDictionary[CSVHeaderEnum.MeetingOwnerEmail])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.MeetingOwnerEmail);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ProductType) && this._configurationDictionary[CSVHeaderEnum.ProductType])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ProductType);
+
+                    //Mandatory
+                    csvWriter.WriteField(Constants.CSVHeaderEN.Duration);
+
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CallEvaluationOn5) && this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.CallEvaluationOn5);
+
+                    csvWriter.WriteField(Constants.CSVHeaderEN.PartecipantName);
+
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.IPAddress) && this._configurationDictionary[CSVHeaderEnum.IPAddress])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.IPAddress);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.City) && this._configurationDictionary[CSVHeaderEnum.City])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.City);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.Country) && this._configurationDictionary[CSVHeaderEnum.Country])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.Country);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NETRoundTrip) && this._configurationDictionary[CSVHeaderEnum.NETRoundTrip])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.NETRoundTrip);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TransportProtocol) && this._configurationDictionary[CSVHeaderEnum.TransportProtocol])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.TransportProtocol);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EstimatedUploadBandwidthInkbps) && this._configurationDictionary[CSVHeaderEnum.EstimatedUploadBandwidthInkbps])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.EstimatedUploadBandwidthInkbps);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EstimatedDownloadBandwidthInkbps) && this._configurationDictionary[CSVHeaderEnum.EstimatedDownloadBandwidthInkbps])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.EstimatedDownloadBandwidthInkbps);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceivePacketLossMax) && this._configurationDictionary[CSVHeaderEnum.AudioReceivePacketLossMax])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.AudioReceivePacketLossMax);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceivePacketLossMean) && this._configurationDictionary[CSVHeaderEnum.AudioReceivePacketLossMean])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.AudioReceivePacketLossMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceiveDuration) && this._configurationDictionary[CSVHeaderEnum.AudioReceiveDuration])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.AudioReceiveDuration);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioAudioSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioAudioSending])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.BitRatioAudioSending);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.AudioSendPacketLossMax])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.AudioSendPacketLossMax);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendPacketLossMean) && this._configurationDictionary[CSVHeaderEnum.AudioSendPacketLossMean])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.AudioSendPacketLossMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendDuration) && this._configurationDictionary[CSVHeaderEnum.AudioSendDuration])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.AudioSendDuration);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CalendarEventIdentifier) && this._configurationDictionary[CSVHeaderEnum.CalendarEventIdentifier])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.CalendarEventIdentifier);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ConferenceID) && this._configurationDictionary[CSVHeaderEnum.ConferenceID])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ConferenceID);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkRecvJitterMeaninms) && this._configurationDictionary[CSVHeaderEnum.NetworkRecvJitterMeaninms])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.NetworkRecvJitterMeaninms);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkRecvJitterMaxinms) && this._configurationDictionary[CSVHeaderEnum.NetworkRecvJitterMaxinms])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.NetworkRecvJitterMaxinms);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkSendJitterMeaninms) && this._configurationDictionary[CSVHeaderEnum.NetworkSendJitterMeaninms])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.NetworkSendJitterMeaninms);
+
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioScreencastReception) && this._configurationDictionary[CSVHeaderEnum.BitRatioScreencastReception])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.BitRatioScreencastReception);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveFPSMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveFPSMean])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ScreencastReceiveFPSMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveLongSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ScreencastReceiveLongSideMedian);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceivePacketLossMax) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceivePacketLossMax])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ScreencastReceivePacketLossMax);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceivePacketLossMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceivePacketLossMean])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ScreencastReceivePacketLossMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveDuration) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveDuration])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ScreencastReceiveDuration);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveShortSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ScreencastReceiveShortSideMedian);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioScreencastSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioScreencastSending])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.BitRatioScreencastSending);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendFPSMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendFPSMean])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ScreencastSendFPSMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendLongSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ScreencastSendLongSideMedian);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendPacketLossMax])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ScreencastSendPacketLossMax);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendPacketLossMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendPacketLossMean])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ScreencastSendPacketLossMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendDuration) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendDuration])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ScreencastSendDuration);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendShortSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ScreencastSendShortSideMedian);
+
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveFPSMean) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveFPSMean])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.VideoReceiveFPSMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveLongSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.VideoReceiveLongSideMedian);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceivePacketLossMax) && this._configurationDictionary[CSVHeaderEnum.VideoReceivePacketLossMax])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.VideoReceivePacketLossMax);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceivePacketLossMean) && this._configurationDictionary[CSVHeaderEnum.VideoReceivePacketLossMean])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.VideoReceivePacketLossMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveDuration) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveDuration])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.VideoReceiveDuration);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveShortSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.VideoReceiveShortSideMedian);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkCongestionRatio) && this._configurationDictionary[CSVHeaderEnum.NetworkCongestionRatio])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.NetworkCongestionRatio);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioVideoSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioVideoSending])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.BitRatioVideoSending);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendFPSMean) && this._configurationDictionary[CSVHeaderEnum.VideoSendFPSMean])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.VideoSendFPSMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoSendLongSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.VideoSendLongSideMedian);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.VideoSendPacketLossMax])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.VideoSendPacketLossMax);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendPacketLossMean) && this._configurationDictionary[CSVHeaderEnum.VideoSendPacketLossMean])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.VideoSendPacketLossMean);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendDuration) && this._configurationDictionary[CSVHeaderEnum.VideoSendDuration])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.VideoSendDuration);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoSendShortSideMedian])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.VideoSendShortSideMedian);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ActionReason) && this._configurationDictionary[CSVHeaderEnum.ActionReason])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ActionReason);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ActionDescription) && this._configurationDictionary[CSVHeaderEnum.ActionDescription])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.ActionDescription);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TargetDisplayNames) && this._configurationDictionary[CSVHeaderEnum.TargetDisplayNames])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.TargetDisplayNames);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TargetEmail) && this._configurationDictionary[CSVHeaderEnum.TargetEmail])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.TargetEmail);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TargetPhoneNumber) && this._configurationDictionary[CSVHeaderEnum.TargetPhoneNumber])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.TargetPhoneNumber);
+
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingStartDate) && this._configurationDictionary[CSVHeaderEnum.MeetingStartDate])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.MeetingStartDate);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEndDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEndDate])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.MeetingEndDate);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEnteringDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEnteringDate])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.MeetingEnteringDate);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInDecimal);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInHours) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInHours])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInHours);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInMinutes);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInSeconds) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInSeconds])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInSeconds);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CommonEuropeanTimeType) && this._configurationDictionary[CSVHeaderEnum.CommonEuropeanTimeType])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.TimeZone);
+                }
+                catch (System.Exception ex)
+                {
+                    throw new Exception.WriterException("Errore durante la scrittura dell'header del contenuto del csv", ex);
+                }
+
+                csvWriter.NextRecord();
+
+                for (int i = 0; i < logs.Count; ++i)
+                {
+                    IGoogleMeetLogTO log = logs[i];
+
+                    try
+                    {
+                        /*Mandatory*/
+                        csvWriter.WriteField(log.Date.GetSafeString());
+                        csvWriter.WriteField(log.EventName.GetSafeString());
+                        csvWriter.WriteField(log.EventDescription.GetSafeString());
+                        csvWriter.WriteField(log.MeetingCode.GetSafeString());
+                        csvWriter.WriteField(log.PartecipantIdentifier.GetSafeString());
+                        csvWriter.WriteField(log.ExternalPartecipantIdentifier.GetSafeString());
+                        csvWriter.WriteField(log.ClientType.GetSafeString());
+                        /*Mandatory*/
+
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingOwnerEmail) && this._configurationDictionary[CSVHeaderEnum.MeetingOwnerEmail])
+                            csvWriter.WriteField(log.MeetingOwnerEmail.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ProductType) && this._configurationDictionary[CSVHeaderEnum.ProductType])
+                            csvWriter.WriteField(log.ProductType.GetSafeString());
+
+                        //Mandatory
+                        csvWriter.WriteField(log.Duration);
+
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CallEvaluationOn5) && this._configurationDictionary[CSVHeaderEnum.CallEvaluationOn5])
+                            csvWriter.WriteField(log.CallEvaluationOn5.GetSafeString());
+
+                        csvWriter.WriteField(log.PartecipantName.GetSafeString());
+
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.IPAddress) && this._configurationDictionary[CSVHeaderEnum.IPAddress])
+                            csvWriter.WriteField(log.IPAddress.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.City) && this._configurationDictionary[CSVHeaderEnum.City])
+                            csvWriter.WriteField(log.City.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.Country) && this._configurationDictionary[CSVHeaderEnum.Country])
+                            csvWriter.WriteField(log.Nation.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NETRoundTrip) && this._configurationDictionary[CSVHeaderEnum.NETRoundTrip])
+                            csvWriter.WriteField(log.NETRoundTrip.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TransportProtocol) && this._configurationDictionary[CSVHeaderEnum.TransportProtocol])
+                            csvWriter.WriteField(log.TransportProtocol.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EstimatedUploadBandwidthInkbps) && this._configurationDictionary[CSVHeaderEnum.EstimatedUploadBandwidthInkbps])
+                            csvWriter.WriteField(log.EstimatedUploadBandwidthInkbps.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.EstimatedDownloadBandwidthInkbps) && this._configurationDictionary[CSVHeaderEnum.EstimatedDownloadBandwidthInkbps])
+                            csvWriter.WriteField(log.EstimatedDownloadBandwidthInkbps.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceivePacketLossMax) && this._configurationDictionary[CSVHeaderEnum.AudioReceivePacketLossMax])
+                            csvWriter.WriteField(log.AudioReceivePacketLossMax.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceivePacketLossMean) && this._configurationDictionary[CSVHeaderEnum.AudioReceivePacketLossMean])
+                            csvWriter.WriteField(log.AudioReceivePacketLossMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioReceiveDuration) && this._configurationDictionary[CSVHeaderEnum.AudioReceiveDuration])
+                            csvWriter.WriteField(log.AudioReceiveDuration.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioAudioSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioAudioSending])
+                            csvWriter.WriteField(log.BitRatioAudioSending.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.AudioSendPacketLossMax])
+                            csvWriter.WriteField(log.AudioSendPacketLossMax.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendPacketLossMean) && this._configurationDictionary[CSVHeaderEnum.AudioSendPacketLossMean])
+                            csvWriter.WriteField(log.AudioSendPacketLossMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.AudioSendDuration) && this._configurationDictionary[CSVHeaderEnum.AudioSendDuration])
+                            csvWriter.WriteField(log.AudioSendDuration.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CalendarEventIdentifier) && this._configurationDictionary[CSVHeaderEnum.CalendarEventIdentifier])
+                            csvWriter.WriteField(log.CalendarEventIdentifier.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ConferenceID) && this._configurationDictionary[CSVHeaderEnum.ConferenceID])
+                            csvWriter.WriteField(log.ConferenceID.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkRecvJitterMeaninms) && this._configurationDictionary[CSVHeaderEnum.NetworkRecvJitterMeaninms])
+                            csvWriter.WriteField(log.NetworkRecvJitterMeaninms.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkRecvJitterMaxinms) && this._configurationDictionary[CSVHeaderEnum.NetworkRecvJitterMaxinms])
+                            csvWriter.WriteField(log.NetworkRecvJitterMaxinms.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkSendJitterMeaninms) && this._configurationDictionary[CSVHeaderEnum.NetworkSendJitterMeaninms])
+                            csvWriter.WriteField(log.NetworkSendJitterMeaninms.GetSafeString());
+
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioScreencastReception) && this._configurationDictionary[CSVHeaderEnum.BitRatioScreencastReception])
+                            csvWriter.WriteField(log.BitRatioScreencastReception.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveFPSMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveFPSMean])
+                            csvWriter.WriteField(log.ScreencastReceiveFPSMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveLongSideMedian])
+                            csvWriter.WriteField(log.ScreencastReceiveLongSideMedian.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceivePacketLossMax) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceivePacketLossMax])
+                            csvWriter.WriteField(log.ScreencastReceivePacketLossMax.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceivePacketLossMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceivePacketLossMean])
+                            csvWriter.WriteField(log.ScreencastReceivePacketLossMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveDuration) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveDuration])
+                            csvWriter.WriteField(log.ScreencastReceiveDuration.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastReceiveShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastReceiveShortSideMedian])
+                            csvWriter.WriteField(log.ScreencastReceiveShortSideMedian.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioScreencastSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioScreencastSending])
+                            csvWriter.WriteField(log.BitRatioScreencastSending.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendFPSMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendFPSMean])
+                            csvWriter.WriteField(log.AverageScreecastSending.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendLongSideMedian])
+                            csvWriter.WriteField(log.ScreencastSendLongSideMedian.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendPacketLossMax])
+                            csvWriter.WriteField(log.ScreencastSendPacketLossMax);
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendPacketLossMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendPacketLossMean])
+                            csvWriter.WriteField(log.ScreencastSendPacketLossMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendDuration) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendDuration])
+                            csvWriter.WriteField(log.ScreencastSendDuration.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendShortSideMedian])
+                            csvWriter.WriteField(log.ScreencastSendShortSideMedian.GetSafeString());
+
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveFPSMean) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveFPSMean])
+                            csvWriter.WriteField(log.VideoReceiveFPSMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveLongSideMedian])
+                            csvWriter.WriteField(log.VideoReceiveLongSideMedian.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceivePacketLossMax) && this._configurationDictionary[CSVHeaderEnum.VideoReceivePacketLossMax])
+                            csvWriter.WriteField(log.VideoReceivePacketLossMax.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceivePacketLossMean) && this._configurationDictionary[CSVHeaderEnum.VideoReceivePacketLossMean])
+                            csvWriter.WriteField(log.VideoReceivePacketLossMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveDuration) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveDuration])
+                            csvWriter.WriteField(log.VideoReceiveDuration.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoReceiveShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoReceiveShortSideMedian])
+                            csvWriter.WriteField(log.VideoReceiveShortSideMedian.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NetworkCongestionRatio) && this._configurationDictionary[CSVHeaderEnum.NetworkCongestionRatio])
+                            csvWriter.WriteField(log.NetworkCongestionRatio.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioVideoSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioVideoSending])
+                            csvWriter.WriteField(log.BitRatioVideoSending.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendFPSMean) && this._configurationDictionary[CSVHeaderEnum.VideoSendFPSMean])
+                            csvWriter.WriteField(log.VideoSendFPSMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoSendLongSideMedian])
+                            csvWriter.WriteField(log.VideoSendLongSideMedian.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.VideoSendPacketLossMax])
+                            csvWriter.WriteField(log.VideoSendPacketLossMax.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendPacketLossMean) && this._configurationDictionary[CSVHeaderEnum.VideoSendPacketLossMean])
+                            csvWriter.WriteField(log.VideoSendPacketLossMean.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendDuration) && this._configurationDictionary[CSVHeaderEnum.VideoSendDuration])
+                            csvWriter.WriteField(log.VideoSendDuration.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.VideoSendShortSideMedian) && this._configurationDictionary[CSVHeaderEnum.VideoSendShortSideMedian])
+                            csvWriter.WriteField(log.VideoSendShortSideMedian.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ActionReason) && this._configurationDictionary[CSVHeaderEnum.ActionReason])
+                            csvWriter.WriteField(log.ActionReason.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ActionDescription) && this._configurationDictionary[CSVHeaderEnum.ActionDescription])
+                            csvWriter.WriteField(log.ActionDescription.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TargetDisplayNames) && this._configurationDictionary[CSVHeaderEnum.TargetDisplayNames])
+                            csvWriter.WriteField(log.TargetDisplayNames.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TargetEmail) && this._configurationDictionary[CSVHeaderEnum.TargetEmail])
+                            csvWriter.WriteField(log.TargetEmail.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TargetPhoneNumber) && this._configurationDictionary[CSVHeaderEnum.TargetPhoneNumber])
+                            csvWriter.WriteField(log.TargetPhoneNumber.GetSafeString());
+
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingStartDate) && this._configurationDictionary[CSVHeaderEnum.MeetingStartDate])
+                            csvWriter.WriteField(log.MeetingStartDate.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEndDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEndDate])
+                            csvWriter.WriteField(log.MeetingEndDate.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.MeetingEnteringDate) && this._configurationDictionary[CSVHeaderEnum.MeetingEnteringDate])
+                            csvWriter.WriteField(log.MeetingEnteringDate.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal])
+                            csvWriter.WriteField(log.TotalMeetingUserPartecipationInDecimal.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInSeconds) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInSeconds])
+                            csvWriter.WriteField(log.TotalMeetingUserPartecipationInSeconds.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes])
+                            csvWriter.WriteField(log.TotalMeetingUserPartecipationInMinutes.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInHours) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInHours])
+                            csvWriter.WriteField(log.TotalMeetingUserPartecipationInHours.GetSafeString());
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CommonEuropeanTimeType) && this._configurationDictionary[CSVHeaderEnum.CommonEuropeanTimeType])
+                            csvWriter.WriteField(log.TimeZone.GetSafeString());
 
                         csvWriter.NextRecord();
                     }

@@ -17,6 +17,7 @@ using System.Drawing;
 using System.Configuration;
 using System.Threading;
 using CsvHelper.Configuration.Attributes;
+using GoogleMeetLogsNavigator.TransferObject;
 
 namespace GoogleMeetLogsNavigator
 {
@@ -24,6 +25,7 @@ namespace GoogleMeetLogsNavigator
     public partial class Form3 : Form
     {
         DataTable dt = new DataTable();
+        
         LogItem logItem;
         String selectComboItem;
         string csvDelimiter = ",";
@@ -39,6 +41,7 @@ namespace GoogleMeetLogsNavigator
         private bool AllChecked = false;
         public Form3()
         {
+
             InitializeComponent();
             text_search.Visible = false;
             dataGridView1.Visible = false;
@@ -146,7 +149,7 @@ namespace GoogleMeetLogsNavigator
                 StreamReader streamCsv = new StreamReader(all);
                 GoogleMeetCSVReader gcsvr = new GoogleMeetCSVReader(streamCsv, csvDelimiter, _supportedLanguage);
                 csvEncoding = gcsvr.CSVTextEncoding;
-                var gmdc = new GoogleMeetMissingDataCalculator(gcsvr);
+                var gmdc = new GoogleMeetMissingDataCalculator((IDictionary<string, IList<IGoogleMeetLogTO>>)gcsvr.MeetingDictionary);
                 IDictionary<string, IList<GoogleMeetLogModel>> dicLog = gmdc.MeetingLogsDictionary;
                 IList<GoogleMeetLogModel> listAllMeeting = new List<GoogleMeetLogModel>();
                 var logAllItem = new LogItem { codiceRiunione = "AllMeeting", logListModel = listAllMeeting };

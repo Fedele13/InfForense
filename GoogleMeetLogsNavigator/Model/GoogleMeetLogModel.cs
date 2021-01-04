@@ -74,8 +74,11 @@ namespace GoogleMeetLogsNavigator.Model
         public DateTime MeetingStartDate { get; set; }
         public DateTime MeetingEndDate { get; set; }
         public DateTime MeetingEnteringDate { get; set; }
-        public int TotalMeetingUserPartecipation { get; set; }
-        public string CommonEuropeanTimeType { get; set; }
+        public double TotalMeetingUserPartecipationInDecimal { get; set; }
+        public int TotalMeetingUserPartecipationInSeconds { get; set; }
+        public int TotalMeetingUserPartecipationInMinutes { get; set; }
+        public int TotalMeetingUserPartecipationInHours { get; set; }
+        public string TimeZone { get; set; }
 
     }
 }
