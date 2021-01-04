@@ -333,7 +333,6 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 ++i;
                 GoogleMeetLogTO to = new GoogleMeetLogTO();
 
-                var c = csvReader.GetField(Constants.CSVHeaderEN.Date);
                 /*Mandatory*/
                 to.Date = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeaderEN.Date)) ? throw new ArgumentException("Il campo Data non può essere vuoto") : csvReader.GetField(Constants.CSVHeaderEN.Date).Replace(",", "");
                 if (to.Date.StartsWith("\"") && to.Date.EndsWith("\""))
