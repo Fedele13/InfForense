@@ -100,7 +100,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
             }
             catch (System.Exception ex)
             {
-                throw new Exception.ReaderException("Errore durante la lettura del file Controlla che il delimitatore scelto sia corretto.\n" + ex.Message, ex);
+                throw new Exception.ReaderException("Errore durante la lettura del file Controlla che il delimitatore scelto sia corretto e che il file abbia l'header della lingua selezionata\n" + ex.Message, ex);
             }
         }
 
