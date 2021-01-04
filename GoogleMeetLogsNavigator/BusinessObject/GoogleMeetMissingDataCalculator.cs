@@ -110,7 +110,8 @@ namespace GoogleMeetLogsNavigator.BO
             {
                 filteredLogs = logs.Where(item => item.EventName == Constants.EventsToConsider.CallExitEN).ToList();
             }
-            
+
+            //questa parte di codice è un po' azzardata ma ci proviamo
             if (filteredLogs.Count == 0)
             {
                 if (triedLangauge == Constants.Langauges.ITA)
@@ -126,7 +127,6 @@ namespace GoogleMeetLogsNavigator.BO
                     throw new BusinessObject.Exception.CalculationException("Non è stato possibile trovare elementi per il calcolo dei dati in nessuna lingua al momento supportata");
                 }
             }
-            //questa parte di codice è un po' azzardata ma ci proviamo
           
             string timeZone = string.Empty;
             DateTime minDateTime = filteredLogs.Select(item =>item.Date.ConvertGooogleMeetDataInDateTime(this._language, out timeZone)).Min();
