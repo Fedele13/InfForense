@@ -361,7 +361,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                         csvWriter.WriteField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInMinutes);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInHours) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInHours])
                         csvWriter.WriteField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInHours);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CommonEuropeanTimeType) && this._configurationDictionary[CSVHeaderEnum.CommonEuropeanTimeType])
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TimeZone) && this._configurationDictionary[CSVHeaderEnum.TimeZone])
                         csvWriter.WriteField(Constants.CSVHeaderITA.TimeZone);
                 }
                 catch (System.Exception ex)
@@ -528,7 +528,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                             csvWriter.WriteField(log.TotalMeetingUserPartecipationInMinutes.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInHours) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInHours])
                             csvWriter.WriteField(log.TotalMeetingUserPartecipationInHours.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CommonEuropeanTimeType) && this._configurationDictionary[CSVHeaderEnum.CommonEuropeanTimeType])
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TimeZone) && this._configurationDictionary[CSVHeaderEnum.TimeZone])
                             csvWriter.WriteField(log.TimeZone.GetSafeString());
 
                         csvWriter.NextRecord();
@@ -722,7 +722,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                         csvWriter.WriteField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInMinutes);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInHours) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInHours])
                         csvWriter.WriteField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInHours);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CommonEuropeanTimeType) && this._configurationDictionary[CSVHeaderEnum.CommonEuropeanTimeType])
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TimeZone) && this._configurationDictionary[CSVHeaderEnum.TimeZone])
                         csvWriter.WriteField(Constants.CSVHeaderEN.TimeZone);
                 }
                 catch (System.Exception ex)
@@ -889,7 +889,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                             csvWriter.WriteField(log.TotalMeetingUserPartecipationInMinutes.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInHours) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInHours])
                             csvWriter.WriteField(log.TotalMeetingUserPartecipationInHours.GetSafeString());
-                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CommonEuropeanTimeType) && this._configurationDictionary[CSVHeaderEnum.CommonEuropeanTimeType])
+                        if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TimeZone) && this._configurationDictionary[CSVHeaderEnum.TimeZone])
                             csvWriter.WriteField(log.TimeZone.GetSafeString());
 
                         csvWriter.NextRecord();

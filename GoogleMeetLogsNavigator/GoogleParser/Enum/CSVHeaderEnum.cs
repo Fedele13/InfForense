@@ -92,6 +92,6 @@
         TotalMeetingUserPartecipationInSeconds,
         TotalMeetingUserPartecipationInMinutes,
         TotalMeetingUserPartecipationInHours,
-        CommonEuropeanTimeType
+        TimeZone
     }
 }
