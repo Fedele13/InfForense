@@ -21,56 +21,56 @@ namespace GoogleMeetLogsNavigator.Model
         public string PartecipantName { get; set; }
         public string IPAddress { get; set; }
         public string City { get; set; }
-        public string Nation { get; set; }
-        public string ActionCause { get; set; }
+        public string Country { get; set; }
+        public string ActionReason { get; set; }
         public string ActionDescription { get; set; }
-        public string VisualizedDestinationName { get; set; }
-        public string DestinationEmailsAddresses { get; set; }
-        public string DestinationPhoneNumber { get; set; }
+        public string TargetDisplayNames { get; set; }
+        public string TargetEmail { get; set; }
+        public string TargetPhoneNumber { get; set; }
         public string CalendarEventIdentifier { get; set; }
         public string ConferenceID { get; set; }
         public string NETRoundTrip { get; set; }
         public string TransportProtocol { get; set; }
-        public int PredictedBandWidthLoading { get; set; }
-        public int PredictedBandWidthUploading { get; set; }
-        public int MaxReceptionAudioPacketsLost { get; set; }
-        public double AverageReceptionAudioPacketsLost { get; set; }
-        public int AudioReceptionDuration { get; set; }
+        public int EstimatedUploadBandwidthInkbps { get; set; }
+        public int EstimatedDownloadBandwidthInkbps { get; set; }
+        public int AudioReceivePacketLossMax { get; set; }
+        public double AudioReceivePacketLossMean { get; set; }
+        public int AudioReceiveDuration { get; set; }
         public double BitRatioAudioSending { get; set; }
-        public int MaxSendingAudioPacketsLost { get; set; }
-        public double AverageSendingAudioPacketsLost { get; set; }
-        public int AudioSendingDuration { get; set; }
-        public double AverageReceptionFlickering { get; set; }
-        public int MaxReceptionFilckering { get; set; }
-        public double AverageSendingFlickering { get; set; }
+        public int AudioSendPacketLossMax { get; set; }
+        public double AudioSendPacketLossMean { get; set; }
+        public int AudioSendDuration { get; set; }
+        public double NetworkRecvJitterMeaninms { get; set; }
+        public int NetworkRecvJitterMaxinms { get; set; }
+        public double NetworkSendJitterMeaninms { get; set; }
         public double BitRatioScreencastReception { get; set; }
-        public double AverageScreecastReception { get; set; }
-        public int LongSideMedianScreencastReception { get; set; }
-        public int MaxReceptionScreencastPacketsLost { get; set; }
-        public double AverageReceptionScreencastPacketsLost { get; set; }
-        public int ScreencastReceptionDuration { get; set; }
-        public int ShortSideMedianScreencastReception { get; set; }
+        public double ScreencastReceiveFPSMean { get; set; }
+        public int ScreencastReceiveLongSideMedian { get; set; }
+        public int ScreencastReceivePacketLossMax { get; set; }
+        public double ScreencastReceivePacketLossMean { get; set; }
+        public int ScreencastReceiveDuration { get; set; }
+        public int ScreencastReceiveShortSideMedian { get; set; }
         public double BitRatioScreencastSending { get; set; }
-        public double AverageScreecastSending { get; set; }
-        public int LongSideMedianScreencastSending { get; set; }
-        public int MaxSendingScreencastPacketsLost { get; set; }
-        public double AverageSendingScreencastPacketsLost { get; set; }
-        public int ScreencastSendingDuration { get; set; }
-        public int ShortSideMedianScreencastSending { get; set; }
-        public double AverageVideoReception { get; set; }
-        public int LongSideMedianVideoReception { get; set; }
+        public double ScreencastSendFPSMean { get; set; }
+        public int ScreencastSendLongSideMedian { get; set; }
+        public int ScreencastSendPacketLossMax { get; set; }
+        public double ScreencastSendPacketLossMean { get; set; }
+        public int ScreencastSendDuration { get; set; }
+        public int ScreencastSendShortSideMedian { get; set; }
+        public double VideoReceiveFPSMean { get; set; }
+        public int VideoReceiveLongSideMedian { get; set; }
         public int MaxVideoReceptionPacketsLost { get; set; }
-        public double AverageVideoReceptionPacketsLost { get; set; }
-        public int ReceptionVideoDuration { get; set; }
-        public int ShortSideMedianVideoReception { get; set; }
+        public double VideoReceivePacketLossMax { get; set; }
+        public int VideoReceiveDuration { get; set; }
+        public int VideoReceiveShortSideMedian { get; set; }
         public double BitRatioVideoSending { get; set; }
-        public double AverageVideoSending { get; set; }
-        public int LongSideMedianVideoSending { get; set; }
-        public int MaxSendingVideoPacketsLost { get; set; }
+        public double VideoSendFPSMean { get; set; }
+        public int VideoSendLongSideMedian { get; set; }
+        public int VideoSendPacketLossMax { get; set; }
         public double AverageSendingVideoPacketsLost { get; set; }
-        public int VideoSendingDuration { get; set; }
-        public int ShortSideMedianVideoSending { get; set; }
-        public string NetworkCongestion { get; set; }
+        public int VideoSendDuration { get; set; }
+        public int VideoSendShortSideMedian { get; set; }
+        public string NetworkCongestionRatio { get; set; }
         public DateTime MeetingStartDate { get; set; }
         public DateTime MeetingEndDate { get; set; }
         public DateTime MeetingEnteringDate { get; set; }

@@ -131,7 +131,7 @@
 
             public const string MeetingOwnerEmail = "Organizer Email";
             public const string ProductType = "Product Type,Duration";
-            public const string Duration = "Durata";
+            public const string Duration = "Duration";
             public const string CallEvaluationOn5 = "Call Rating out of 5";
             public const string IPAddress = "IP Address";
             public const string City = "City";
@@ -246,10 +246,36 @@
             /// </summary>
             public const string CET = "CET";
 
+            /// 
+            /// </summary>
+            public const string GMT1 = "GMT+1";
+
+            /// <summary>
+            /// 
+            /// </summary>
+            public const string GMT2 = "GMT+2";
+
             /// <summary>
             /// 
             /// </summary>
             public const string EmptyString = "";
+        }
+
+        /// <summary>
+        /// Supported Langauges
+        /// </summary>
+        public static class Langauges
+        {
+            /// <summary>
+            /// Language ITA
+            /// </summary>
+            public const string ITA = "it";
+
+
+            /// <summary>
+            /// Language EN
+            /// </summary>
+            public const string EN = "en";
         }
     }
 }

@@ -19,13 +19,34 @@ namespace GoogleMeetLogsNavigator.Utility
         /// <param name="googleDate"></param>
         /// <param name="commonEuropeanTime"></param>
         /// <returns></returns>
-        public static DateTime ConvertGooogleMeetDataInDateTime(this string googleDate, out string commonEuropeanTime)
+        public static DateTime ConvertGooogleMeetDataInDateTime(this string googleDate, string language, out string commonEuropeanTime)
         {
-            string[] date = googleDate.Split(' ');
-            string[] hours = date[3].Split(':');
-            int monthInt = GetGoogleMonthIntITA(date[1]);
-            commonEuropeanTime = date[4];
-            return new DateTime(int.Parse(date[2]), monthInt, int.Parse(date[0]), int.Parse(hours[0]), int.Parse(hours[1]), int.Parse(hours[2]));
+            if (string.IsNullOrEmpty(language) ||language == "it")
+            {
+                //16 dic 2020 21:57:35 CET
+                string[] date = googleDate.Split(' ');
+                string[] hours = date[3].Split(':');
+                int monthInt = GetGoogleMonthIntITA(date[1]);
+                commonEuropeanTime = date[4];
+                return new DateTime(int.Parse(date[2]), monthInt, int.Parse(date[0]), int.Parse(hours[0]), int.Parse(hours[1]), int.Parse(hours[2]));
+            }
+            if (language == "en")
+            {
+                //Nov 27 2020 8:04:52 PM GMT+1
+                string[] date = googleDate.Split(' ');
+                int monthInt = GetGoogleMonthIntEN(date[0]);
+                string[] hours = date[3].Split(':');
+                int hour = int.Parse(hours[0]);
+                if (date[4] == "PM")
+                {
+                    hour += 12;
+                }
+                commonEuropeanTime = date[5];
+                return new DateTime(int.Parse(date[2]), monthInt, int.Parse(date[1]), hour, int.Parse(hours[1]), int.Parse(hours[2]));
+            }
+
+            throw new ArgumentException("La lingua in input non è supportata");
+            
         }
 
         /// <summary>
@@ -33,9 +54,9 @@ namespace GoogleMeetLogsNavigator.Utility
         /// </summary>
         /// <param name="googleDate"></param>
         /// <returns></returns>
-        public static DateTime ConvertGooogleMeetDataInDateTime(this string googleDate)
+        public static DateTime ConvertGooogleMeetDataInDateTime(this string googleDate, string language)
         {
-            return googleDate.ConvertGooogleMeetDataInDateTime(out string notUsed);
+            return googleDate.ConvertGooogleMeetDataInDateTime(language, out string notUsed);
         }
 
         /// <summary>
@@ -187,23 +208,23 @@ namespace GoogleMeetLogsNavigator.Utility
             {
                 case 1:
                     {
-                        return "gen";
+                        return "Gen";
                     }
                 case 2:
                     {
-                        return "feb";
+                        return "Feb";
                     }
                 case 3:
                     {
-                        return "mar";
+                        return "Mar";
                     }
                 case 4:
                     {
-                        return "apr";
+                        return "Apr";
                     }
                 case 5:
                     {
-                        return "may";
+                        return "May";
                     }
                 case 6:
                     {
@@ -215,23 +236,23 @@ namespace GoogleMeetLogsNavigator.Utility
                     }
                 case 8:
                     {
-                        return "aug";
+                        return "Aug";
                     }
                 case 9:
                     {
-                        return "sep";
+                        return "Sep";
                     }
                 case 10:
                     {
-                        return "oct";
+                        return "Oct";
                     }
                 case 11:
                     {
-                        return "nov";
+                        return "Nov";
                     }
                 case 12:
                     {
-                        return "dec";
+                        return "Dec";
                     }
                 default:
                     throw new InvalidOperationException("Invalid input month");
@@ -247,23 +268,23 @@ namespace GoogleMeetLogsNavigator.Utility
         {
             switch (month)
             {
-                case "gen":
+                case "Gen":
                     {
                         return 1;
                     }
-                case "feb":
+                case "Feb":
                     {
                         return 2;
                     }
-                case "mar":
+                case "Mar":
                     {
                         return 3;
                     }
-                case "apr":
+                case "Apr":
                     {
                         return 4;
                     }
-                case "may":
+                case "May":
                     {
                         return 5;
                     }
@@ -275,23 +296,23 @@ namespace GoogleMeetLogsNavigator.Utility
                     {
                         return 7;
                     }
-                case "aug":
+                case "Aug":
                     {
                         return 8;
                     }
-                case "sep":
+                case "Sep":
                     {
                         return 9;
                     }
-                case "oct":
+                case "Oct":
                     {
                         return 10;
                     }
-                case "nov":
+                case "Nov":
                     {
                         return 11;
                     }
-                case "dec":
+                case "Dec":
                     {
                         return 12;
                     }
@@ -310,13 +331,13 @@ namespace GoogleMeetLogsNavigator.Utility
         /// <param name="googleMeetLogTO"></param>
         /// <param name="dataToUpdate"></param>
         /// <returns></returns>
-        public static GoogleMeetLogModel MapTransferObjectITAInModel(this IGoogleMeetLogTO googleMeetLogTO)
+        public static GoogleMeetLogModel MapTransferObjectInModel(this IGoogleMeetLogTO googleMeetLogTO, string languageForDateString)
         {
             try 
             { 
                 return new GoogleMeetLogModel
                 {
-                    Date = googleMeetLogTO.Date.ConvertGooogleMeetDataInDateTime(),
+                    Date = googleMeetLogTO.Date.ConvertGooogleMeetDataInDateTime(languageForDateString),
                     EventName = googleMeetLogTO.EventName,
                     EventDescription = googleMeetLogTO.EventDescription,
                     MeetingCode = googleMeetLogTO.MeetingCode,
@@ -330,58 +351,58 @@ namespace GoogleMeetLogsNavigator.Utility
                     PartecipantName = googleMeetLogTO.PartecipantName,
                     IPAddress = googleMeetLogTO.IPAddress,
                     City = googleMeetLogTO.City,
-                    Nation = googleMeetLogTO.Nation,
-                    ActionCause = googleMeetLogTO.ActionReason,
+                    Country = googleMeetLogTO.Country,
+                    ActionReason = googleMeetLogTO.ActionReason,
                     ActionDescription = googleMeetLogTO.ActionDescription,
-                    VisualizedDestinationName = googleMeetLogTO.TargetDisplayNames,
-                    DestinationEmailsAddresses = googleMeetLogTO.TargetEmail,
-                    DestinationPhoneNumber = googleMeetLogTO.TargetPhoneNumber,
+                    TargetDisplayNames = googleMeetLogTO.TargetDisplayNames,
+                    TargetEmail = googleMeetLogTO.TargetEmail,
+                    TargetPhoneNumber = googleMeetLogTO.TargetPhoneNumber,
                     CalendarEventIdentifier = googleMeetLogTO.CalendarEventIdentifier,
                     ConferenceID = googleMeetLogTO.ConferenceID,
                     NETRoundTrip = googleMeetLogTO.NETRoundTrip,
                     TransportProtocol = googleMeetLogTO.TransportProtocol,
-                    PredictedBandWidthLoading = string.IsNullOrEmpty(googleMeetLogTO.EstimatedUploadBandwidthInkbps) ? 0 : int.Parse(googleMeetLogTO.EstimatedUploadBandwidthInkbps),
-                    PredictedBandWidthUploading = string.IsNullOrEmpty(googleMeetLogTO.EstimatedDownloadBandwidthInkbps) ? 0 : int.Parse(googleMeetLogTO.EstimatedDownloadBandwidthInkbps),
-                    MaxReceptionAudioPacketsLost = string.IsNullOrEmpty(googleMeetLogTO.AudioReceivePacketLossMax) ? 0 : int.Parse(googleMeetLogTO.AudioReceivePacketLossMax),
-                    AverageReceptionAudioPacketsLost = string.IsNullOrEmpty(googleMeetLogTO.AudioReceivePacketLossMean) ? 0 : double.Parse(googleMeetLogTO.AudioReceivePacketLossMean),
-                    AudioReceptionDuration = string.IsNullOrEmpty(googleMeetLogTO.AudioReceiveDuration) ? 0 : int.Parse(googleMeetLogTO.AudioReceiveDuration),
+                    EstimatedUploadBandwidthInkbps = string.IsNullOrEmpty(googleMeetLogTO.EstimatedUploadBandwidthInkbps) ? 0 : int.Parse(googleMeetLogTO.EstimatedUploadBandwidthInkbps),
+                    EstimatedDownloadBandwidthInkbps = string.IsNullOrEmpty(googleMeetLogTO.EstimatedDownloadBandwidthInkbps) ? 0 : int.Parse(googleMeetLogTO.EstimatedDownloadBandwidthInkbps),
+                    AudioReceivePacketLossMax = string.IsNullOrEmpty(googleMeetLogTO.AudioReceivePacketLossMax) ? 0 : int.Parse(googleMeetLogTO.AudioReceivePacketLossMax),
+                    AudioReceivePacketLossMean = string.IsNullOrEmpty(googleMeetLogTO.AudioReceivePacketLossMean) ? 0 : double.Parse(googleMeetLogTO.AudioReceivePacketLossMean),
+                    AudioReceiveDuration = string.IsNullOrEmpty(googleMeetLogTO.AudioReceiveDuration) ? 0 : int.Parse(googleMeetLogTO.AudioReceiveDuration),
                     BitRatioAudioSending = string.IsNullOrEmpty(googleMeetLogTO.BitRatioAudioSending) ? 0 : double.Parse(googleMeetLogTO.BitRatioAudioSending),
-                    MaxSendingAudioPacketsLost = string.IsNullOrEmpty(googleMeetLogTO.AudioSendPacketLossMax) ? 0 : int.Parse(googleMeetLogTO.AudioSendPacketLossMax),
-                    AverageSendingAudioPacketsLost = string.IsNullOrEmpty(googleMeetLogTO.AudioSendPacketLossMean) ? 0 : double.Parse(googleMeetLogTO.AudioSendPacketLossMean),
-                    AudioSendingDuration = string.IsNullOrEmpty(googleMeetLogTO.AudioSendDuration) ? 0 : int.Parse(googleMeetLogTO.AudioSendDuration),
-                    AverageReceptionFlickering = string.IsNullOrEmpty(googleMeetLogTO.NetworkRecvJitterMeaninms) ? 0 : double.Parse(googleMeetLogTO.NetworkRecvJitterMeaninms),
-                    MaxReceptionFilckering = string.IsNullOrEmpty(googleMeetLogTO.NetworkRecvJitterMaxinms) ? 0 : int.Parse(googleMeetLogTO.NetworkRecvJitterMaxinms),
-                    AverageSendingFlickering = string.IsNullOrEmpty(googleMeetLogTO.NetworkSendJitterMeaninms) ? 0 : double.Parse(googleMeetLogTO.NetworkSendJitterMeaninms),
+                    AudioSendPacketLossMax = string.IsNullOrEmpty(googleMeetLogTO.AudioSendPacketLossMax) ? 0 : int.Parse(googleMeetLogTO.AudioSendPacketLossMax),
+                    AudioSendPacketLossMean = string.IsNullOrEmpty(googleMeetLogTO.AudioSendPacketLossMean) ? 0 : double.Parse(googleMeetLogTO.AudioSendPacketLossMean),
+                    AudioSendDuration = string.IsNullOrEmpty(googleMeetLogTO.AudioSendDuration) ? 0 : int.Parse(googleMeetLogTO.AudioSendDuration),
+                    NetworkRecvJitterMeaninms = string.IsNullOrEmpty(googleMeetLogTO.NetworkRecvJitterMeaninms) ? 0 : double.Parse(googleMeetLogTO.NetworkRecvJitterMeaninms),
+                    NetworkRecvJitterMaxinms = string.IsNullOrEmpty(googleMeetLogTO.NetworkRecvJitterMaxinms) ? 0 : int.Parse(googleMeetLogTO.NetworkRecvJitterMaxinms),
+                    NetworkSendJitterMeaninms = string.IsNullOrEmpty(googleMeetLogTO.NetworkSendJitterMeaninms) ? 0 : double.Parse(googleMeetLogTO.NetworkSendJitterMeaninms),
                     BitRatioScreencastReception = string.IsNullOrEmpty(googleMeetLogTO.BitRatioScreencastReception) ? 0 : double.Parse(googleMeetLogTO.BitRatioScreencastReception),
-                    AverageScreecastReception = string.IsNullOrEmpty(googleMeetLogTO.ScreencastReceiveFPSMean) ? 0 : double.Parse(googleMeetLogTO.ScreencastReceiveFPSMean),
-                    LongSideMedianScreencastReception = string.IsNullOrEmpty(googleMeetLogTO.ScreencastReceiveLongSideMedian) ? 0 : int.Parse(googleMeetLogTO.ScreencastReceiveLongSideMedian),
-                    MaxReceptionScreencastPacketsLost = string.IsNullOrEmpty(googleMeetLogTO.ScreencastReceivePacketLossMax) ? 0 : int.Parse(googleMeetLogTO.ScreencastReceivePacketLossMax),
-                    AverageReceptionScreencastPacketsLost = string.IsNullOrEmpty(googleMeetLogTO.ScreencastReceivePacketLossMean) ? 0 : double.Parse(googleMeetLogTO.ScreencastReceivePacketLossMean),
-                    ScreencastReceptionDuration = string.IsNullOrEmpty(googleMeetLogTO.ScreencastReceiveDuration) ? 0 : int.Parse(googleMeetLogTO.ScreencastReceiveDuration),
-                    ShortSideMedianScreencastReception = string.IsNullOrEmpty(googleMeetLogTO.ScreencastReceiveShortSideMedian) ? 0 : int.Parse(googleMeetLogTO.ScreencastReceiveShortSideMedian),
+                    ScreencastReceiveFPSMean = string.IsNullOrEmpty(googleMeetLogTO.ScreencastReceiveFPSMean) ? 0 : double.Parse(googleMeetLogTO.ScreencastReceiveFPSMean),
+                    ScreencastReceiveLongSideMedian = string.IsNullOrEmpty(googleMeetLogTO.ScreencastReceiveLongSideMedian) ? 0 : int.Parse(googleMeetLogTO.ScreencastReceiveLongSideMedian),
+                    ScreencastReceivePacketLossMax = string.IsNullOrEmpty(googleMeetLogTO.ScreencastReceivePacketLossMax) ? 0 : int.Parse(googleMeetLogTO.ScreencastReceivePacketLossMax),
+                    ScreencastReceivePacketLossMean = string.IsNullOrEmpty(googleMeetLogTO.ScreencastReceivePacketLossMean) ? 0 : double.Parse(googleMeetLogTO.ScreencastReceivePacketLossMean),
+                    ScreencastReceiveDuration = string.IsNullOrEmpty(googleMeetLogTO.ScreencastReceiveDuration) ? 0 : int.Parse(googleMeetLogTO.ScreencastReceiveDuration),
+                    ScreencastReceiveShortSideMedian = string.IsNullOrEmpty(googleMeetLogTO.ScreencastReceiveShortSideMedian) ? 0 : int.Parse(googleMeetLogTO.ScreencastReceiveShortSideMedian),
                     BitRatioScreencastSending = string.IsNullOrEmpty(googleMeetLogTO.BitRatioScreencastSending) ? 0 : double.Parse(googleMeetLogTO.BitRatioScreencastSending),
-                    AverageScreecastSending = string.IsNullOrEmpty(googleMeetLogTO.AverageScreecastSending) ? 0 : double.Parse(googleMeetLogTO.AverageScreecastSending),
-                    LongSideMedianScreencastSending = string.IsNullOrEmpty(googleMeetLogTO.ScreencastSendLongSideMedian) ? 0 : int.Parse(googleMeetLogTO.ScreencastSendLongSideMedian),
-                    MaxSendingScreencastPacketsLost = string.IsNullOrEmpty(googleMeetLogTO.ScreencastSendPacketLossMax) ? 0 : int.Parse(googleMeetLogTO.ScreencastSendPacketLossMax),
-                    AverageSendingScreencastPacketsLost = string.IsNullOrEmpty(googleMeetLogTO.ScreencastSendPacketLossMean) ? 0 : double.Parse(googleMeetLogTO.ScreencastSendPacketLossMean),
-                    ScreencastSendingDuration = string.IsNullOrEmpty(googleMeetLogTO.ScreencastSendDuration) ? 0 : int.Parse(googleMeetLogTO.ScreencastSendDuration),
-                    ShortSideMedianScreencastSending = string.IsNullOrEmpty(googleMeetLogTO.ScreencastSendShortSideMedian) ? 0 : int.Parse(googleMeetLogTO.ScreencastSendShortSideMedian),
-                    AverageVideoReception = string.IsNullOrEmpty(googleMeetLogTO.VideoReceiveFPSMean) ? 0 : double.Parse(googleMeetLogTO.VideoReceiveFPSMean),
-                    LongSideMedianVideoReception = string.IsNullOrEmpty(googleMeetLogTO.VideoReceiveLongSideMedian) ? 0 : int.Parse(googleMeetLogTO.VideoReceiveLongSideMedian),
+                    ScreencastSendFPSMean = string.IsNullOrEmpty(googleMeetLogTO.ScreencastSendFPSMean) ? 0 : double.Parse(googleMeetLogTO.ScreencastSendFPSMean),
+                    ScreencastSendLongSideMedian = string.IsNullOrEmpty(googleMeetLogTO.ScreencastSendLongSideMedian) ? 0 : int.Parse(googleMeetLogTO.ScreencastSendLongSideMedian),
+                    ScreencastSendPacketLossMax = string.IsNullOrEmpty(googleMeetLogTO.ScreencastSendPacketLossMax) ? 0 : int.Parse(googleMeetLogTO.ScreencastSendPacketLossMax),
+                    ScreencastSendPacketLossMean = string.IsNullOrEmpty(googleMeetLogTO.ScreencastSendPacketLossMean) ? 0 : double.Parse(googleMeetLogTO.ScreencastSendPacketLossMean),
+                    ScreencastSendDuration = string.IsNullOrEmpty(googleMeetLogTO.ScreencastSendDuration) ? 0 : int.Parse(googleMeetLogTO.ScreencastSendDuration),
+                    ScreencastSendShortSideMedian = string.IsNullOrEmpty(googleMeetLogTO.ScreencastSendShortSideMedian) ? 0 : int.Parse(googleMeetLogTO.ScreencastSendShortSideMedian),
+                    VideoReceiveFPSMean = string.IsNullOrEmpty(googleMeetLogTO.VideoReceiveFPSMean) ? 0 : double.Parse(googleMeetLogTO.VideoReceiveFPSMean),
+                    VideoReceiveLongSideMedian = string.IsNullOrEmpty(googleMeetLogTO.VideoReceiveLongSideMedian) ? 0 : int.Parse(googleMeetLogTO.VideoReceiveLongSideMedian),
                     MaxVideoReceptionPacketsLost = string.IsNullOrEmpty(googleMeetLogTO.VideoReceivePacketLossMax) ? 0 : int.Parse(googleMeetLogTO.VideoReceivePacketLossMax),
-                    AverageVideoReceptionPacketsLost = string.IsNullOrEmpty(googleMeetLogTO.VideoReceivePacketLossMean) ? 0 : double.Parse(googleMeetLogTO.VideoReceivePacketLossMean),
-                    ReceptionVideoDuration = string.IsNullOrEmpty(googleMeetLogTO.VideoReceiveDuration) ? 0 : int.Parse(googleMeetLogTO.VideoReceiveDuration),
-                    ShortSideMedianVideoReception = string.IsNullOrEmpty(googleMeetLogTO.VideoReceiveShortSideMedian) ? 0 : int.Parse(googleMeetLogTO.VideoReceiveShortSideMedian),
+                    VideoReceivePacketLossMax = string.IsNullOrEmpty(googleMeetLogTO.VideoReceivePacketLossMean) ? 0 : double.Parse(googleMeetLogTO.VideoReceivePacketLossMean),
+                    VideoReceiveDuration = string.IsNullOrEmpty(googleMeetLogTO.VideoReceiveDuration) ? 0 : int.Parse(googleMeetLogTO.VideoReceiveDuration),
+                    VideoReceiveShortSideMedian = string.IsNullOrEmpty(googleMeetLogTO.VideoReceiveShortSideMedian) ? 0 : int.Parse(googleMeetLogTO.VideoReceiveShortSideMedian),
                     BitRatioVideoSending = string.IsNullOrEmpty(googleMeetLogTO.BitRatioVideoSending) ? 0 : double.Parse(googleMeetLogTO.BitRatioVideoSending),
-                    AverageVideoSending = string.IsNullOrEmpty(googleMeetLogTO.VideoSendFPSMean) ? 0 : double.Parse(googleMeetLogTO.VideoSendFPSMean),
-                    LongSideMedianVideoSending = string.IsNullOrEmpty(googleMeetLogTO.VideoSendLongSideMedian) ? 0 : int.Parse(googleMeetLogTO.VideoSendLongSideMedian),
-                    MaxSendingVideoPacketsLost = string.IsNullOrEmpty(googleMeetLogTO.VideoSendPacketLossMax) ? 0 : int.Parse(googleMeetLogTO.VideoSendPacketLossMax),
-                    VideoSendingDuration = string.IsNullOrEmpty(googleMeetLogTO.VideoSendDuration) ? 0 : int.Parse(googleMeetLogTO.VideoSendDuration),
-                    ShortSideMedianVideoSending = string.IsNullOrEmpty(googleMeetLogTO.VideoSendShortSideMedian) ? 0 : int.Parse(googleMeetLogTO.VideoSendShortSideMedian),
-                    NetworkCongestion = googleMeetLogTO.NetworkCongestionRatio,
-                    MeetingStartDate = googleMeetLogTO.MeetingStartDate.GetSafeString().ConvertGooogleMeetDataInDateTime(),
-                    MeetingEndDate = googleMeetLogTO.MeetingEndDate.GetSafeString().ConvertGooogleMeetDataInDateTime(),
-                    MeetingEnteringDate = googleMeetLogTO.MeetingEnteringDate.GetSafeString().ConvertGooogleMeetDataInDateTime(),
+                    VideoSendFPSMean = string.IsNullOrEmpty(googleMeetLogTO.VideoSendFPSMean) ? 0 : double.Parse(googleMeetLogTO.VideoSendFPSMean),
+                    VideoSendLongSideMedian = string.IsNullOrEmpty(googleMeetLogTO.VideoSendLongSideMedian) ? 0 : int.Parse(googleMeetLogTO.VideoSendLongSideMedian),
+                    VideoSendPacketLossMax = string.IsNullOrEmpty(googleMeetLogTO.VideoSendPacketLossMax) ? 0 : int.Parse(googleMeetLogTO.VideoSendPacketLossMax),
+                    VideoSendDuration = string.IsNullOrEmpty(googleMeetLogTO.VideoSendDuration) ? 0 : int.Parse(googleMeetLogTO.VideoSendDuration),
+                    VideoSendShortSideMedian = string.IsNullOrEmpty(googleMeetLogTO.VideoSendShortSideMedian) ? 0 : int.Parse(googleMeetLogTO.VideoSendShortSideMedian),
+                    NetworkCongestionRatio = googleMeetLogTO.NetworkCongestionRatio,
+                    MeetingStartDate = googleMeetLogTO.MeetingStartDate.GetSafeString().ConvertGooogleMeetDataInDateTime(languageForDateString),
+                    MeetingEndDate = googleMeetLogTO.MeetingEndDate.GetSafeString().ConvertGooogleMeetDataInDateTime(languageForDateString),
+                    MeetingEnteringDate = googleMeetLogTO.MeetingEnteringDate.GetSafeString().ConvertGooogleMeetDataInDateTime(languageForDateString),
                     TotalMeetingUserPartecipationInDecimal = string.IsNullOrEmpty(googleMeetLogTO.TotalMeetingUserPartecipationInDecimal) ? 0.0 : double.Parse(googleMeetLogTO.TotalMeetingUserPartecipationInDecimal),
                     TotalMeetingUserPartecipationInSeconds = string.IsNullOrEmpty(googleMeetLogTO.TotalMeetingUserPartecipationInSeconds) ? 0 : int.Parse(googleMeetLogTO.TotalMeetingUserPartecipationInSeconds),
                     TotalMeetingUserPartecipationInMinutes = string.IsNullOrEmpty(googleMeetLogTO.TotalMeetingUserPartecipationInMinutes) ? 0 : int.Parse(googleMeetLogTO.TotalMeetingUserPartecipationInMinutes),
@@ -404,13 +425,13 @@ namespace GoogleMeetLogsNavigator.Utility
         /// </summary>
         /// <param name="googleMeetLogModel"></param>
         /// <returns></returns>
-        public static IGoogleMeetLogTO MapObjectModelInTransferObjectITA(this GoogleMeetLogModel googleMeetLogModel)
+        public static IGoogleMeetLogTO MapObjectModelInTransferObject(this GoogleMeetLogModel googleMeetLogModel, string language)
         {
             try
             {
                 return new GoogleMeetLogTO
                 {
-                    Date = googleMeetLogModel.Date.ConvertGoogleDateTimeInString(googleMeetLogModel.TimeZone),
+                    Date = googleMeetLogModel.Date.ConvertGoogleDateTimeInString(googleMeetLogModel.TimeZone, language),
                     EventName = googleMeetLogModel.EventName,
                     EventDescription = googleMeetLogModel.EventDescription,
                     MeetingCode = googleMeetLogModel.MeetingCode,
@@ -424,58 +445,58 @@ namespace GoogleMeetLogsNavigator.Utility
                     PartecipantName = googleMeetLogModel.PartecipantName,
                     IPAddress = googleMeetLogModel.IPAddress,
                     City = googleMeetLogModel.City,
-                    Nation = googleMeetLogModel.Nation,
-                    ActionReason = googleMeetLogModel.ActionCause,
+                    Country = googleMeetLogModel.Country,
+                    ActionReason = googleMeetLogModel.ActionReason,
                     ActionDescription = googleMeetLogModel.ActionDescription,
-                    TargetDisplayNames = googleMeetLogModel.VisualizedDestinationName,
-                    TargetEmail = googleMeetLogModel.DestinationEmailsAddresses,
-                    TargetPhoneNumber = googleMeetLogModel.DestinationPhoneNumber,
+                    TargetDisplayNames = googleMeetLogModel.TargetDisplayNames,
+                    TargetEmail = googleMeetLogModel.TargetEmail,
+                    TargetPhoneNumber = googleMeetLogModel.TargetPhoneNumber,
                     CalendarEventIdentifier = string.IsNullOrEmpty(googleMeetLogModel.CalendarEventIdentifier) ? string.Empty : googleMeetLogModel.CalendarEventIdentifier,
                     ConferenceID = googleMeetLogModel.ConferenceID,
                     NETRoundTrip = googleMeetLogModel.NETRoundTrip,
                     TransportProtocol = googleMeetLogModel.TransportProtocol,
-                    EstimatedUploadBandwidthInkbps = googleMeetLogModel.PredictedBandWidthLoading.ToString(),
-                    EstimatedDownloadBandwidthInkbps = googleMeetLogModel.PredictedBandWidthUploading.ToString(),
-                    AudioReceivePacketLossMax = googleMeetLogModel.MaxReceptionAudioPacketsLost.ToString(),
-                    AudioReceivePacketLossMean = googleMeetLogModel.AverageReceptionAudioPacketsLost.ToString(),
-                    AudioReceiveDuration = googleMeetLogModel.AudioReceptionDuration.ToString(),
+                    EstimatedUploadBandwidthInkbps = googleMeetLogModel.EstimatedUploadBandwidthInkbps.ToString(),
+                    EstimatedDownloadBandwidthInkbps = googleMeetLogModel.EstimatedDownloadBandwidthInkbps.ToString(),
+                    AudioReceivePacketLossMax = googleMeetLogModel.AudioReceivePacketLossMax.ToString(),
+                    AudioReceivePacketLossMean = googleMeetLogModel.AudioReceivePacketLossMean.ToString(),
+                    AudioReceiveDuration = googleMeetLogModel.AudioReceiveDuration.ToString(),
                     BitRatioAudioSending = googleMeetLogModel.BitRatioAudioSending.ToString(),
-                    AudioSendPacketLossMax = googleMeetLogModel.MaxSendingAudioPacketsLost.ToString(),
-                    AudioSendPacketLossMean = googleMeetLogModel.AverageSendingAudioPacketsLost.ToString(),
-                    AudioSendDuration = googleMeetLogModel.AudioSendingDuration.ToString(),
-                    NetworkRecvJitterMeaninms = googleMeetLogModel.AverageReceptionFlickering.ToString(),
-                    NetworkRecvJitterMaxinms = googleMeetLogModel.MaxReceptionFilckering.ToString(),
-                    NetworkSendJitterMeaninms = googleMeetLogModel.AverageSendingFlickering.ToString(),
+                    AudioSendPacketLossMax = googleMeetLogModel.AudioSendPacketLossMax.ToString(),
+                    AudioSendPacketLossMean = googleMeetLogModel.AudioSendPacketLossMean.ToString(),
+                    AudioSendDuration = googleMeetLogModel.AudioSendDuration.ToString(),
+                    NetworkRecvJitterMeaninms = googleMeetLogModel.NetworkRecvJitterMeaninms.ToString(),
+                    NetworkRecvJitterMaxinms = googleMeetLogModel.NetworkRecvJitterMaxinms.ToString(),
+                    NetworkSendJitterMeaninms = googleMeetLogModel.NetworkSendJitterMeaninms.ToString(),
                     BitRatioScreencastReception = googleMeetLogModel.BitRatioScreencastReception.ToString(),
-                    ScreencastReceiveFPSMean = googleMeetLogModel.AverageScreecastReception.ToString(),
-                    ScreencastReceiveLongSideMedian = googleMeetLogModel.LongSideMedianScreencastReception.ToString(),
-                    ScreencastReceivePacketLossMax = googleMeetLogModel.MaxReceptionScreencastPacketsLost.ToString(),
-                    ScreencastReceivePacketLossMean = googleMeetLogModel.AverageReceptionScreencastPacketsLost.ToString(),
-                    ScreencastReceiveDuration = googleMeetLogModel.ScreencastReceptionDuration.ToString(),
-                    ScreencastReceiveShortSideMedian = googleMeetLogModel.ShortSideMedianScreencastReception.ToString(),
+                    ScreencastReceiveFPSMean = googleMeetLogModel.ScreencastReceiveFPSMean.ToString(),
+                    ScreencastReceiveLongSideMedian = googleMeetLogModel.ScreencastReceiveLongSideMedian.ToString(),
+                    ScreencastReceivePacketLossMax = googleMeetLogModel.ScreencastReceivePacketLossMax.ToString(),
+                    ScreencastReceivePacketLossMean = googleMeetLogModel.ScreencastReceivePacketLossMean.ToString(),
+                    ScreencastReceiveDuration = googleMeetLogModel.ScreencastReceiveDuration.ToString(),
+                    ScreencastReceiveShortSideMedian = googleMeetLogModel.ScreencastReceiveShortSideMedian.ToString(),
                     BitRatioScreencastSending = googleMeetLogModel.BitRatioScreencastSending.ToString(),
-                    AverageScreecastSending = googleMeetLogModel.AverageScreecastSending.ToString(),
-                    ScreencastSendLongSideMedian = googleMeetLogModel.LongSideMedianScreencastSending.ToString(),
-                    ScreencastSendPacketLossMax = googleMeetLogModel.MaxSendingScreencastPacketsLost.ToString(),
-                    ScreencastSendPacketLossMean = googleMeetLogModel.AverageSendingScreencastPacketsLost.ToString(),
-                    ScreencastSendDuration = googleMeetLogModel.ScreencastSendingDuration.ToString(),
-                    ScreencastSendShortSideMedian = googleMeetLogModel.ShortSideMedianScreencastSending.ToString(),
-                    VideoReceiveFPSMean = googleMeetLogModel.AverageVideoReception.ToString(),
-                    VideoReceiveLongSideMedian = googleMeetLogModel.LongSideMedianVideoReception.ToString(),
+                    ScreencastSendFPSMean = googleMeetLogModel.ScreencastSendFPSMean.ToString(),
+                    ScreencastSendLongSideMedian = googleMeetLogModel.ScreencastSendLongSideMedian.ToString(),
+                    ScreencastSendPacketLossMax = googleMeetLogModel.ScreencastSendPacketLossMax.ToString(),
+                    ScreencastSendPacketLossMean = googleMeetLogModel.ScreencastSendPacketLossMean.ToString(),
+                    ScreencastSendDuration = googleMeetLogModel.ScreencastSendDuration.ToString(),
+                    ScreencastSendShortSideMedian = googleMeetLogModel.ScreencastSendShortSideMedian.ToString(),
+                    VideoReceiveFPSMean = googleMeetLogModel.VideoReceiveFPSMean.ToString(),
+                    VideoReceiveLongSideMedian = googleMeetLogModel.VideoReceiveLongSideMedian.ToString(),
                     VideoReceivePacketLossMax = googleMeetLogModel.MaxVideoReceptionPacketsLost.ToString(),
-                    VideoReceivePacketLossMean = googleMeetLogModel.AverageVideoReceptionPacketsLost.ToString(),
-                    VideoReceiveDuration = googleMeetLogModel.ReceptionVideoDuration.ToString(),
-                    VideoReceiveShortSideMedian = googleMeetLogModel.ShortSideMedianVideoReception.ToString(),
+                    VideoReceivePacketLossMean = googleMeetLogModel.VideoReceivePacketLossMax.ToString(),
+                    VideoReceiveDuration = googleMeetLogModel.VideoReceiveDuration.ToString(),
+                    VideoReceiveShortSideMedian = googleMeetLogModel.VideoReceiveShortSideMedian.ToString(),
                     BitRatioVideoSending = googleMeetLogModel.BitRatioVideoSending.ToString(),
-                    VideoSendFPSMean = googleMeetLogModel.AverageVideoSending.ToString(),
-                    VideoSendLongSideMedian = googleMeetLogModel.LongSideMedianVideoSending.ToString(),
-                    VideoSendPacketLossMax = googleMeetLogModel.MaxSendingVideoPacketsLost.ToString(),
-                    VideoSendDuration = googleMeetLogModel.VideoSendingDuration.ToString(),
-                    VideoSendShortSideMedian = googleMeetLogModel.ShortSideMedianVideoSending.ToString(),
-                    NetworkCongestionRatio = googleMeetLogModel.NetworkCongestion,
-                    MeetingStartDate = googleMeetLogModel.MeetingStartDate.ConvertGoogleDateTimeInString(googleMeetLogModel.TimeZone),
-                    MeetingEndDate = googleMeetLogModel.MeetingEndDate.ConvertGoogleDateTimeInString(googleMeetLogModel.TimeZone),
-                    MeetingEnteringDate = googleMeetLogModel.MeetingEnteringDate.ConvertGoogleDateTimeInString(googleMeetLogModel.TimeZone),
+                    VideoSendFPSMean = googleMeetLogModel.VideoSendFPSMean.ToString(),
+                    VideoSendLongSideMedian = googleMeetLogModel.VideoSendLongSideMedian.ToString(),
+                    VideoSendPacketLossMax = googleMeetLogModel.VideoSendPacketLossMax.ToString(),
+                    VideoSendDuration = googleMeetLogModel.VideoSendDuration.ToString(),
+                    VideoSendShortSideMedian = googleMeetLogModel.VideoSendShortSideMedian.ToString(),
+                    NetworkCongestionRatio = googleMeetLogModel.NetworkCongestionRatio,
+                    MeetingStartDate = googleMeetLogModel.MeetingStartDate.ConvertGoogleDateTimeInString(googleMeetLogModel.TimeZone, language),
+                    MeetingEndDate = googleMeetLogModel.MeetingEndDate.ConvertGoogleDateTimeInString(googleMeetLogModel.TimeZone, language),
+                    MeetingEnteringDate = googleMeetLogModel.MeetingEnteringDate.ConvertGoogleDateTimeInString(googleMeetLogModel.TimeZone, language),
                     TotalMeetingUserPartecipationInDecimal = googleMeetLogModel.TotalMeetingUserPartecipationInDecimal.ToString(),
                     TotalMeetingUserPartecipationInSeconds = googleMeetLogModel.TotalMeetingUserPartecipationInSeconds.ToString(),
                     TotalMeetingUserPartecipationInMinutes =googleMeetLogModel.TotalMeetingUserPartecipationInMinutes.ToString(),
@@ -500,16 +521,37 @@ namespace GoogleMeetLogsNavigator.Utility
         /// <param name="googleDateTime"></param>
         /// <param name="cet"></param>
         /// <returns></returns>
-        public static string ConvertGoogleDateTimeInString(this DateTime googleDateTime, string cet)
+        public static string ConvertGoogleDateTimeInString(this DateTime googleDateTime, string cet, string language)
         {
-            return string.Format("{0} {1} {2} {3}:{4}:{5} {6}", 
-                googleDateTime.Day, 
-                GetGoogleMonthStringITA(googleDateTime.Month), 
-                googleDateTime.Year,
-                (googleDateTime.Hour > 9 ? googleDateTime.Hour.ToString() : ("0" + googleDateTime.Hour.ToString())),
-                (googleDateTime.Minute > 9 ? googleDateTime.Minute.ToString() : ("0" + googleDateTime.Minute.ToString())),
-                (googleDateTime.Second > 9 ? googleDateTime.Second.ToString() : ("0" + googleDateTime.Second.ToString())),
-                string.IsNullOrEmpty(cet) ? string.Empty : cet);
+            if (string.IsNullOrEmpty(language) || language == "it")
+            {
+                return string.Format("{0} {1} {2} {3}:{4}:{5} {6}",
+                    googleDateTime.Day,
+                    GetGoogleMonthStringITA(googleDateTime.Month),
+                    googleDateTime.Year,
+                    (googleDateTime.Hour > 9 ? googleDateTime.Hour.ToString() : ("0" + googleDateTime.Hour.ToString())),
+                    (googleDateTime.Minute > 9 ? googleDateTime.Minute.ToString() : ("0" + googleDateTime.Minute.ToString())),
+                    (googleDateTime.Second > 9 ? googleDateTime.Second.ToString() : ("0" + googleDateTime.Second.ToString())),
+                    string.IsNullOrEmpty(cet) ? string.Empty : cet);
+            }
+            if (language == "en")
+            {
+                //Nov 27 2020 8:04:52 PM GMT+1
+                string antePostMeridian = googleDateTime.Hour > 12 ? "PM" : "AM";
+                int hour = googleDateTime.Hour > 12 ? googleDateTime.Hour - 12 : googleDateTime.Hour;
+                
+                return string.Format("{0} {1} {2} {3}:{4}:{5} {6} {7}",
+                    GetGoogleMonthStringEN(googleDateTime.Month),
+                    googleDateTime.Day,
+                    googleDateTime.Year,
+                   hour,
+                   (googleDateTime.Minute > 9 ? googleDateTime.Minute.ToString() : ("0" + googleDateTime.Minute.ToString())),
+                   (googleDateTime.Second > 9 ? googleDateTime.Second.ToString() : ("0" + googleDateTime.Second.ToString())),
+                   antePostMeridian,
+                   string.IsNullOrEmpty(cet) ? string.Empty : cet);
+            }
+
+            throw new ArgumentException("Input language is not valid");
 
         }
         #endregion

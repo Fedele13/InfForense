@@ -38,7 +38,7 @@ namespace GoogleMeetLogsNavigator.TransferObject
       
         public string City { get; set; }
      
-        public string Nation { get; set; }
+        public string Country { get; set; }
        
         public string ActionReason { get; set; }
       
@@ -99,7 +99,7 @@ namespace GoogleMeetLogsNavigator.TransferObject
       
         public string BitRatioScreencastSending { get; set; }
 
-        public string AverageScreecastSending { get; set; }
+        public string ScreencastSendFPSMean { get; set; }
        
         public string ScreencastSendLongSideMedian { get; set; }
       

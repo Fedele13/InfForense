@@ -16,7 +16,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
     /// The GoogleMeetCSVReader
     /// Implements <see cref="ICSVReader">
     /// </summary>
-    public class GoogleMeetCSVReader : ICSVReader<GoogleMeetingTO>
+    public class GoogleMeetCSVReader :  ICSVReader<IList<IGoogleMeetLogTO>> 
     {
         #region private attribute 
         /// <summary>
@@ -27,12 +27,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// <summary>
         /// Used Laguage
         /// </summary>
-        private string _langauge = "it";
+        private string _langauge = Constants.Langauges.ITA;
 
         /// <summary>
         /// The meeting dictionary
         /// </summary>
-        private IDictionary<string, GoogleMeetingTO> _meetingDictionary = null;
+        private IDictionary<string, IList<IGoogleMeetLogTO>> _meetingDictionary = null;
 
         /// <summary>
         /// The CSV Text Encoding
@@ -52,7 +52,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="InvalidOperationException"></exception>
         /// <exception cref="Exception.ReaderException"></exception>
-        public GoogleMeetCSVReader(StreamReader csvStream, string csvDelimiter = ",", string langauge = "it")
+        public GoogleMeetCSVReader(StreamReader csvStream, string csvDelimiter = ",", string langauge = Constants.Langauges.ITA)
         {
             if (csvStream == null)
             {
@@ -60,7 +60,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
             }
 
             this._encoding = csvStream.CurrentEncoding;
-            this._meetingDictionary = new Dictionary<string, GoogleMeetingTO>();
+            this._meetingDictionary = new Dictionary<string, IList<IGoogleMeetLogTO>>();
             this._csvReader = new CsvReader(csvStream, System.Globalization.CultureInfo.InvariantCulture);
             this._csvReader.Configuration.IgnoreQuotes = false;
             this._csvReader.Configuration.HeaderValidated = null;
@@ -71,11 +71,11 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
             try
             {
                 IList<IGoogleMeetLogTO> recordsList = null;
-                if (string.IsNullOrEmpty(this._langauge) || this._langauge == "it")
+                if (string.IsNullOrEmpty(this._langauge) || this._langauge == Constants.Langauges.ITA)
                 {
                     recordsList = getTransferObjectListITA(this._csvReader).ToList().ConvertAll(item => (IGoogleMeetLogTO)item);
                 }
-                else if (this._langauge == "en")
+                else if (this._langauge == Constants.Langauges.EN)
                 {
                     recordsList = getTransferObjectListEN(this._csvReader).ToList().ConvertAll(item => (IGoogleMeetLogTO)item);
                 }
@@ -111,7 +111,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// <summary>
         /// The Meeting Dictionary with complete data
         /// </summary>
-        public IDictionary<string, GoogleMeetingTO> MeetingDictionary => this._meetingDictionary;
+        public IDictionary<string, IList<IGoogleMeetLogTO>> MeetingDictionary => this._meetingDictionary;
 
         /// <summary>
         /// The Encoding
@@ -149,6 +149,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 {
                     to.Date = to.Date.Replace("\"", "");
                 }
+                to.Date = to.Date.Trim();
                 to.EventName = csvReader.GetField(Constants.CSVHeaderITA.EventName);
                 to.EventDescription = csvReader.GetField(Constants.CSVHeaderITA.EventDescription);
                 to.MeetingCode = csvReader.GetField(Constants.CSVHeaderITA.MeetingCode);
@@ -174,7 +175,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                     ? csvReader.GetField(Constants.CSVHeaderITA.City2)
                     : csvReader.GetField(Constants.CSVHeaderITA.City);
                        
-                to.Nation = csvReader.GetField(Constants.CSVHeaderITA.Country);
+                to.Country = csvReader.GetField(Constants.CSVHeaderITA.Country);
                     
                 to.NETRoundTrip = csvReader.GetField(Constants.CSVHeaderITA.NETRoundTrip);
            
@@ -230,7 +231,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                         ? csvReader.GetField(Constants.CSVHeaderITA.BitRatioScreencastSending2)
                         : csvReader.GetField(Constants.CSVHeaderITA.BitRatioScreencastSending);
                         
-                to.AverageScreecastSending = csvReader.GetField(Constants.CSVHeaderITA.ScreencastSendFPSMean);
+                to.ScreencastSendFPSMean = csvReader.GetField(Constants.CSVHeaderITA.ScreencastSendFPSMean);
                         
                 to.ScreencastSendLongSideMedian = csvReader.GetField(Constants.CSVHeaderITA.ScreencastSendLongSideMedian);
                         
@@ -326,8 +327,9 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                 ++i;
                 GoogleMeetLogTO to = new GoogleMeetLogTO();
 
+                var c = csvReader.GetField(Constants.CSVHeaderEN.Date);
                 /*Mandatory*/
-                to.Date = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeaderITA.Date)) ? throw new ArgumentException("Il campo Data non può essere vuoto") : csvReader.GetField(Constants.CSVHeaderITA.Date).Replace(",", "");
+                to.Date = string.IsNullOrEmpty(csvReader.GetField(Constants.CSVHeaderEN.Date)) ? throw new ArgumentException("Il campo Data non può essere vuoto") : csvReader.GetField(Constants.CSVHeaderEN.Date).Replace(",", "");
                 if (to.Date.StartsWith("\"") && to.Date.EndsWith("\""))
                 {
                     to.Date = to.Date.Replace("\"", "");
@@ -355,7 +357,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                 to.City = csvReader.GetField(Constants.CSVHeaderEN.City);
 
-                to.Nation = csvReader.GetField(Constants.CSVHeaderEN.Country);
+                to.Country = csvReader.GetField(Constants.CSVHeaderEN.Country);
 
                 to.NETRoundTrip = csvReader.GetField(Constants.CSVHeaderEN.NETRoundTrip);
 
@@ -405,7 +407,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                 to.BitRatioScreencastSending = csvReader.GetField(Constants.CSVHeaderEN.BitRatioScreencastSending);
 
-                to.AverageScreecastSending = csvReader.GetField(Constants.CSVHeaderEN.ScreencastSendFPSMean);
+                to.ScreencastSendFPSMean = csvReader.GetField(Constants.CSVHeaderEN.ScreencastSendFPSMean);
 
                 to.ScreencastSendLongSideMedian = csvReader.GetField(Constants.CSVHeaderEN.ScreencastSendLongSideMedian);
 
@@ -431,7 +433,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
 
                 to.NetworkCongestionRatio = csvReader.GetField(Constants.CSVHeaderEN.NetworkCongestionRatio);
 
-                to.BitRatioVideoSending = csvReader.GetField(Constants.CSVHeaderITA.BitRatioVideoSending);
+                to.BitRatioVideoSending = csvReader.GetField(Constants.CSVHeaderEN.BitRatioVideoSending);
 
                 to.VideoSendFPSMean = csvReader.GetField(Constants.CSVHeaderEN.VideoSendFPSMean);
 

@@ -37,7 +37,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// <summary>
         /// Language used to find the header of csv file
         /// </summary>
-        private string _supportedLanguage = "it";
+        private string _supportedLanguage = Constants.Langauges.ITA;
 
         #endregion
 
@@ -48,7 +48,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// </summary>
         /// <param name="configurationDictionary">The Configuration Dictionary</param>
         /// <param name="language">The language used for csv headers</param>
-        public GoogleMeetCSVWriter(IDictionary<CSVHeaderEnum, bool> configurationDictionary, string language = "it")
+        public GoogleMeetCSVWriter(IDictionary<CSVHeaderEnum, bool> configurationDictionary, string language = Constants.Langauges.ITA)
         {
             if (configurationDictionary != null)
             {
@@ -62,7 +62,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// </summary>
         /// <param name="delimiter">The delimiter to use to build csv file</param>
         /// <param name="language">The language used for csv headers</param>
-        public GoogleMeetCSVWriter(string delimiter = ",", string language = "it")
+        public GoogleMeetCSVWriter(string delimiter = ",", string language = Constants.Langauges.ITA)
         {
             this._csvDelimiter = delimiter;
             this._supportedLanguage = language;
@@ -73,7 +73,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// </summary>
         /// <param name="encoding"></param>
         /// <param name="language">The language used for csv headers</param>
-        public GoogleMeetCSVWriter(Encoding encoding, string language = "it")
+        public GoogleMeetCSVWriter(Encoding encoding, string language = Constants.Langauges.ITA)
         {
             if (encoding != null)
             {
@@ -93,7 +93,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// <param name="encoding">Encoder to use to create text content into csv file</param>
         /// <param name="delimiter">The delimiter to use to build csv file</param>
         /// <param name="language">The csv header language</param>
-        public GoogleMeetCSVWriter(IDictionary<CSVHeaderEnum, bool> configurationDictionary, Encoding encoding, string delimiter = ",", string language = "it")
+        public GoogleMeetCSVWriter(IDictionary<CSVHeaderEnum, bool> configurationDictionary, Encoding encoding, string delimiter = ",", string language = Constants.Langauges.ITA)
         {
             if (configurationDictionary != null)
             {
@@ -160,7 +160,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
         /// <exception cref="Exception.WriterException">
         public string ToGoogleMeetCsv(IList<IGoogleMeetLogTO> logs)
         {
-            if (this._supportedLanguage == "it")
+            if (this._supportedLanguage == Constants.Langauges.ITA)
                 return exportTransferObjectITA(logs);
             throw new Exception.WriterException("La lingua configurata da usare per l'header del csv non è al momento gestita");
         }
@@ -396,7 +396,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.City) && this._configurationDictionary[CSVHeaderEnum.City])
                             csvWriter.WriteField(log.City.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.Country) && this._configurationDictionary[CSVHeaderEnum.Country])
-                            csvWriter.WriteField(log.Nation.GetSafeString());
+                            csvWriter.WriteField(log.Country.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NETRoundTrip) && this._configurationDictionary[CSVHeaderEnum.NETRoundTrip])
                             csvWriter.WriteField(log.NETRoundTrip.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TransportProtocol) && this._configurationDictionary[CSVHeaderEnum.TransportProtocol])
@@ -447,7 +447,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioScreencastSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioScreencastSending])
                             csvWriter.WriteField(log.BitRatioScreencastSending.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendFPSMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendFPSMean])
-                            csvWriter.WriteField(log.AverageScreecastSending.GetSafeString());
+                            csvWriter.WriteField(log.ScreencastSendFPSMean.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendLongSideMedian])
                             csvWriter.WriteField(log.ScreencastSendLongSideMedian.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendPacketLossMax])
@@ -743,7 +743,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.City) && this._configurationDictionary[CSVHeaderEnum.City])
                             csvWriter.WriteField(log.City.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.Country) && this._configurationDictionary[CSVHeaderEnum.Country])
-                            csvWriter.WriteField(log.Nation.GetSafeString());
+                            csvWriter.WriteField(log.Country.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.NETRoundTrip) && this._configurationDictionary[CSVHeaderEnum.NETRoundTrip])
                             csvWriter.WriteField(log.NETRoundTrip.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TransportProtocol) && this._configurationDictionary[CSVHeaderEnum.TransportProtocol])
@@ -794,7 +794,7 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.BitRatioScreencastSending) && this._configurationDictionary[CSVHeaderEnum.BitRatioScreencastSending])
                             csvWriter.WriteField(log.BitRatioScreencastSending.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendFPSMean) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendFPSMean])
-                            csvWriter.WriteField(log.AverageScreecastSending.GetSafeString());
+                            csvWriter.WriteField(log.ScreencastSendFPSMean.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendLongSideMedian) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendLongSideMedian])
                             csvWriter.WriteField(log.ScreencastSendLongSideMedian.GetSafeString());
                         if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.ScreencastSendPacketLossMax) && this._configurationDictionary[CSVHeaderEnum.ScreencastSendPacketLossMax])

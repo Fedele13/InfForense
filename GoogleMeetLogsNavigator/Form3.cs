@@ -36,7 +36,7 @@ namespace GoogleMeetLogsNavigator
             ,CSVHeaderEnum.ClientType.ToString()
         };
         private IList<GoogleMeetLogModel> listLog;
-        private string _supportedLanguage = "it";
+        private string _supportedLanguage = Constants.Langauges.ITA;
         private Encoding csvEncoding = Encoding.UTF8;
         private bool AllChecked = false;
         public Form3()
@@ -149,7 +149,7 @@ namespace GoogleMeetLogsNavigator
                 StreamReader streamCsv = new StreamReader(all);
                 GoogleMeetCSVReader gcsvr = new GoogleMeetCSVReader(streamCsv, csvDelimiter, _supportedLanguage);
                 csvEncoding = gcsvr.CSVTextEncoding;
-                var gmdc = new GoogleMeetMissingDataCalculator((IDictionary<string, IList<IGoogleMeetLogTO>>)gcsvr.MeetingDictionary);
+                var gmdc = new GoogleMeetMissingDataCalculator(gcsvr.MeetingDictionary, this._supportedLanguage);
                 IDictionary<string, IList<GoogleMeetLogModel>> dicLog = gmdc.MeetingLogsDictionary;
                 IList<GoogleMeetLogModel> listAllMeeting = new List<GoogleMeetLogModel>();
                 var logAllItem = new LogItem { codiceRiunione = "AllMeeting", logListModel = listAllMeeting };
@@ -393,7 +393,7 @@ namespace GoogleMeetLogsNavigator
                     form1.ShowDialog();
                     csvDelimiter = form1.Delimitator;
                 }
-                IList<IGoogleMeetLogTO> logs = listLog.Select(i => i.MapObjectModelInTransferObjectITA()).Cast<IGoogleMeetLogTO>().ToList();
+                IList<IGoogleMeetLogTO> logs = listLog.Select(i => i.MapObjectModelInTransferObject(this._supportedLanguage)).Cast<IGoogleMeetLogTO>().ToList();
                 ICSVWriter<IGoogleMeetLogTO> writer = new GoogleMeetCSVWriter(exportConfiguration, csvEncoding, csvDelimiter, _supportedLanguage);
                 string s = writer.ToGoogleMeetCsv(logs);
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();

@@ -25,7 +25,7 @@ namespace GoogleMeetLogsNavigator.TransferObject.Interface
         string PartecipantName { get; set; }
         string IPAddress { get; set; }
         string City { get; set; }
-        string Nation { get; set; }
+        string Country { get; set; }
         string ActionReason { get; set; }
         string ActionDescription { get; set; }
         string TargetDisplayNames { get; set; }
@@ -56,7 +56,7 @@ namespace GoogleMeetLogsNavigator.TransferObject.Interface
         string ScreencastReceiveDuration { get; set; }
         string ScreencastReceiveShortSideMedian { get; set; }
         string BitRatioScreencastSending { get; set; }
-        string AverageScreecastSending { get; set; }
+        string ScreencastSendFPSMean { get; set; }
         string ScreencastSendLongSideMedian { get; set; }
         string ScreencastSendPacketLossMax { get; set; }
         string ScreencastSendPacketLossMean { get; set; }
