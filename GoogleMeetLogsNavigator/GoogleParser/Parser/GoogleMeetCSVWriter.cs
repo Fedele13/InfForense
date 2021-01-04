@@ -355,12 +355,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                         csvWriter.WriteField(Constants.CSVHeaderITA.MeetingEnteringDate);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal])
                         csvWriter.WriteField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInDecimal);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInHours) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInHours])
-                        csvWriter.WriteField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInHours);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes])
-                        csvWriter.WriteField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInMinutes);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInSeconds) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInSeconds])
                         csvWriter.WriteField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInSeconds);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInMinutes);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInHours) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInHours])
+                        csvWriter.WriteField(Constants.CSVHeaderITA.TotalMeetingUserPartecipationInHours);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CommonEuropeanTimeType) && this._configurationDictionary[CSVHeaderEnum.CommonEuropeanTimeType])
                         csvWriter.WriteField(Constants.CSVHeaderITA.TimeZone);
                 }
@@ -716,12 +716,12 @@ namespace GoogleMeetLogsNavigator.GoogleParser.Parser
                         csvWriter.WriteField(Constants.CSVHeaderEN.MeetingEnteringDate);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInDecimal])
                         csvWriter.WriteField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInDecimal);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInHours) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInHours])
-                        csvWriter.WriteField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInHours);
-                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes])
-                        csvWriter.WriteField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInMinutes);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInSeconds) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInSeconds])
                         csvWriter.WriteField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInSeconds);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInMinutes])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInMinutes);
+                    if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.TotalMeetingUserPartecipationInHours) && this._configurationDictionary[CSVHeaderEnum.TotalMeetingUserPartecipationInHours])
+                        csvWriter.WriteField(Constants.CSVHeaderEN.TotalMeetingUserPartecipationInHours);
                     if (this._configurationDictionary.ContainsKey(CSVHeaderEnum.CommonEuropeanTimeType) && this._configurationDictionary[CSVHeaderEnum.CommonEuropeanTimeType])
                         csvWriter.WriteField(Constants.CSVHeaderEN.TimeZone);
                 }
