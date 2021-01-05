@@ -268,8 +268,8 @@ namespace GoogleMeetLogsNavigator
 
                 dateTimePicker_inizio_previsto.Value = logItem.logListModel.FirstOrDefault().EffectiveMeetingStartDate;
                 dateTimePicker_fine_previsto.Value = logItem.logListModel.FirstOrDefault().EffectiveMeetingEndDate;
-
-
+                dataPickerValueIni = logItem.logListModel.FirstOrDefault().EffectiveMeetingStartDate;
+                dataPickerValueFin = logItem.logListModel.FirstOrDefault().EffectiveMeetingEndDate;
                 foreach (GoogleMeetLogModel model in actualListLog)
                 {
 
@@ -487,19 +487,26 @@ namespace GoogleMeetLogsNavigator
         {
             var logItem = (LogItem)listBox2.SelectedItem;
             
-            if (logItem.logListModel.Where(item => item.Date == logItem.logListModel.Select(log => log.Date).Min()).FirstOrDefault().EffectiveMeetingStartDate == dateTimePicker_inizio_previsto.Value)
+            if (logItem.logListModel.Where(item => item.Date == logItem.logListModel.Select(log => log.Date).Min()).FirstOrDefault().EffectiveMeetingStartDate == dateTimePicker_inizio_previsto.Value 
+                || dateTimePicker_inizio_previsto.Value == dataPickerValueIni)
             {
                 return;
-
             }
 
             if(dateTimePicker_inizio_previsto.Value < logItem.logListModel.Where(item => item.Date == logItem.logListModel.Select(log => log.Date).Min()).FirstOrDefault().Date.AddHours(-12))
             {
                 MessageBox.Show("Non è possibile iniziare una riunione più di 12 ore prima della data dell'evento meno recende della riunione in esame","WARNING",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                dateTimePicker_inizio_previsto.Value = dataPickerValueIni;
                 return;
-
             }
-           
+
+            if (dateTimePicker_fine_previsto.Value < dateTimePicker_inizio_previsto.Value)
+            {
+                MessageBox.Show("Non è possibile impostare una data di inizio più recente della data di fine", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dateTimePicker_inizio_previsto.Value = dataPickerValueIni;
+                return;
+            }
+
             IList<GoogleMeetLogModel> newModel = new List<GoogleMeetLogModel>();
             foreach(GoogleMeetLogModel mod in actualListLog)
             {
@@ -533,16 +540,24 @@ namespace GoogleMeetLogsNavigator
         private void dateTimePicker_fine_previsto_ValueChanged(object sender, EventArgs e)
         {
             var logItem = (LogItem)listBox2.SelectedItem;
-            if (logItem.logListModel.Where(item => item.Date == logItem.logListModel.Select(log => log.Date).Max()).FirstOrDefault().EffectiveMeetingEndDate == dateTimePicker_fine_previsto.Value)
+            if (logItem.logListModel.Where(item => item.Date == logItem.logListModel.Select(log => log.Date).Max()).FirstOrDefault().EffectiveMeetingEndDate == dateTimePicker_fine_previsto.Value
+                || dateTimePicker_fine_previsto.Value == dataPickerValueFin)
             {
                 return;
             }
 
-            if (dateTimePicker_inizio_previsto.Value < logItem.logListModel.Where(item => item.Date == logItem.logListModel.Select(log => log.Date).Max()).FirstOrDefault().Date.AddHours(-12))
+            if (dateTimePicker_fine_previsto.Value > logItem.logListModel.Where(item => item.Date == logItem.logListModel.Select(log => log.Date).Max()).FirstOrDefault().Date.AddHours(12))
             {
                 MessageBox.Show("Non è possibile iniziare una riunione più di 12 ore prima della data dell'evento più recende della riunione in esame","WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                dateTimePicker_fine_previsto.Value = dataPickerValueFin;
                 return;
+            }
 
+            if (dateTimePicker_fine_previsto.Value < dateTimePicker_inizio_previsto.Value)
+            {
+                MessageBox.Show("Non è possibile impostare una data di fine meno recente della data di inizio", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                dateTimePicker_fine_previsto.Value = dataPickerValueFin;
+                return;
             }
 
             IList<GoogleMeetLogModel> newModel = new List<GoogleMeetLogModel>();
@@ -572,8 +587,6 @@ namespace GoogleMeetLogsNavigator
 
             }
             dataGridView1.DataSource = dt;
-            dataPickerValueFin = dateTimePicker_fine_previsto.Value;
-
         }
 
         private void comboLanguage_SelectedIndexChanged(object sender, EventArgs e)
