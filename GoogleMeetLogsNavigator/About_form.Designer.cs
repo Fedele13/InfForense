@@ -51,9 +51,9 @@ namespace GoogleMeetLogsNavigator
             // richTextBox1
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.Gainsboro;
-            this.richTextBox1.Location = new System.Drawing.Point(12, 75);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 59);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(270, 149);
+            this.richTextBox1.Size = new System.Drawing.Size(270, 160);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
