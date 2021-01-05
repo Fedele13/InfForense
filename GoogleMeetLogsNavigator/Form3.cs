@@ -41,7 +41,8 @@ namespace GoogleMeetLogsNavigator
         private string _supportedLanguage = "it";
         private Encoding csvEncoding = Encoding.UTF8;
         private bool AllChecked = false;
-       
+        IList<string> supportedLanguages = new List<string>();
+        IList<string> supportedDelimitators = new List<string>(); 
         public Form3()
         {
 
@@ -66,8 +67,6 @@ namespace GoogleMeetLogsNavigator
             listBox2.ValueMember = "logListModel";
             comboBox1.SelectedItem = "All";
             comboBox1.SelectedText = "All";
-            comboLanguage.SelectedItem = "it";
-            comboLanguage.SelectedText = "it";
             logItem = new LogItem();
            
             columns = typeof(GoogleMeetLogModel).GetProperties().Select(item => item.Name).ToList();
@@ -82,8 +81,22 @@ namespace GoogleMeetLogsNavigator
                     checkedListBox1.SetItemChecked(checkedListBox1.Items.IndexOf(value), true);
                 }
             }
-           
 
+            supportedLanguages = ConfigurationManager.AppSettings["Language"]?.Split(',').ToList();
+            supportedDelimitators = ConfigurationManager.AppSettings["Delimitator"]?.Split('\\').ToList();
+
+            if (supportedDelimitators == null)
+            {
+                supportedDelimitators = new List<string>();
+            }
+
+            if (supportedLanguages == null)
+            {
+                supportedLanguages = new List<string>();
+            }
+
+            comboLanguage.Items.AddRange(supportedLanguages.ToArray());
+            comboLanguage.SelectedItem = supportedLanguages.FirstOrDefault();
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -156,7 +169,7 @@ namespace GoogleMeetLogsNavigator
                 label5.Visible = false;
                 //comboLanguage.Visible = false;
                 var all = string.Join(Environment.NewLine, selectedItems.Select(x => x.Path));
-                using (Form1 form1 = new Form1())
+                using (Form1 form1 = new Form1(this.supportedDelimitators))
                 {
                     form1.ShowDialog();
                     csvDelimiter = form1.Delimitator;

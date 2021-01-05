@@ -13,15 +13,21 @@ namespace GoogleMeetLogsNavigator
 {
     public partial class Form1 : Form
     {
-        string comboDelimitatorItem;
+        private string comboDelimitatorItem;
+
+        private IList<string> supportedDelimitators = new List<string>();
+
         public string Delimitator
         {
             get { return comboDelimitatorItem; }
         }
-        public Form1()
+        public Form1(IList<string> supportedDelimitators)
         {
             InitializeComponent();
-            comboBox1.SelectedItem = ",";
+            this.supportedDelimitators = supportedDelimitators;
+            comboBox1.Items.AddRange(supportedDelimitators.ToArray());
+            comboBox1.SelectedItem = supportedDelimitators.FirstOrDefault();
+
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)

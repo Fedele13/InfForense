@@ -103,9 +103,6 @@ namespace GoogleMeetLogsNavigator
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboLanguage.BackColor = System.Drawing.Color.Gainsboro;
             this.comboLanguage.FormattingEnabled = true;
-            this.comboLanguage.Items.AddRange(new object[] {
-            "it",
-            "en"});
             this.comboLanguage.Location = new System.Drawing.Point(725, 27);
             this.comboLanguage.Name = "comboLanguage";
             this.comboLanguage.Size = new System.Drawing.Size(63, 21);
